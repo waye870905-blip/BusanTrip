@@ -1,76 +1,110 @@
-!DOCTYPE html
-html lang=zh-Hant
-head
-  meta charset=UTF-8
-  meta name=viewport content=width=device-width, initial-scale=1.0
-  title釜山自由行title
-  style
-    body {
-      font-family -apple-system, BlinkMacSystemFont;
-      margin 0;
-      background #f5f5f5;
-    }
-    header {
-      background #111;
-      color white;
-      padding 40px;
-      text-align center;
-    }
-    .container {
-      padding 20px;
-    }
-    .card {
-      background white;
-      border-radius 12px;
-      padding 20px;
-      margin-bottom 20px;
-      box-shadow 0 4px 10px rgba(0,0,0,0.1);
-    }
-    h2 {
-      margin-top 0;
-    }
-  style
-head
-body
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>釜山自由行｜首頁</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<nav class="nav">
+  <div class="container nav-inner">
+    <a class="brand" href="index.html">🇰🇷 釜山行</a>
+    <div class="nav-links">
+      <a href="index.html" class="active">首頁</a>
+      <a href="d1.html">Day 1</a>
+      <a href="d2.html">Day 2</a>
+      <a href="d3.html">Day 3</a>
+      <a href="d4.html">Day 4</a>
+      <a href="d5.html">Day 5</a>
+      <a href="notes.html">注意事項</a>
+    </div>
+  </div>
+</nav>
 
-header
-  h1🇰🇷 釜山自由行h1
-  p20260523 - 0527p
-header
+<header class="hero">
+  <div class="container hero-grid">
+    <div class="hero-card">
+      <span class="badge">2026/05/23 - 2026/05/27</span>
+      <h1>釜山自由行</h1>
+      <p class="lead">把這次旅程整理成一個可以直接分享的旅行網站。首頁放總覽、每天獨立分頁、最後再補上交通與注意事項，整體看起來就會很完整。</p>
+      <div class="meta">
+        <span>4人同行</span>
+        <span>住宿：釜山站附近</span>
+        <span>主題：美食 × 海景 × 購物</span>
+      </div>
+      <div class="btn-row">
+        <a class="btn primary" href="d1.html">開始看行程</a>
+        <a class="btn" href="notes.html">旅遊注意事項</a>
+      </div>
+    </div>
+    <div class="hero-card cover-box">
+      <img src="images/cover.jpg" alt="封面圖">
+    </div>
+  </div>
+</header>
 
-div class=container
+<section class="section">
+  <div class="container">
+    <h2>每日行程總覽</h2>
+    <div class="grid">
+      <a class="card day-card" href="d1.html">
+        <div class="tag">Day 1</div>
+        <h3>抵達釜山</h3>
+        <p>金海機場 → 釜山站 → 晚餐 → 入住休息</p>
+      </a>
+      <a class="card day-card" href="d2.html">
+        <div class="tag">Day 2</div>
+        <h3>白淺灘・南浦</h3>
+        <p>白淺灘文化村、札嘎其市場、南浦地下街</p>
+      </a>
+      <a class="card day-card" href="d3.html">
+        <div class="tag">Day 3</div>
+        <h3>機張・海雲台線</h3>
+        <p>Skyline Luge、Outlet、膠囊列車、豬肉湯飯</p>
+      </a>
+      <a class="card day-card" href="d4.html">
+        <div class="tag">Day 4</div>
+        <h3>甘川洞・廣安里</h3>
+        <p>彩色山城、海景散步、夜景收尾</p>
+      </a>
+      <a class="card day-card" href="d5.html">
+        <div class="tag">Day 5</div>
+        <h3>回程日</h3>
+        <p>早餐、最後採買、前往機場、回台灣</p>
+      </a>
+      <a class="card day-card" href="notes.html">
+        <div class="tag">Info</div>
+        <h3>注意事項</h3>
+        <p>交通、換匯、必備 APP、住宿與小提醒</p>
+      </a>
+    </div>
+  </div>
+</section>
 
-  div class=card
-    h2Day 1｜抵達釜山h2
-    p✈️ 金海機場 → 釜山站p
-    p🍗 晚餐：BHC Chickenp
-  div
+<section class="section">
+  <div class="container">
+    <h2>旅遊資訊</h2>
+    <div class="info-grid">
+      <div class="card info-card">
+        <h3>住宿位置</h3>
+        <p class="small-muted">建議放飯店名稱、地址、入住資訊與附近地鐵站。</p>
+      </div>
+      <div class="card info-card">
+        <h3>交通方式</h3>
+        <p class="small-muted">地鐵、公車、Uber 使用時機可以整理在這邊。</p>
+      </div>
+      <div class="card info-card">
+        <h3>旅遊提醒</h3>
+        <p class="small-muted">例如插頭、天氣、換錢、退稅、網卡與交通卡。</p>
+      </div>
+    </div>
+  </div>
+</section>
 
-  div class=card
-    h2Day 2｜南浦 & 白淺灘h2
-    p📍 札嘎其市場p
-    p📍 白淺灘文化村p
-    p🛍 南浦地下街p
-  div
-
-  div class=card
-    h2Day 3｜機張 & 膠囊列車h2
-    p🎢 Skyline Lugep
-    p🚝 膠囊列車p
-  div
-
-  div class=card
-    h2Day 4｜甘川洞 & 廣安里h2
-    p🎨 甘川文化村p
-    p🌉 廣安里海灘p
-  div
-
-  div class=card
-    h2Day 5｜回程h2
-    p✈️ 回台灣p
-  div
-
-div
-
-body
-html
+<div class="container footer">BusanTrip｜可直接放到 GitHub Pages。圖片可替換成你自己的 Canva 行程圖。</div>
+</body>
+</html>
