@@ -377,4 +377,18 @@ h2{
   color:#1f2937;
   border:1px solid rgba(255,255,255,.4);
 }
+  .page-head-home h1{
+  color:#fff !important;
+}
+  .page-head-home h1{
+  margin:8px 0 6px;   /* 原本太大 */
+}
+
+.page-head-home .lead{
+  margin:4px 0;       /* 壓縮中間段 */
+}
+
+.page-head-home .meta{
+  margin-top:6px;     /* 你已經改，但再更小 */
+}
 }
