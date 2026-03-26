@@ -148,3 +148,42 @@ h3{margin:0 0 10px;font-size:1.15rem}
   .item{grid-template-columns:1fr}
   .nav-inner{align-items:flex-start;flex-direction:column}
 }
+.page-head-cover{
+  position: relative;
+  min-height: 380px;
+  padding: 0;
+  overflow: hidden;
+  background:
+    linear-gradient(rgba(0,0,0,.28), rgba(0,0,0,.28)),
+    url("images/D1.jpg") center/cover no-repeat;
+  display: flex;
+  align-items: flex-end;
+}
+
+.page-head-overlay{
+  width: 100%;
+  padding: 32px;
+  color: #fff;
+}
+
+.page-head-cover .lead{
+  color: rgba(255,255,255,.9);
+}
+
+.page-head-cover .badge{
+  background: rgba(255,255,255,.18);
+  color: #fff;
+  backdrop-filter: blur(6px);
+}
+
+.page-head-cover .btn{
+  background: rgba(255,255,255,.15);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,.28);
+}
+
+.page-head-cover .btn.primary{
+  background: #fff;
+  color: #1f2937;
+  border-color: #fff;
+}
