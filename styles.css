@@ -328,4 +328,37 @@ h2{
   .info-grid{
     grid-template-columns:1fr;
   }
+    .info-section{
+  padding-top: 8px;
+}
+
+.info-grid{
+  display:grid;
+  grid-template-columns:repeat(3, minmax(0, 1fr));
+  gap:20px;
+  align-items:stretch;
+}
+
+.info-card{
+  padding:24px;
+  min-height:160px;
+}
+
+.info-card h3{
+  margin:0 0 12px;
+}
+
+.info-card p{
+  margin:0;
+}
+
+@media (max-width: 768px){
+  .info-grid{
+    grid-template-columns:1fr;
+  }
+
+  .info-card{
+    min-height:auto;
+  }
+}
 }
