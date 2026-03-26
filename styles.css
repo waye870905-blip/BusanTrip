@@ -199,20 +199,31 @@ h2{
   padding:0;
   overflow:hidden;
   display:flex;
-  align-items:flex-end;
+  align-items:flex-end;   /* 👈 保持貼底（比較有設計感） */
 }
+
+/* 標題 */
 .page-head-cover h1{
   color:#fff;
+  margin:8px 0 6px;
 }
 
+/* 介紹文字 */
 .page-head-cover .lead{
   color:rgba(255,255,255,.9);
+  margin:4px 0;
 }
 
+/* 整塊文字區 */
 .page-head-overlay{
-  padding:20px 32px 60px;
+  width:100%;
+  padding:24px 32px 80px;  /* 👈 這個控制「整體往上」 */
 }
 
+/* meta（4人同行那排） */
+.page-head-cover .meta{
+  margin-top:6px;
+}
 /* 文字在封面上的樣式 */
 .page-head-cover .lead{
   color:rgba(255,255,255,.9);
