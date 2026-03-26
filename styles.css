@@ -288,3 +288,8 @@ h3{margin:0 0 10px;font-size:1.15rem}
   }
 
 }
+.page-head-home{
+  background:
+    linear-gradient(rgba(0,0,0,.30), rgba(0,0,0,.30)),
+    url("images/imagescover.jpg") center/cover no-repeat;
+}
