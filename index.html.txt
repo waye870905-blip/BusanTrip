@@ -1,0 +1,76 @@
+!DOCTYPE html
+html lang=zh-Hant
+head
+  meta charset=UTF-8
+  meta name=viewport content=width=device-width, initial-scale=1.0
+  title釜山自由行title
+  style
+    body {
+      font-family -apple-system, BlinkMacSystemFont;
+      margin 0;
+      background #f5f5f5;
+    }
+    header {
+      background #111;
+      color white;
+      padding 40px;
+      text-align center;
+    }
+    .container {
+      padding 20px;
+    }
+    .card {
+      background white;
+      border-radius 12px;
+      padding 20px;
+      margin-bottom 20px;
+      box-shadow 0 4px 10px rgba(0,0,0,0.1);
+    }
+    h2 {
+      margin-top 0;
+    }
+  style
+head
+body
+
+header
+  h1🇰🇷 釜山自由行h1
+  p20260523 - 0527p
+header
+
+div class=container
+
+  div class=card
+    h2Day 1｜抵達釜山h2
+    p✈️ 金海機場 → 釜山站p
+    p🍗 晚餐：BHC Chickenp
+  div
+
+  div class=card
+    h2Day 2｜南浦 & 白淺灘h2
+    p📍 札嘎其市場p
+    p📍 白淺灘文化村p
+    p🛍 南浦地下街p
+  div
+
+  div class=card
+    h2Day 3｜機張 & 膠囊列車h2
+    p🎢 Skyline Lugep
+    p🚝 膠囊列車p
+  div
+
+  div class=card
+    h2Day 4｜甘川洞 & 廣安里h2
+    p🎨 甘川文化村p
+    p🌉 廣安里海灘p
+  div
+
+  div class=card
+    h2Day 5｜回程h2
+    p✈️ 回台灣p
+  div
+
+div
+
+body
+html
