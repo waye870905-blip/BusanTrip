@@ -123,10 +123,7 @@ h2{
 }
 
 .meta{
-  display:flex;
-  gap:10px;
-  flex-wrap:wrap;
-  margin-top:8px;
+  margin-top:6px;
 }
 
 .meta span{
@@ -206,9 +203,7 @@ h2{
 
 /* 文字區 */
 .page-head-overlay{
-  width:100%;
-  padding:32px;
-  color:#fff;
+  padding:20px 32px 28px; /* 上 左右 下 */
 }
 
 /* 文字在封面上的樣式 */
