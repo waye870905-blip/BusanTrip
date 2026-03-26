@@ -209,9 +209,8 @@ h2{
   color:rgba(255,255,255,.9);
 }
 
-/* 文字區 */
 .page-head-overlay{
-  padding:20px 32px 50px; /* 上 左右 下 */
+  padding:20px 32px 60px;
 }
 
 /* 文字在封面上的樣式 */
