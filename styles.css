@@ -105,7 +105,95 @@ h2{
   background:#1f2937;
   color:#fff;
 }
+/* ===== 首頁 / 共用區塊 ===== */
+.hero{
+  padding:52px 0 28px;
+}
 
+.badge{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:8px 14px;
+  border-radius:999px;
+  background:var(--accent-soft);
+  color:#9a5500;
+  font-weight:700;
+  font-size:.92rem;
+}
+
+.meta{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  margin-top:18px;
+}
+
+.meta span{
+  padding:8px 12px;
+  border-radius:999px;
+  background:#fff;
+  border:1px solid var(--line);
+  color:#374151;
+  font-size:.95rem;
+}
+
+.section{
+  padding:10px 0 30px;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(2, minmax(0,1fr));
+  gap:20px;
+}
+
+.day-card{
+  padding:22px;
+}
+
+.day-card .tag{
+  display:inline-block;
+  margin-bottom:8px;
+  color:#9a5500;
+  background:var(--accent-soft);
+  border-radius:999px;
+  padding:6px 10px;
+  font-size:.85rem;
+  font-weight:700;
+}
+
+.day-card p{
+  margin:0;
+  color:#4b5563;
+}
+
+.info-grid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:18px;
+}
+
+.info-card{
+  padding:20px;
+}
+
+.list{
+  margin:0;
+  padding-left:18px;
+  color:#4b5563;
+}
+
+.small-muted{
+  color:var(--muted);
+  font-size:.92rem;
+}
+
+.footer{
+  padding:28px 0 48px;
+  color:#6b7280;
+  font-size:.95rem;
+}
 /* ===== 滿版封面（核心） ===== */
 .page-head-cover{
   position:relative;
@@ -234,6 +322,10 @@ h2{
   }
 
   .item{
+    grid-template-columns:1fr;
+  }
+    .grid,
+  .info-grid{
     grid-template-columns:1fr;
   }
 }
