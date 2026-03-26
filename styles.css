@@ -356,4 +356,25 @@ h2{
     min-height:auto;
   }
 }
+  .page-head-home{
+  background:
+    linear-gradient(rgba(0,0,0,.35), rgba(0,0,0,.35)),
+    url("images/imagescover.jpg") center/cover no-repeat;
+}
+
+/* 修正文字顏色 */
+.page-head-home h1{
+  color:#fff;
+}
+
+.page-head-home .lead{
+  color:rgba(255,255,255,.9);
+}
+
+/* meta 標籤 */
+.page-head-home .meta span{
+  background:rgba(255,255,255,.9);
+  color:#1f2937;
+  border:1px solid rgba(255,255,255,.4);
+}
 }
