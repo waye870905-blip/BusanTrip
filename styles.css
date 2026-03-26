@@ -211,7 +211,7 @@ h2{
 /* 介紹文字 */
 .page-head-cover .lead{
   color:rgba(255,255,255,.9);
-  margin:4px 0;
+  margin:-4px 0;
 }
 
 /* 整塊文字區 */
