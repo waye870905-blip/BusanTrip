@@ -47,6 +47,11 @@ img{max-width:100%;display:block}
   padding:14px 0;
 }
 
+.brand{
+  font-weight:900;
+  font-size:1.8rem;
+  letter-spacing:.05em;
+}
 .nav-links{
   display:flex;
   gap:10px;
@@ -209,7 +214,9 @@ h2{
     flex-direction:column;
     align-items:flex-start;
   }
-
+  .brand{
+    font-size:1.4rem;
+  }
   .page-head-cover{
     min-height:260px;
   }
