@@ -899,3 +899,41 @@ body{
   color:#64748b;
   margin-top:4px;
 }
+/* ===== 行程時間對齊優化 ===== */
+
+.itinerary-list{
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.itinerary-list li{
+  display: flex;
+  align-items: center;
+  margin-bottom: 12px;
+  gap: 12px;
+}
+
+/* 時間方框 */
+.itinerary-list strong{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 90px;
+  height: 32px;
+
+  border-radius: 8px;
+  background: #eef2ff;
+  color: #4f46e5;
+  font-weight: 700;
+  font-size: 13px;
+
+  flex-shrink: 0;
+}
+
+/* 行程文字 */
+.itinerary-list li span{
+  flex: 1;
+  text-align: right;
+}
