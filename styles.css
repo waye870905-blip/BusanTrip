@@ -937,3 +937,108 @@ body{
   flex: 1;
   text-align: right;
 }
+/* ===== 行程交通列 ===== */
+.itinerary-list .transport-row{
+  display: block;
+  margin: 14px 0;
+}
+
+.transport-card{
+  width: 100%;
+  padding: 14px 16px;
+  border-radius: 14px;
+  background: #f8fafc;
+  border: 1px solid #dbe4f0;
+}
+
+.transport-title{
+  font-size: 14px;
+  font-weight: 800;
+  color: #0f172a;
+  margin-bottom: 10px;
+  text-align: left;
+}
+
+.transport-route{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  line-height: 1.8;
+}
+
+.line-badge{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 30px;
+  padding: 0 12px;
+  border-radius: 999px;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.line-1{
+  background: #F58220;
+}
+
+.line-2{
+  background: #33C481;
+}
+
+.line-3{
+  background: #BB8C46;
+}
+
+.line-4{
+  background: #2F6CE5;
+}
+
+.line-bgl{
+  background: #8758D6;
+}
+
+.walk-badge{
+  background: #64748b;
+}
+
+.station{
+  font-size: 14px;
+  font-weight: 700;
+  color: #334155;
+}
+
+.arrow{
+  font-size: 13px;
+  font-weight: 700;
+  color: #94a3b8;
+  white-space: nowrap;
+}
+
+@media (max-width: 768px){
+  .transport-card{
+    padding: 12px;
+  }
+
+  .transport-title{
+    font-size: 13px;
+    margin-bottom: 8px;
+  }
+
+  .transport-route{
+    gap: 6px;
+  }
+
+  .line-badge{
+    font-size: 12px;
+    min-height: 28px;
+    padding: 0 10px;
+  }
+
+  .station,
+  .arrow{
+    font-size: 12px;
+  }
+}
