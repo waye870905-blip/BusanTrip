@@ -691,28 +691,26 @@ function buildRouteSummary(pathResult) {
 
     if (i > 0) {
       const prev = stations[i - 1];
+
       if (prev.lineKey === current.lineKey) {
         rideStops += 1;
       } else {
         transferCount += 1;
-        transferNotes.push(`${prev.name} 轉乘 ${current.lineLabel}`);
+        transferNotes.push({
+          station: prev.name,
+          toLine: current.lineLabel
+        });
       }
     }
-  }
-
-  let note = "直達，不需轉乘";
-  if (transferCount > 0) {
-    note = transferNotes.join(" → ");
   }
 
   return {
     from: stations[0],
     to: stations[stations.length - 1],
     stops: rideStops,
-    duration: totalTime + 2, // 加一點進出站緩衝
-    lineText: lineSequence.join(" → "),
-    note,
-    pathStations: stations,
+    duration: totalTime + 2,
+    lineSequence,
+    transferNotes,
     transferCount
   };
 }
@@ -768,9 +766,8 @@ function calculateRoute(fromId, toId) {
   const hrs = Math.floor(minutes / 60);
   const mins = minutes % 60;
   return mins === 0 ? `${hrs} 小時` : `${hrs} 小時 ${mins} 分鐘`;
-}
-
-function renderRouteResult(result) {
+}   
+    function renderRouteResult(result) {
   const resultCard = document.getElementById("planner-result-card");
   const routeStops = document.getElementById("route-stops");
   const routeDuration = document.getElementById("route-duration");
@@ -799,40 +796,53 @@ function renderRouteResult(result) {
   routeDuration.textContent = formatMinutes(result.duration);
   routeFrom.textContent = `${result.from.name} [${result.from.code}]`;
   routeTo.textContent = `${result.to.name} [${result.to.code}]`;
+
   routeFrom.style.color = result.from.lineColor;
-  routeFrom.style.fontWeight = "800";
   routeTo.style.color = result.to.lineColor;
+  routeFrom.style.fontWeight = "800";
   routeTo.style.fontWeight = "800";
+
   routeLine.innerHTML = "";
 
-const lines = result.lineText.split(" → ");
+  result.lineSequence.forEach((lineText, index) => {
+    const span = document.createElement("span");
 
-lines.forEach((lineText, index) => {
-  const span = document.createElement("span");
+    const line = metroLines.find(l =>
+      lineText.includes(l.label.split("（")[0])
+    );
 
-  // 找對應顏色
-  const line = metroLines.find(l => lineText.includes(l.label.split("（")[0]));
-  const color = line?.color || "#999";
+    const color = line?.color || "#999";
 
-  span.textContent = lineText;
-  span.style.background = color;
-  span.style.color = "#fff";
-  span.style.padding = "6px 10px";
-  span.style.borderRadius = "999px";
-  span.style.fontSize = "12px";
-  span.style.fontWeight = "700";
-  span.style.marginRight = "6px";
+    const transfer = result.transferNotes.find(t =>
+      t.toLine === lineText
+    );
 
-  routeLine.appendChild(span);
+    span.textContent = transfer
+      ? `${lineText}（${transfer.station}轉乘）`
+      : lineText;
 
-  if (index < lines.length - 1) {
-    const arrow = document.createElement("span");
-    arrow.textContent = "→";
-    arrow.style.margin = "0 4px";
-    routeLine.appendChild(arrow);
-  }
-});
-  routeNote.textContent = result.note;
+    span.style.background = color;
+    span.style.color = "#fff";
+    span.style.padding = "6px 10px";
+    span.style.borderRadius = "999px";
+    span.style.fontSize = "12px";
+    span.style.fontWeight = "700";
+    span.style.marginRight = "6px";
+    span.style.display = "inline-flex";
+    span.style.alignItems = "center";
+
+    routeLine.appendChild(span);
+
+    if (index < result.lineSequence.length - 1) {
+      const arrow = document.createElement("span");
+      arrow.textContent = "→";
+      arrow.style.margin = "0 6px";
+      arrow.style.color = "#fff";
+      routeLine.appendChild(arrow);
+    }
+  });
+
+  routeNote.textContent = "";
 }
     document.addEventListener("DOMContentLoaded", () => {
   updateKoreaTime();
