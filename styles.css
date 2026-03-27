@@ -1012,4 +1012,9 @@ body{
   .arrow{
     font-size:11px;
   }
+  .itinerary-list li span,
+.itinerary-list li .item-text {
+  text-align: left;
+  margin-left: 0;
+}
 }
