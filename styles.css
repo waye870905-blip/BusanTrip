@@ -777,3 +777,12 @@ body{
     top: 52px;
   }
 }
+.itinerary-list{
+  margin: 0;
+  padding-left: 1.2rem;
+}
+
+.itinerary-list li{
+  margin-bottom: 10px;
+  line-height: 1.7;
+}
