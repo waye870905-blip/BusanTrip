@@ -9,119 +9,153 @@
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css" />
 </head>
-  <script src="app.js"></script>
 <body>
+
+  <!-- top bar -->
+  <div class="top-bar">
+    <div class="container top-bar-inner">
+      <div class="top-item">
+        🇰🇷 韓國時間：
+        <span id="korea-time">--:--:--</span>
+      </div>
+      <div class="top-item">
+        🌤 釜山天氣：
+        <span id="weather-main">--°C</span>
+        <span id="weather-sub" class="top-sub"></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- nav -->
   <nav class="nav">
     <div class="container nav-inner">
       <a class="brand" href="index.html">🇰🇷 釜山行</a>
       <div class="nav-links">
         <a href="index.html">首頁</a>
         <a href="itinerary.html" class="active">行程表</a>
+        <a href="subway.html">地鐵資訊</a>
+        <a href="travel-info.html">旅遊資訊</a>
       </div>
     </div>
   </nav>
 
-  <header class="hero hero-itinerary">
-    <div class="hero-mask"></div>
-    <div class="container hero-content">
-      <span class="badge">Busan Itinerary</span>
-      <h1>五天行程總覽</h1>
-      <p class="lead">把每天的行程整理在同一頁，查找會比較快。</p>
-    </div>
-  </header>
-
   <main>
     <section class="section">
       <div class="container">
-        <div class="timeline">
-
-          <article class="card day-card">
-            <div class="day-head">
-              <div>
-                <span class="day-badge">Day 1</span>
-                <h2>抵達＋入住＋夜間移動</h2>
-              </div>
-              <div class="day-date">2026/05/23</div>
-            </div>
-            <ul class="schedule-list">
-              <li><span class="time">19:55</span><span class="event">抵達釜山／金海國際機場</span></li>
-              <li><span class="time">20:55</span><span class="event">預估完成出關</span></li>
-              <li><span class="time">21:xx</span><span class="event">前往釜山站附近住宿</span></li>
-              <li><span class="time">晚間</span><span class="event">入住、簡單晚餐、休息</span></li>
-            </ul>
-          </article>
-
-          <article class="card day-card">
-            <div class="day-head">
-              <div>
-                <span class="day-badge">Day 2</span>
-                <h2>白淺灘文化村＋南浦洞＋帝王蟹</h2>
-              </div>
-              <div class="day-date">2026/05/24</div>
-            </div>
-            <ul class="schedule-list">
-              <li><span class="time">早上</span><span class="event">出發前往白淺灘文化村</span></li>
-              <li><span class="time">中午</span><span class="event">安排海鮮／帝王蟹午餐或晚餐</span></li>
-              <li><span class="time">下午</span><span class="event">札嘎其市場、南浦地下街、光復路一帶 shopping</span></li>
-              <li><span class="time">晚上</span><span class="event">回住宿休息</span></li>
-            </ul>
-          </article>
-
-          <article class="card day-card">
-            <div class="day-head">
-              <div>
-                <span class="day-badge">Day 3</span>
-                <h2>Skyline Luge＋Outlet＋膠囊列車＋廣安里/晚餐</h2>
-              </div>
-              <div class="day-date">2026/05/25</div>
-            </div>
-            <ul class="schedule-list">
-              <li><span class="time">早上</span><span class="event">前往機張 Skyline Luge</span></li>
-              <li><span class="time">中午</span><span class="event">逛旁邊 Outlet</span></li>
-              <li><span class="time">下午</span><span class="event">青沙浦站搭膠囊列車到尾浦</span></li>
-              <li><span class="time">晚上</span><span class="event">安排晚餐，之後回住宿</span></li>
-            </ul>
-          </article>
-
-          <article class="card day-card">
-            <div class="day-head">
-              <div>
-                <span class="day-badge">Day 4</span>
-                <h2>甘川文化村＋廣安里海灘</h2>
-              </div>
-              <div class="day-date">2026/05/26</div>
-            </div>
-            <ul class="schedule-list">
-              <li><span class="time">早上</span><span class="event">前往甘川文化村</span></li>
-              <li><span class="time">下午</span><span class="event">移動到廣安里海灘周邊</span></li>
-              <li><span class="time">傍晚</span><span class="event">看海景、散步、拍照</span></li>
-              <li><span class="time">晚上</span><span class="event">廣安里附近晚餐</span></li>
-            </ul>
-          </article>
-
-          <article class="card day-card">
-            <div class="day-head">
-              <div>
-                <span class="day-badge">Day 5</span>
-                <h2>汗蒸幕／購物／回程</h2>
-              </div>
-              <div class="day-date">2026/05/27</div>
-            </div>
-            <ul class="schedule-list">
-              <li><span class="time">早上</span><span class="event">早餐後自由活動</span></li>
-              <li><span class="time">中午</span><span class="event">可安排汗蒸幕或最後採買</span></li>
-              <li><span class="time">下午</span><span class="event">回飯店拿行李，前往機場</span></li>
-              <li><span class="time">晚上</span><span class="event">搭機返台</span></li>
-            </ul>
-          </article>
-
+        <div class="section-head">
+          <h1>五天四夜行程表</h1>
+          <p class="small-muted">依照目前規劃整理的完整時間版行程</p>
         </div>
+
+        <div class="card">
+          <h3>Day 1｜2026/05/23（六）｜抵達＋晚餐＋入住</h3>
+          <ul class="itinerary-list">
+            <li><strong>19:55</strong> 抵達釜山／金海國際機場</li>
+            <li><strong>19:55–20:55</strong> 出關、領行李、準備移動</li>
+            <li><strong>21:41</strong> 抵達 Busan Station</li>
+            <li><strong>21:41–22:11</strong> 前往住宿／稍作整理</li>
+            <li><strong>22:11</strong> 晚餐：BHC Chicken, Busan Station Branch</li>
+            <li><strong>22:11–23:11</strong> 用餐時間</li>
+            <li><strong>23:11</strong> 返回 Busan Station／住宿休息</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>Day 2｜2026/05/24（日）｜白淺灘＋南浦購物</h3>
+          <ul class="itinerary-list">
+            <li><strong>00:00–08:30</strong> 住宿休息</li>
+            <li><strong>08:57</strong> Huinnyeoul Culture Village 白淺灘文化村</li>
+            <li><strong>08:57–11:27</strong> 白淺灘散步、拍照、看海</li>
+            <li><strong>11:52</strong> 札嘎其市場</li>
+            <li><strong>11:52–13:52</strong> 午餐／海鮮市場逛逛</li>
+            <li><strong>13:52</strong> 南浦地下商街</li>
+            <li><strong>13:52–15:22</strong> 地下街購物</li>
+            <li><strong>15:22</strong> 光復路時尚街</li>
+            <li><strong>15:22–16:52</strong> 逛街散步</li>
+            <li><strong>16:52</strong> 樂天百貨公司 光復店</li>
+            <li><strong>16:52–18:52</strong> 百貨逛街／休息</li>
+            <li><strong>19:00</strong> 返回 Busan Station</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>Day 3｜2026/05/25（一）｜Luge＋Outlet＋膠囊列車＋廣安里</h3>
+          <ul class="itinerary-list">
+            <li><strong>00:00–08:00</strong> 住宿休息</li>
+            <li><strong>08:00</strong> 早餐：All Sunday</li>
+            <li><strong>08:00–08:30</strong> 早餐時間</li>
+            <li><strong>09:10</strong> Skyline Luge 釜山</li>
+            <li><strong>09:10–10:40</strong> 體驗 Luge</li>
+            <li><strong>10:56</strong> Lotte Premium Outlets 東釜山店</li>
+            <li><strong>10:56–12:56</strong> Outlet 逛街</li>
+            <li><strong>13:11</strong> 海雲台藍線公園 青沙浦站</li>
+            <li><strong>13:11–14:11</strong> 膠囊列車／周邊拍照</li>
+            <li><strong>14:47</strong> 海雲台藍線公園 尾浦站</li>
+            <li><strong>14:47–15:47</strong> 尾浦散步看海</li>
+            <li><strong>15:47</strong> 水邊最高豬肉湯飯</li>
+            <li><strong>15:47–16:47</strong> 晚午餐／豬肉湯飯</li>
+            <li><strong>17:27</strong> Gwangalli Beach 廣安里海灘</li>
+            <li><strong>17:27–19:27</strong> 海邊散步、拍照、看夜景</li>
+            <li><strong>20:10</strong> Turtle Town Choryang Kbbq Restaurant</li>
+            <li><strong>20:10–21:10</strong> 韓式烤肉晚餐</li>
+            <li><strong>21:18</strong> 返回 Busan Station</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>Day 4｜2026/05/26（二）｜甘川＋松島</h3>
+          <ul class="itinerary-list">
+            <li><strong>08:00</strong> 從 Busan Station 出發</li>
+            <li><strong>09:26</strong> 甘川洞文化村</li>
+            <li><strong>09:26–10:26</strong> 甘川文化村散步拍照</li>
+            <li><strong>10:26</strong> 哲秀與英熙（甘川洞韓服租借）</li>
+            <li><strong>10:26–11:26</strong> 韓服體驗</li>
+            <li><strong>11:26</strong> flipbookstudio</li>
+            <li><strong>11:26–12:26</strong> 拍攝／體驗</li>
+            <li><strong>12:41</strong> 海底貝殼王國</li>
+            <li><strong>12:41–13:41</strong> 用餐／停留</li>
+            <li><strong>13:41</strong> 松島灣纜車站</li>
+            <li><strong>13:41–14:41</strong> 松島海上纜車</li>
+            <li><strong>15:11</strong> 松島龍宮空中步道</li>
+            <li><strong>15:11–16:11</strong> 散步拍照</li>
+            <li><strong>16:52</strong> 返回 Busan Station</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>Day 5｜2026/05/27（三）｜汗蒸幕＋西面購物＋回程</h3>
+          <ul class="itinerary-list">
+            <li><strong>08:00</strong> 從 Busan Station 出發</li>
+            <li><strong>09:41</strong> 釜山新世界 SPA LAND 汗蒸幕</li>
+            <li><strong>09:41–12:11</strong> 汗蒸幕放鬆休息</li>
+            <li><strong>12:44</strong> 烤肉的男子</li>
+            <li><strong>12:44–14:14</strong> 午餐</li>
+            <li><strong>14:14</strong> 西面地下道街／西面 Mall</li>
+            <li><strong>14:14–16:14</strong> 最後購物</li>
+            <li><strong>16:52</strong> 前往釜山／金海國際機場</li>
+            <li><strong>21:05</strong> 回程航班 IT607 起飛</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>行程連結</h3>
+          <p>
+            <a href="https://chictrip-share.app.link/QGHjGe07M1b" target="_blank" rel="noopener noreferrer">
+              點我查看去趣完整行程細節
+            </a>
+          </p>
+        </div>
+
       </div>
     </section>
   </main>
 
   <footer class="footer">
-    <div class="container">Busan Trip Itinerary｜全部行程整理在同一頁</div>
+    <div class="container">
+      Busan Trip Itinerary｜全部行程整理在同一頁
+    </div>
   </footer>
+
+  <script src="app.js"></script>
 </body>
 </html>
