@@ -825,7 +825,7 @@ function calculateRoute(fromId, toId) {
   const stops = result.lineStopsMap?.[lineText] || 0;
 
   span.innerHTML = `
-    <div style="display:flex; flex-direction:column; align-items:center; line-height:1.2;">
+    <div style="display:flex; flex-direction:column; align-items:center; line-height:1.3;">
       <div>${cleanLineName}</div>
       <div style="font-size:10px; opacity:0.9;">
         ${stops}站${transfer ? `｜${transfer.station}` : ""}
@@ -844,6 +844,7 @@ function calculateRoute(fromId, toId) {
   span.style.alignItems = "center";
   span.style.justifyContent = "center";
   span.style.minWidth = "70px";
+  span.style.height = "42px";
 
   routeLine.appendChild(span);
 
