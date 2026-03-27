@@ -873,3 +873,12 @@ body{
   font-size:20px;
   font-weight:800;
 }
+.day-toggle h3{
+  margin: 0;
+  flex: 1;
+}
+
+.toggle-icon{
+  margin-left: 12px;
+  flex-shrink: 0;
+}
