@@ -676,3 +676,43 @@ img{
     grid-template-columns:1fr;
   }
 }
+/* 地鐵結果 badge 區手機防爆版 */
+#route-line{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  gap:8px;
+  white-space:normal;
+}
+
+#route-line > span{
+  margin-right:0 !important;
+}
+
+@media (max-width: 768px){
+  .planner-result-card-dark{
+    padding:16px;
+  }
+
+  .result-top{
+    grid-template-columns:1fr;
+  }
+
+  .result-middle{
+    margin-left:0;
+    padding:12px;
+  }
+
+  #route-line{
+    gap:6px;
+  }
+
+  #route-line > span{
+    max-width:100%;
+  }
+
+  .station-name{
+    font-size:1rem;
+    word-break:break-word;
+  }
+}
