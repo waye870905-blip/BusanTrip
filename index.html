@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>釜山自由行｜首頁</title>
+  <title>釜山自由行｜首頁</title>ㄇ
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;800&display=swap" rel="stylesheet">
@@ -75,7 +75,7 @@
       <div class="card planner-card planner-dark">
         <div class="planner-title-wrap">
           <h3>釜山地鐵路線規劃</h3>
-          <p>Busan Metro 旅遊站點版</p>
+          <p>Busan Metro 完整站點版</p>
         </div>
 
         <div class="planner-form">
@@ -807,9 +807,7 @@ function calculateRoute(fromId, toId) {
   result.lineSequence.forEach((lineText, index) => {
     const span = document.createElement("span");
 
-    const line = metroLines.find(l =>
-      const line = metroLines.find(l => l.label === lineText);
-    );
+    const line = metroLines.find(l => l.label === lineText);
 
     const color = line?.color || "#999";
 
@@ -818,7 +816,7 @@ function calculateRoute(fromId, toId) {
     );
 
     span.textContent = transfer
-      ? `${lineText}🔁 ${transfer.station}`
+      ? `${lineText} 🔁 ${transfer.station}`
       : lineText;
 
     span.style.background = color;
