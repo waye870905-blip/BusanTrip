@@ -63,52 +63,92 @@
     </section>
 
     <section class="section" id="subway-info">
-      <div class="container">
-        <div class="section-head">
-          <h2>地鐵資訊</h2>
-          <p class="small-muted">先把常用路線整理在首頁，之後還可以再補更多站點。</p>
+  <div class="container">
+    <div class="section-head">
+      <h2>地鐵資訊</h2>
+      <p class="small-muted">
+        參考釜山地鐵規劃網站的互動方式，先整理成可選站點的路線規劃區。
+      </p>
+    </div>
+
+    <div class="subway-layout">
+      <div class="card planner-card planner-dark">
+        <div class="planner-title-wrap">
+          <h3>釜山地鐵路線規劃</h3>
+          <p>Busan Metro 旅遊站點版</p>
         </div>
 
-        <div class="card route-card">
-          <div class="route-head">
-            <h3>常用站點路線整理</h3>
-            <span class="route-badge">可再補充</span>
+        <div class="planner-form">
+          <div class="planner-line"></div>
+
+          <div class="planner-field-wrap">
+            <label for="from-station">出發站</label>
+            <select id="from-station" class="planner-select">
+              <option value="">請選擇出發站...</option>
+            </select>
           </div>
 
-          <div class="route-list">
-            <div class="route-item">
-              <h4>釜山站 → 南浦站</h4>
-              <p>搭乘地鐵 1 號線，不需轉乘。</p>
-              <ul>
-                <li>路線：釜山站 → 南浦站</li>
-                <li>轉乘：無</li>
-                <li>班距：可填你查到的平日／假日班距</li>
-              </ul>
-            </div>
+          <div class="planner-field-wrap">
+            <label for="to-station">目的站</label>
+            <select id="to-station" class="planner-select">
+              <option value="">請選擇目的站...</option>
+            </select>
+          </div>
 
-            <div class="route-item">
-              <h4>釜山站 → 西面站</h4>
-              <p>搭乘地鐵 1 號線，不需轉乘。</p>
-              <ul>
-                <li>路線：釜山站 → 西面站</li>
-                <li>轉乘：無</li>
-                <li>班距：可填你常用時段的班距</li>
-              </ul>
-            </div>
+          <button id="plan-route-btn" class="planner-btn" type="button">
+            開始規劃路線
+          </button>
+        </div>
+      </div>
 
-            <div class="route-item">
-              <h4>釜山站 → 海雲台／尾浦方向</h4>
-              <p>可先到西面或依你實際安排轉乘，這區先保留成可編輯區塊。</p>
-              <ul>
-                <li>建議寫法：起點站 → 轉乘站 → 目的站</li>
-                <li>轉乘：填第幾號線轉第幾號線</li>
-                <li>班距：填尖峰／離峰</li>
-              </ul>
+      <div class="card planner-result-card-dark" id="planner-result-card" style="display:none;">
+        <div class="result-top">
+          <div class="result-stat">
+            <span class="result-label">總計經過</span>
+            <strong id="route-stops">--</strong>
+          </div>
+
+          <div class="result-stat">
+            <span class="result-label">預估時間</span>
+            <strong id="route-duration">--</strong>
+          </div>
+        </div>
+
+        <div class="result-route">
+          <div class="result-station">
+            <span class="dot start"></span>
+            <div>
+              <div class="station-label">起點</div>
+              <div class="station-name" id="route-from">--</div>
+            </div>
+          </div>
+
+          <div class="result-middle">
+            <div class="route-pill" id="route-line">--</div>
+            <div class="route-note" id="route-note">--</div>
+          </div>
+
+          <div class="result-station">
+            <span class="dot end"></span>
+            <div>
+              <div class="station-label">終點</div>
+              <div class="station-name" id="route-to">--</div>
             </div>
           </div>
         </div>
       </div>
-    </section>
+    </div>
+
+    <div class="card subway-tip-card">
+      <h3>機場進市區</h3>
+      <p>
+        金海機場可搭金海輕軌，於 <strong>沙上站</strong> 轉乘地鐵 2 號線，
+        或於 <strong>大渚站</strong> 轉乘 3 號線；也可選擇機場巴士往
+        <strong>西面/釜山站</strong> 或 <strong>海雲台</strong> 方向。:contentReference[oaicite:1]{index=1}
+      </p>
+    </div>
+  </div>
+</section>
 
     <section class="section">
       <div class="container">
