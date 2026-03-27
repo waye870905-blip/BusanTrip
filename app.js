@@ -69,9 +69,18 @@ async function loadBusanWeather() {
     weatherSub.textContent = "請確認網路或稍後重整";
   }
 }
-
+ // 👉 收合功能
 document.addEventListener("DOMContentLoaded", () => {
   updateKoreaTime();
   setInterval(updateKoreaTime, 1000);
   loadBusanWeather();
 });
+document.querySelectorAll(".day-toggle").forEach(toggle => {
+    toggle.addEventListener("click", () => {
+      const card = toggle.closest(".day-card");
+      card.classList.toggle("active");
+
+      const icon = toggle.querySelector(".toggle-icon");
+      icon.textContent = card.classList.contains("active") ? "－" : "＋";
+    });
+  });
