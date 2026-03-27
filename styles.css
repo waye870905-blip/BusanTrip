@@ -1019,8 +1019,4 @@ body{
   .arrow{
     font-size:11px;
   }
-  .two-line div:last-child {
-  color: #666;
-  font-size: 14px;
-}
 }
