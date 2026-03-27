@@ -288,5 +288,177 @@
     setInterval(updateKoreaTime, 1000);
     loadBusanWeather();
   </script>
+<script>
+  const metroStations = [
+    "釜山站",
+    "南浦站",
+    "札嘎其站",
+    "土城站",
+    "西面站",
+    "海雲台站",
+    "中洞站",
+    "Centum City站",
+    "沙上站",
+    "大渚站",
+    "機場站",
+    "老圃站",
+    "慶星大・釜慶大站"
+  ];
+
+  const metroRoutes = {
+    "機場站|沙上站": {
+      stops: "7 站",
+      duration: "約 16 分",
+      line: "金海輕軌",
+      note: "搭乘金海輕軌前往沙上站，再轉乘地鐵 2 號線。"
+    },
+    "機場站|大渚站": {
+      stops: "3 站",
+      duration: "約 8 分",
+      line: "金海輕軌",
+      note: "搭乘金海輕軌前往大渚站，再轉乘地鐵 3 號線。"
+    },
+    "釜山站|南浦站": {
+      stops: "2 站",
+      duration: "約 4 分",
+      line: "地鐵 1 號線",
+      note: "地鐵 1 號線直達，不需轉乘。"
+    },
+    "釜山站|札嘎其站": {
+      stops: "3 站",
+      duration: "約 6 分",
+      line: "地鐵 1 號線",
+      note: "地鐵 1 號線直達，不需轉乘。"
+    },
+    "釜山站|土城站": {
+      stops: "4 站",
+      duration: "約 8 分",
+      line: "地鐵 1 號線",
+      note: "地鐵 1 號線直達，甘川文化村常會先到土城站再轉公車。"
+    },
+    "釜山站|西面站": {
+      stops: "5 站",
+      duration: "約 11 分",
+      line: "地鐵 1 號線",
+      note: "地鐵 1 號線直達，不需轉乘。"
+    },
+    "釜山站|海雲台站": {
+      stops: "轉乘 1 次",
+      duration: "約 39 分",
+      line: "1 號線 → 2 號線",
+      note: "先搭 1 號線到西面站，再轉乘 2 號線往海雲台方向。"
+    },
+    "釜山站|中洞站": {
+      stops: "轉乘 1 次",
+      duration: "約 42 分",
+      line: "1 號線 → 2 號線",
+      note: "先搭到西面站，再轉 2 號線；中洞站可銜接尾浦、青沙浦一帶行程。"
+    },
+    "釜山站|Centum City站": {
+      stops: "轉乘 1 次",
+      duration: "約 32 分",
+      line: "1 號線 → 2 號線",
+      note: "先到西面站，再轉乘 2 號線往海雲台方向。"
+    },
+    "釜山站|慶星大・釜慶大站": {
+      stops: "轉乘 1 次",
+      duration: "約 26 分",
+      line: "1 號線 → 2 號線",
+      note: "先搭到西面站，再轉 2 號線，適合去廣安里周邊。"
+    },
+    "釜山站|老圃站": {
+      stops: "15 站",
+      duration: "約 34 分",
+      line: "地鐵 1 號線",
+      note: "地鐵 1 號線直達。"
+    },
+    "沙上站|海雲台站": {
+      stops: "17 站",
+      duration: "約 42 分",
+      line: "地鐵 2 號線",
+      note: "地鐵 2 號線直達，不需轉乘。"
+    },
+    "西面站|海雲台站": {
+      stops: "12 站",
+      duration: "約 28 分",
+      line: "地鐵 2 號線",
+      note: "地鐵 2 號線直達。"
+    },
+    "西面站|Centum City站": {
+      stops: "9 站",
+      duration: "約 20 分",
+      line: "地鐵 2 號線",
+      note: "地鐵 2 號線直達。"
+    },
+    "西面站|慶星大・釜慶大站": {
+      stops: "5 站",
+      duration: "約 10 分",
+      line: "地鐵 2 號線",
+      note: "地鐵 2 號線直達。"
+    },
+    "海雲台站|中洞站": {
+      stops: "1 站",
+      duration: "約 2 分",
+      line: "地鐵 2 號線",
+      note: "地鐵 2 號線直達。"
+    }
+  };
+
+  function fillMetroSelects() {
+    const fromSelect = document.getElementById("from-station");
+    const toSelect = document.getElementById("to-station");
+
+    metroStations.forEach(station => {
+      const opt1 = document.createElement("option");
+      opt1.value = station;
+      opt1.textContent = station;
+      fromSelect.appendChild(opt1);
+
+      const opt2 = document.createElement("option");
+      opt2.value = station;
+      opt2.textContent = station;
+      toSelect.appendChild(opt2);
+    });
+  }
+
+  function findRoute(from, to) {
+    const key1 = `${from}|${to}`;
+    const key2 = `${to}|${from}`;
+    return metroRoutes[key1] || metroRoutes[key2] || null;
+  }
+
+  function planMetroRoute() {
+    const from = document.getElementById("from-station").value;
+    const to = document.getElementById("to-station").value;
+
+    if (!from || !to) {
+      alert("請先選擇出發站與目的站");
+      return;
+    }
+
+    if (from === to) {
+      alert("出發站與目的站不能相同");
+      return;
+    }
+
+    const result = findRoute(from, to);
+
+    if (!result) {
+      alert("這組路線我還沒補進去，先跟我說你想加哪一段，我幫你補。");
+      return;
+    }
+
+    document.getElementById("route-stops").textContent = result.stops;
+    document.getElementById("route-duration").textContent = result.duration;
+    document.getElementById("route-from").textContent = from;
+    document.getElementById("route-to").textContent = to;
+    document.getElementById("route-line").textContent = result.line;
+    document.getElementById("route-note").textContent = result.note;
+    document.getElementById("planner-result-card").style.display = "block";
+  }
+
+  fillMetroSelects();
+  document.getElementById("plan-route-btn").addEventListener("click", planMetroRoute);
+</script>
 </body>
 </html>
