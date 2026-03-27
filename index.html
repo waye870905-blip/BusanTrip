@@ -219,6 +219,9 @@
 
   <script>
   function updateKoreaTime() {
+    const koreaTimeEl = document.getElementById("korea-time");
+    if (!koreaTimeEl) return;
+
     const now = new Date();
     const koreaTime = new Intl.DateTimeFormat("zh-TW", {
       timeZone: "Asia/Seoul",
@@ -231,7 +234,7 @@
       hour12: false
     }).format(now);
 
-    document.getElementById("korea-time").textContent = koreaTime;
+    koreaTimeEl.textContent = koreaTime;
   }
 
   function weatherCodeToText(code) {
@@ -263,6 +266,8 @@
     const weatherMain = document.getElementById("weather-main");
     const weatherSub = document.getElementById("weather-sub");
 
+    if (!weatherMain || !weatherSub) return;
+
     try {
       const res = await fetch("https://api.open-meteo.com/v1/forecast?latitude=35.1796&longitude=129.0756&current=temperature_2m,weather_code&timezone=Asia%2FSeoul");
       const data = await res.json();
@@ -279,183 +284,185 @@
         weatherSub.textContent = "稍後再試一次";
       }
     } catch (error) {
+      console.error("天氣讀取失敗：", error);
       weatherMain.textContent = "讀取失敗";
       weatherSub.textContent = "請確認網路或稍後重整";
     }
   }
 
   const metroLines = [
-  {
-    key: "line1",
-    label: "1號線（橘線）",
-    color: "#F58220",
-    stations: [
-      { id: "095", name: "多大浦海水浴場", en: "Dadaepo Beach", code: "095" },
-      { id: "096", name: "多大浦港", en: "Dadaepo Harbor", code: "096" },
-      { id: "097", name: "汐浦", en: "Natgae", code: "097" },
-      { id: "098", name: "新長林", en: "Sinjangnim", code: "098" },
-      { id: "099", name: "長林", en: "Jangnim", code: "099" },
-      { id: "100", name: "東梅", en: "Dongmae", code: "100" },
-      { id: "101", name: "新平", en: "Sinpyeong", code: "101" },
-      { id: "102", name: "下端", en: "Hadan", code: "102" },
-      { id: "103", name: "堂里", en: "Dangni", code: "103" },
-      { id: "104", name: "沙下", en: "Saha", code: "104" },
-      { id: "105", name: "槐亭", en: "Goejeong", code: "105" },
-      { id: "106", name: "大峙", en: "Daeti", code: "106" },
-      { id: "107", name: "西大新", en: "Seodaesin", code: "107" },
-      { id: "108", name: "東大新", en: "Dongdaesin", code: "108" },
-      { id: "109", name: "土城", en: "Toseong", code: "109" },
-      { id: "110", name: "札嘎其", en: "Jagalchi", code: "110" },
-      { id: "111", name: "南浦", en: "Nampo", code: "111" },
-      { id: "112", name: "中央", en: "Jungang", code: "112" },
-      { id: "113", name: "釜山站", en: "Busan Station", code: "113" },
-      { id: "114", name: "草梁", en: "Choryang", code: "114" },
-      { id: "115", name: "釜山鎮", en: "Busanjin", code: "115" },
-      { id: "116", name: "佐川", en: "Jwacheon", code: "116" },
-      { id: "117", name: "凡一", en: "Beomil", code: "117" },
-      { id: "118", name: "凡內谷", en: "Beomnaegol", code: "118" },
-      { id: "119", name: "西面", en: "Seomyeon", code: "119" },
-      { id: "120", name: "釜田", en: "Bujeon", code: "120" },
-      { id: "121", name: "楊亭", en: "Yangjeong", code: "121" },
-      { id: "122", name: "市廳", en: "City Hall", code: "122" },
-      { id: "123", name: "蓮山", en: "Yeonsan", code: "123" },
-      { id: "124", name: "教大", en: "Busan Nat'l Univ. of Edu.", code: "124" },
-      { id: "125", name: "東萊", en: "Dongnae", code: "125" },
-      { id: "126", name: "明倫", en: "Myeongnyun", code: "126" },
-      { id: "127", name: "溫泉場", en: "Oncheonjang", code: "127" },
-      { id: "128", name: "釜山大學", en: "Pusan Nat'l Univ.", code: "128" },
-      { id: "129", name: "長箭", en: "Jangjeon", code: "129" },
-      { id: "130", name: "久瑞", en: "Guseo", code: "130" },
-      { id: "131", name: "斗實", en: "Dusil", code: "131" },
-      { id: "132", name: "南山", en: "Namsan", code: "132" },
-      { id: "133", name: "梵魚寺", en: "Beomeosa", code: "133" },
-      { id: "134", name: "老圃", en: "Nopo", code: "134" }
-    ]
-  },
-  {
-    key: "line2",
-    label: "2號線（綠線）",
-    color: "#33C481",
-    stations: [
-      { id: "201", name: "萇山", en: "Jangsan", code: "201" },
-      { id: "202", name: "中洞", en: "Jung-dong", code: "202" },
-      { id: "203", name: "海雲台", en: "Haeundae", code: "203" },
-      { id: "204", name: "冬柏", en: "Dongbaek", code: "204" },
-      { id: "205", name: "BEXCO", en: "BEXCO", code: "205" },
-      { id: "206", name: "Centum City", en: "Centum City", code: "206" },
-      { id: "207", name: "民樂", en: "Millak", code: "207" },
-      { id: "208", name: "水營", en: "Suyeong", code: "208" },
-      { id: "209", name: "廣安", en: "Gwangan", code: "209" },
-      { id: "210", name: "金蓮山", en: "Geumnyeonsan", code: "210" },
-      { id: "211", name: "南川", en: "Namcheon", code: "211" },
-      { id: "212", name: "慶星大・釜慶大", en: "Kyungsung Univ. · Pukyong Nat'l Univ.", code: "212" },
-      { id: "213", name: "大淵", en: "Daeyeon", code: "213" },
-      { id: "214", name: "池谷", en: "Motgol", code: "214" },
-      { id: "215", name: "支架谷", en: "Jigegol", code: "215" },
-      { id: "216", name: "門峴", en: "Munhyeon", code: "216" },
-      { id: "217", name: "國際金融中心・釜山銀行", en: "Busan Int'l Finance Center · Busan Bank", code: "217" },
-      { id: "218", name: "田浦", en: "Jeonpo", code: "218" },
-      { id: "219", name: "西面", en: "Seomyeon", code: "219" },
-      { id: "220", name: "釜岩", en: "Buam", code: "220" },
-      { id: "221", name: "伽倻", en: "Gaya", code: "221" },
-      { id: "222", name: "東義大", en: "Dong-eui Univ.", code: "222" },
-      { id: "223", name: "開琴", en: "Gaegeum", code: "223" },
-      { id: "224", name: "冷井", en: "Naengjeong", code: "224" },
-      { id: "225", name: "周禮", en: "Jurye", code: "225" },
-      { id: "226", name: "甘田", en: "Gamjeon", code: "226" },
-      { id: "227", name: "沙上", en: "Sasang", code: "227" },
-      { id: "228", name: "德浦", en: "Deokpo", code: "228" },
-      { id: "229", name: "毛德", en: "Modeok", code: "229" },
-      { id: "230", name: "毛羅", en: "Mora", code: "230" },
-      { id: "231", name: "龜南", en: "Gunam", code: "231" },
-      { id: "232", name: "龜明", en: "Gumyeong", code: "232" },
-      { id: "233", name: "德川", en: "Deokcheon", code: "233" },
-      { id: "234", name: "水亭", en: "Sujeong", code: "234" },
-      { id: "235", name: "華明", en: "Hwamyeong", code: "235" },
-      { id: "236", name: "栗里", en: "Yulli", code: "236" },
-      { id: "237", name: "東院", en: "Dongwon", code: "237" },
-      { id: "238", name: "金谷", en: "Geumgok", code: "238" },
-      { id: "239", name: "湖浦", en: "Hopo", code: "239" },
-      { id: "240", name: "甑山", en: "Jeungsan", code: "240" },
-      { id: "241", name: "釜山大梁山校區", en: "Pusan Nat'l Univ. Yangsan Campus", code: "241" },
-      { id: "242", name: "南梁山", en: "Namyangsan", code: "242" },
-      { id: "243", name: "梁山", en: "Yangsan", code: "243" }
-    ]
-  },
-  {
-    key: "line3",
-    label: "3號線（棕線）",
-    color: "#BB8C46",
-    stations: [
-      { id: "301", name: "水營", en: "Suyeong", code: "301" },
-      { id: "302", name: "望美", en: "Mangmi", code: "302" },
-      { id: "303", name: "盃山", en: "Baesan", code: "303" },
-      { id: "304", name: "物萬谷", en: "Mulmangol", code: "304" },
-      { id: "305", name: "蓮山", en: "Yeonsan", code: "305" },
-      { id: "306", name: "巨堤", en: "Geoje", code: "306" },
-      { id: "307", name: "綜合運動場", en: "Sports Complex", code: "307" },
-      { id: "308", name: "社稷", en: "Sajik", code: "308" },
-      { id: "309", name: "美南", en: "Minam", code: "309" },
-      { id: "310", name: "萬德", en: "Mandeok", code: "310" },
-      { id: "311", name: "南山亭", en: "Namsanjeong", code: "311" },
-      { id: "312", name: "淑嶝", en: "Sukdeung", code: "312" },
-      { id: "313", name: "德川", en: "Deokcheon", code: "313" },
-      { id: "314", name: "龜浦", en: "Gupo", code: "314" },
-      { id: "315", name: "江西區廳", en: "Gangseo-gu Office", code: "315" },
-      { id: "316", name: "體育公園", en: "Sports Park", code: "316" },
-      { id: "317", name: "大渚", en: "Daejeo", code: "317" }
-    ]
-  },
-  {
-    key: "line4",
-    label: "4號線（藍線）",
-    color: "#2F6CE5",
-    stations: [
-      { id: "401", name: "美南", en: "Minam", code: "401" },
-      { id: "402", name: "東萊", en: "Dongnae", code: "402" },
-      { id: "403", name: "壽安", en: "Suan", code: "403" },
-      { id: "404", name: "樂民", en: "Nangmin", code: "404" },
-      { id: "405", name: "忠烈祠", en: "Chungnyeolsa", code: "405" },
-      { id: "406", name: "鳴藏", en: "Myeongjang", code: "406" },
-      { id: "407", name: "書洞", en: "Seo-dong", code: "407" },
-      { id: "408", name: "錦絲", en: "Geumsa", code: "408" },
-      { id: "409", name: "盤如農產物市場", en: "Banyeo Agricultural Market", code: "409" },
-      { id: "410", name: "石坮", en: "Seokdae", code: "410" },
-      { id: "411", name: "靈山大", en: "Youngsan University", code: "411" },
-      { id: "412", name: "上盤松", en: "Witbansong", code: "412" },
-      { id: "413", name: "古村", en: "Gochon", code: "413" },
-      { id: "414", name: "安平", en: "Anpyeong", code: "414" }
-    ]
-  },
-  {
-    key: "bgl",
-    label: "金海輕軌（紫線）",
-    color: "#8758D6",
-    stations: [
-      { id: "bgl-01", name: "沙上", en: "Sasang", code: "1" },
-      { id: "bgl-02", name: "掛法勒內希泰", en: "Gwaebeop Renecite", code: "2" },
-      { id: "bgl-03", name: "西釜山流通地區", en: "Seobusan Yutongjigu", code: "3" },
-      { id: "bgl-04", name: "金海國際機場", en: "Gimhae Int'l Airport", code: "4" },
-      { id: "bgl-05", name: "德斗", en: "Deokdu", code: "5" },
-      { id: "bgl-06", name: "登龜", en: "Deunggu", code: "6" },
-      { id: "bgl-07", name: "大渚", en: "Daejeo", code: "7" },
-      { id: "bgl-08", name: "平江", en: "Pyeonggang", code: "8" },
-      { id: "bgl-09", name: "大沙", en: "Daesa", code: "9" },
-      { id: "bgl-10", name: "佛岩", en: "Buram", code: "10" },
-      { id: "bgl-11", name: "池內", en: "Jinae", code: "11" },
-      { id: "bgl-12", name: "金海大學", en: "Gimhae College", code: "12" },
-      { id: "bgl-13", name: "仁濟大", en: "Inje Univ.", code: "13" },
-      { id: "bgl-14", name: "金海市廳", en: "Gimhae City Hall", code: "14" },
-      { id: "bgl-15", name: "府院", en: "Buwon", code: "15" },
-      { id: "bgl-16", name: "鳳凰", en: "Bonghwang", code: "16" },
-      { id: "bgl-17", name: "首露王陵", en: "Royal Tomb of King Suro", code: "17" },
-      { id: "bgl-18", name: "博物館", en: "Gimhae Nat'l Museum", code: "18" },
-      { id: "bgl-19", name: "蓮池公園", en: "Yeonji Park", code: "19" },
-      { id: "bgl-20", name: "長神大", en: "Jangshindae", code: "20" },
-      { id: "bgl-21", name: "加耶大", en: "Gaya Univ.", code: "21" }
-    ]
-  }
-];
+    {
+      key: "line1",
+      label: "1號線（橘線）",
+      color: "#F58220",
+      stations: [
+        { id: "095", name: "多大浦海水浴場", en: "Dadaepo Beach", code: "095" },
+        { id: "096", name: "多大浦港", en: "Dadaepo Harbor", code: "096" },
+        { id: "097", name: "汐浦", en: "Natgae", code: "097" },
+        { id: "098", name: "新長林", en: "Sinjangnim", code: "098" },
+        { id: "099", name: "長林", en: "Jangnim", code: "099" },
+        { id: "100", name: "東梅", en: "Dongmae", code: "100" },
+        { id: "101", name: "新平", en: "Sinpyeong", code: "101" },
+        { id: "102", name: "下端", en: "Hadan", code: "102" },
+        { id: "103", name: "堂里", en: "Dangni", code: "103" },
+        { id: "104", name: "沙下", en: "Saha", code: "104" },
+        { id: "105", name: "槐亭", en: "Goejeong", code: "105" },
+        { id: "106", name: "大峙", en: "Daeti", code: "106" },
+        { id: "107", name: "西大新", en: "Seodaesin", code: "107" },
+        { id: "108", name: "東大新", en: "Dongdaesin", code: "108" },
+        { id: "109", name: "土城", en: "Toseong", code: "109" },
+        { id: "110", name: "札嘎其", en: "Jagalchi", code: "110" },
+        { id: "111", name: "南浦", en: "Nampo", code: "111" },
+        { id: "112", name: "中央", en: "Jungang", code: "112" },
+        { id: "113", name: "釜山站", en: "Busan Station", code: "113" },
+        { id: "114", name: "草梁", en: "Choryang", code: "114" },
+        { id: "115", name: "釜山鎮", en: "Busanjin", code: "115" },
+        { id: "116", name: "佐川", en: "Jwacheon", code: "116" },
+        { id: "117", name: "凡一", en: "Beomil", code: "117" },
+        { id: "118", name: "凡內谷", en: "Beomnaegol", code: "118" },
+        { id: "119", name: "西面", en: "Seomyeon", code: "119" },
+        { id: "120", name: "釜田", en: "Bujeon", code: "120" },
+        { id: "121", name: "楊亭", en: "Yangjeong", code: "121" },
+        { id: "122", name: "市廳", en: "City Hall", code: "122" },
+        { id: "123", name: "蓮山", en: "Yeonsan", code: "123" },
+        { id: "124", name: "教大", en: "Busan Nat'l Univ. of Edu.", code: "124" },
+        { id: "125", name: "東萊", en: "Dongnae", code: "125" },
+        { id: "126", name: "明倫", en: "Myeongnyun", code: "126" },
+        { id: "127", name: "溫泉場", en: "Oncheonjang", code: "127" },
+        { id: "128", name: "釜山大學", en: "Pusan Nat'l Univ.", code: "128" },
+        { id: "129", name: "長箭", en: "Jangjeon", code: "129" },
+        { id: "130", name: "久瑞", en: "Guseo", code: "130" },
+        { id: "131", name: "斗實", en: "Dusil", code: "131" },
+        { id: "132", name: "南山", en: "Namsan", code: "132" },
+        { id: "133", name: "梵魚寺", en: "Beomeosa", code: "133" },
+        { id: "134", name: "老圃", en: "Nopo", code: "134" }
+      ]
+    },
+    {
+      key: "line2",
+      label: "2號線（綠線）",
+      color: "#33C481",
+      stations: [
+        { id: "201", name: "萇山", en: "Jangsan", code: "201" },
+        { id: "202", name: "中洞", en: "Jung-dong", code: "202" },
+        { id: "203", name: "海雲台", en: "Haeundae", code: "203" },
+        { id: "204", name: "冬柏", en: "Dongbaek", code: "204" },
+        { id: "205", name: "BEXCO", en: "BEXCO", code: "205" },
+        { id: "206", name: "Centum City", en: "Centum City", code: "206" },
+        { id: "207", name: "民樂", en: "Millak", code: "207" },
+        { id: "208", name: "水營", en: "Suyeong", code: "208" },
+        { id: "209", name: "廣安", en: "Gwangan", code: "209" },
+        { id: "210", name: "金蓮山", en: "Geumnyeonsan", code: "210" },
+        { id: "211", name: "南川", en: "Namcheon", code: "211" },
+        { id: "212", name: "慶星大・釜慶大", en: "Kyungsung Univ. · Pukyong Nat'l Univ.", code: "212" },
+        { id: "213", name: "大淵", en: "Daeyeon", code: "213" },
+        { id: "214", name: "池谷", en: "Motgol", code: "214" },
+        { id: "215", name: "支架谷", en: "Jigegol", code: "215" },
+        { id: "216", name: "門峴", en: "Munhyeon", code: "216" },
+        { id: "217", name: "國際金融中心・釜山銀行", en: "Busan Int'l Finance Center · Busan Bank", code: "217" },
+        { id: "218", name: "田浦", en: "Jeonpo", code: "218" },
+        { id: "219", name: "西面", en: "Seomyeon", code: "219" },
+        { id: "220", name: "釜岩", en: "Buam", code: "220" },
+        { id: "221", name: "伽倻", en: "Gaya", code: "221" },
+        { id: "222", name: "東義大", en: "Dong-eui Univ.", code: "222" },
+        { id: "223", name: "開琴", en: "Gaegeum", code: "223" },
+        { id: "224", name: "冷井", en: "Naengjeong", code: "224" },
+        { id: "225", name: "周禮", en: "Jurye", code: "225" },
+        { id: "226", name: "甘田", en: "Gamjeon", code: "226" },
+        { id: "227", name: "沙上", en: "Sasang", code: "227" },
+        { id: "228", name: "德浦", en: "Deokpo", code: "228" },
+        { id: "229", name: "毛德", en: "Modeok", code: "229" },
+        { id: "230", name: "毛羅", en: "Mora", code: "230" },
+        { id: "231", name: "龜南", en: "Gunam", code: "231" },
+        { id: "232", name: "龜明", en: "Gumyeong", code: "232" },
+        { id: "233", name: "德川", en: "Deokcheon", code: "233" },
+        { id: "234", name: "水亭", en: "Sujeong", code: "234" },
+        { id: "235", name: "華明", en: "Hwamyeong", code: "235" },
+        { id: "236", name: "栗里", en: "Yulli", code: "236" },
+        { id: "237", name: "東院", en: "Dongwon", code: "237" },
+        { id: "238", name: "金谷", en: "Geumgok", code: "238" },
+        { id: "239", name: "湖浦", en: "Hopo", code: "239" },
+        { id: "240", name: "甑山", en: "Jeungsan", code: "240" },
+        { id: "241", name: "釜山大梁山校區", en: "Pusan Nat'l Univ. Yangsan Campus", code: "241" },
+        { id: "242", name: "南梁山", en: "Namyangsan", code: "242" },
+        { id: "243", name: "梁山", en: "Yangsan", code: "243" }
+      ]
+    },
+    {
+      key: "line3",
+      label: "3號線（棕線）",
+      color: "#BB8C46",
+      stations: [
+        { id: "301", name: "水營", en: "Suyeong", code: "301" },
+        { id: "302", name: "望美", en: "Mangmi", code: "302" },
+        { id: "303", name: "盃山", en: "Baesan", code: "303" },
+        { id: "304", name: "物萬谷", en: "Mulmangol", code: "304" },
+        { id: "305", name: "蓮山", en: "Yeonsan", code: "305" },
+        { id: "306", name: "巨堤", en: "Geoje", code: "306" },
+        { id: "307", name: "綜合運動場", en: "Sports Complex", code: "307" },
+        { id: "308", name: "社稷", en: "Sajik", code: "308" },
+        { id: "309", name: "美南", en: "Minam", code: "309" },
+        { id: "310", name: "萬德", en: "Mandeok", code: "310" },
+        { id: "311", name: "南山亭", en: "Namsanjeong", code: "311" },
+        { id: "312", name: "淑嶝", en: "Sukdeung", code: "312" },
+        { id: "313", name: "德川", en: "Deokcheon", code: "313" },
+        { id: "314", name: "龜浦", en: "Gupo", code: "314" },
+        { id: "315", name: "江西區廳", en: "Gangseo-gu Office", code: "315" },
+        { id: "316", name: "體育公園", en: "Sports Park", code: "316" },
+        { id: "317", name: "大渚", en: "Daejeo", code: "317" }
+      ]
+    },
+    {
+      key: "line4",
+      label: "4號線（藍線）",
+      color: "#2F6CE5",
+      stations: [
+        { id: "401", name: "美南", en: "Minam", code: "401" },
+        { id: "402", name: "東萊", en: "Dongnae", code: "402" },
+        { id: "403", name: "壽安", en: "Suan", code: "403" },
+        { id: "404", name: "樂民", en: "Nangmin", code: "404" },
+        { id: "405", name: "忠烈祠", en: "Chungnyeolsa", code: "405" },
+        { id: "406", name: "鳴藏", en: "Myeongjang", code: "406" },
+        { id: "407", name: "書洞", en: "Seo-dong", code: "407" },
+        { id: "408", name: "錦絲", en: "Geumsa", code: "408" },
+        { id: "409", name: "盤如農產物市場", en: "Banyeo Agricultural Market", code: "409" },
+        { id: "410", name: "石坮", en: "Seokdae", code: "410" },
+        { id: "411", name: "靈山大", en: "Youngsan University", code: "411" },
+        { id: "412", name: "上盤松", en: "Witbansong", code: "412" },
+        { id: "413", name: "古村", en: "Gochon", code: "413" },
+        { id: "414", name: "安平", en: "Anpyeong", code: "414" }
+      ]
+    },
+    {
+      key: "bgl",
+      label: "金海輕軌（紫線）",
+      color: "#8758D6",
+      stations: [
+        { id: "bgl-01", name: "沙上", en: "Sasang", code: "1" },
+        { id: "bgl-02", name: "掛法勒內希泰", en: "Gwaebeop Renecite", code: "2" },
+        { id: "bgl-03", name: "西釜山流通地區", en: "Seobusan Yutongjigu", code: "3" },
+        { id: "bgl-04", name: "金海國際機場", en: "Gimhae Int'l Airport", code: "4" },
+        { id: "bgl-05", name: "德斗", en: "Deokdu", code: "5" },
+        { id: "bgl-06", name: "登龜", en: "Deunggu", code: "6" },
+        { id: "bgl-07", name: "大渚", en: "Daejeo", code: "7" },
+        { id: "bgl-08", name: "平江", en: "Pyeonggang", code: "8" },
+        { id: "bgl-09", name: "大沙", en: "Daesa", code: "9" },
+        { id: "bgl-10", name: "佛岩", en: "Buram", code: "10" },
+        { id: "bgl-11", name: "池內", en: "Jinae", code: "11" },
+        { id: "bgl-12", name: "金海大學", en: "Gimhae College", code: "12" },
+        { id: "bgl-13", name: "仁濟大", en: "Inje Univ.", code: "13" },
+        { id: "bgl-14", name: "金海市廳", en: "Gimhae City Hall", code: "14" },
+        { id: "bgl-15", name: "府院", en: "Buwon", code: "15" },
+        { id: "bgl-16", name: "鳳凰", en: "Bonghwang", code: "16" },
+        { id: "bgl-17", name: "首露王陵", en: "Royal Tomb of King Suro", code: "17" },
+        { id: "bgl-18", name: "博物館", en: "Gimhae Nat'l Museum", code: "18" },
+        { id: "bgl-19", name: "蓮池公園", en: "Yeonji Park", code: "19" },
+        { id: "bgl-20", name: "長神大", en: "Jangshindae", code: "20" },
+        { id: "bgl-21", name: "加耶大", en: "Gaya Univ.", code: "21" }
+      ]
+    }
+  ];
+
   function fillMetroSelects() {
     const fromSelect = document.getElementById("from-station");
     const toSelect = document.getElementById("to-station");
@@ -476,13 +483,11 @@
         const fromOption = document.createElement("option");
         fromOption.value = station.id;
         fromOption.textContent = `[${station.code}] ${station.name} (${station.en})`;
-        fromOption.dataset.line = line.key;
         fromGroup.appendChild(fromOption);
 
         const toOption = document.createElement("option");
         toOption.value = station.id;
         toOption.textContent = `[${station.code}] ${station.name} (${station.en})`;
-        toOption.dataset.line = line.key;
         toGroup.appendChild(toOption);
       });
 
@@ -494,12 +499,28 @@
   function getStationById(id) {
     for (const line of metroLines) {
       const found = line.stations.find(station => station.id === id);
-      if (found) return { ...found, lineKey: line.key, lineLabel: line.label, lineColor: line.color };
+      if (found) {
+        return {
+          ...found,
+          lineKey: line.key,
+          lineLabel: line.label,
+          lineColor: line.color
+        };
+      }
     }
     return null;
   }
 
-  fillMetroSelects();
+  document.addEventListener("DOMContentLoaded", () => {
+    updateKoreaTime();
+    setInterval(updateKoreaTime, 1000);
+
+    loadBusanWeather();
+    fillMetroSelects();
+
+    console.log("頁面初始化完成");
+    console.log("地鐵站總數：", metroLines.reduce((sum, line) => sum + line.stations.length, 0));
+  });
 </script>
 </body>
 </html>
