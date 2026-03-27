@@ -816,7 +816,7 @@ function calculateRoute(fromId, toId) {
     );
 
     span.textContent = transfer
-      ? `${lineText} 🔁 ${transfer.station}`
+      ? `${lineText} ${transfer.station}`
       : lineText;
 
     span.style.background = color;
