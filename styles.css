@@ -867,10 +867,37 @@ body{
   }
 
   .nav-inner{
-    flex-direction:column;
-    align-items:flex-start;
-    padding:12px 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
   }
+
+  .brand{
+    font-size: 16px;      /* 👉 logo縮小一點 */
+    white-space: nowrap;
+  }
+
+  .nav-links{
+    display: flex;
+    gap: 6px;
+    flex-wrap: nowrap;
+    overflow-x: auto;     /* 👉 太長可以滑 */
+  }
+
+  .nav-links a{
+    font-size: 12px;      /* 👉 再縮 */
+    padding: 6px 8px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  /* 👉 隱藏滑動條（美化） */
+  .nav-links::-webkit-scrollbar{
+    display: none;
+  }
+
 
   .hero{
     min-height:360px;
