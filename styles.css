@@ -192,66 +192,126 @@ h2{
   color:#6b7280;
   font-size:.95rem;
 }
-/* ===== 滿版封面（核心） ===== */
+
+/* ===== 首頁封面 ===== */
+.page-hero{
+  padding:24px 0 10px;
+}
+
 .page-head-cover{
   position:relative;
   min-height:420px;
   padding:0;
   overflow:hidden;
   display:flex;
-  align-items:flex-end;   /* 👈 保持貼底（比較有設計感） */
+  align-items:flex-end;
+  border-radius:28px;
 }
 
-/* 標題 */
-.page-head-cover h1{
-  color:#fff;
-  margin:8px 0 6px;
-}
-
-/* 介紹文字 */
-.page-head-cover .lead{
-  color:rgba(255,255,255,.9);
-  margin:-4px 0;
-}
-
-/* 整塊文字區 */
-.page-head-overlay{
-  width:100%;
-  padding:24px 32px 80px;  /* 👈 這個控制「整體往上」 */
-}
-
-/* meta（4人同行那排） */
-.page-head-cover .meta{
-  margin-top:16px;
-}
-/* 文字在封面上的樣式 */
-.page-head-cover .lead{
-  color:rgba(255,255,255,.9);
-}
-
-.page-head-cover .badge{
-  background:rgba(255,255,255,.18);
-  color:#fff;
-}
-
-.page-head-cover .btn{
-  background:rgba(255,255,255,.15);
-  color:#fff;
-  border:1px solid rgba(255,255,255,.3);
-}
-
-.page-head-cover .btn.primary{
-  background:#fff;
-  color:#222;
-}
-
-/* ===== 每頁背景圖 ===== */
 .page-head-home{
   background:
-    linear-gradient(rgba(0,0,0,.3), rgba(0,0,0,.3)),
+    linear-gradient(
+      90deg,
+      rgba(7, 12, 30, 0.72) 0%,
+      rgba(7, 12, 30, 0.52) 32%,
+      rgba(7, 12, 30, 0.20) 58%,
+      rgba(7, 12, 30, 0.05) 75%,
+      rgba(7, 12, 30, 0) 100%
+    ),
     url("images/imagescover.jpg") center/cover no-repeat;
 }
 
+.page-head-overlay{
+  position:relative;
+  z-index:2;
+  width:100%;
+  max-width:640px;
+  padding:42px 34px 44px;
+}
+
+.page-head-home h1{
+  color:#fff;
+  margin:10px 0 14px;
+  font-size:clamp(2.6rem, 5vw, 4.4rem);
+  line-height:1.05;
+  font-weight:800;
+  letter-spacing:-0.03em;
+  text-shadow:0 8px 24px rgba(0,0,0,.28);
+}
+
+.page-head-home .lead{
+  color:rgba(255,255,255,.92);
+  margin:0 0 22px;
+  font-size:1rem;
+  line-height:1.8;
+  max-width:560px;
+}
+
+.page-head-home .badge{
+  display:inline-flex;
+  align-items:center;
+  padding:8px 16px;
+  border-radius:999px;
+  background:rgba(255,255,255,.16);
+  color:#fff;
+  font-weight:700;
+  border:1px solid rgba(255,255,255,.16);
+  backdrop-filter:blur(8px);
+  -webkit-backdrop-filter:blur(8px);
+}
+
+.page-head-home .meta{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-top:0;
+  margin-bottom:22px;
+}
+
+.page-head-home .meta span{
+  padding:8px 14px;
+  border-radius:999px;
+  background:rgba(255,255,255,.92);
+  color:#1f2937;
+  border:1px solid rgba(255,255,255,.5);
+  font-size:.93rem;
+  font-weight:600;
+  box-shadow:0 8px 20px rgba(0,0,0,.10);
+}
+
+.btn-row{
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px;
+}
+
+.page-head-home .btn{
+  padding:12px 18px;
+  border-radius:14px;
+  font-weight:700;
+  transition:.2s ease;
+}
+
+.page-head-home .btn.primary{
+  background:#fff;
+  color:#111827;
+  border:1px solid rgba(255,255,255,.7);
+  box-shadow:0 10px 24px rgba(0,0,0,.14);
+}
+
+.page-head-home .btn:not(.primary){
+  background:rgba(255,255,255,.10);
+  color:#fff;
+  border:1px solid rgba(255,255,255,.48);
+  backdrop-filter:blur(8px);
+  -webkit-backdrop-filter:blur(8px);
+}
+
+.page-head-home .btn:hover{
+  transform:translateY(-2px);
+}
+
+/* ===== 每頁背景圖 ===== */
 .page-head-d1{
   background:
     linear-gradient(rgba(0,0,0,.3), rgba(0,0,0,.3)),
@@ -314,99 +374,80 @@ h2{
 
 /* ===== 手機版 ===== */
 @media (max-width:768px){
-
   .nav-inner{
     flex-direction:column;
     align-items:flex-start;
   }
+
   .brand{
     font-size:1.4rem;
-  }
-  .page-head-cover{
-    min-height:260px;
-  }
-
-  .page-head-overlay{
-    padding:20px;
   }
 
   h1{
     font-size:1.8rem;
   }
 
+  .grid,
+  .info-grid{
+    grid-template-columns:1fr;
+  }
+
+  .page-head-cover{
+    min-height:320px;
+    align-items:flex-end;
+  }
+
+  .page-head-home{
+    background:
+      linear-gradient(
+        180deg,
+        rgba(7, 12, 30, 0.20) 0%,
+        rgba(7, 12, 30, 0.38) 35%,
+        rgba(7, 12, 30, 0.68) 100%
+      ),
+      url("images/imagescover.jpg") 60% center/cover no-repeat;
+  }
+
+  .page-head-overlay{
+    padding:22px 20px 24px;
+    max-width:100%;
+  }
+
+  .page-head-home h1{
+    font-size:2.2rem;
+    margin:8px 0 10px;
+  }
+
+  .page-head-home .lead{
+    font-size:.95rem;
+    line-height:1.7;
+    margin-bottom:18px;
+  }
+
+  .page-head-home .meta{
+    gap:8px;
+    margin-bottom:18px;
+  }
+
+  .page-head-home .meta span{
+    font-size:.85rem;
+    padding:7px 12px;
+  }
+
+  .btn-row{
+    flex-direction:column;
+  }
+
+  .btn{
+    width:100%;
+    justify-content:center;
+  }
+
   .item{
-    grid-template-columns:1fr;
-  }
-    .grid,
-  .info-grid{
-    grid-template-columns:1fr;
-  }
-    .info-section{
-  padding-top: 8px;
-}
-
-.info-grid{
-  display:grid;
-  grid-template-columns:repeat(3, minmax(0, 1fr));
-  gap:20px;
-  align-items:stretch;
-}
-
-.info-card{
-  padding:24px;
-  min-height:160px;
-}
-
-.info-card h3{
-  margin:0 0 12px;
-}
-
-.info-card p{
-  margin:0;
-}
-
-@media (max-width: 768px){
-  .info-grid{
     grid-template-columns:1fr;
   }
 
   .info-card{
     min-height:auto;
   }
-}
-  .page-head-home{
-  background:
-    linear-gradient(rgba(0,0,0,.35), rgba(0,0,0,.35)),
-    url("images/imagescover.jpg") center/cover no-repeat;
-}
-
-/* 修正文字顏色 */
-.page-head-home h1{
-  color:#fff;
-}
-
-.page-head-home .lead{
-  color:rgba(255,255,255,.9);
-}
-
-/* meta 標籤 */
-.page-head-home .meta span{
-  background:rgba(255,255,255,.9);
-  color:#1f2937;
-  border:1px solid rgba(255,255,255,.4);
-}
-  .page-head-home h1{
-  color:#fff !important;
-}
-  .page-head-home h1{
-  margin:8px 0 6px;   /* 原本太大 */
-}
-
-.page-head-home .lead{
-  margin:4px 0;       /* 壓縮中間段 */
-}
-
-.page-head-home .meta{
-  margin-top:6px;     /* 你已經改，但再更小 */
-}
 }
