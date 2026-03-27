@@ -677,6 +677,7 @@ img{
   }
 }
 /* 地鐵結果 badge 區手機防爆版 */
+/* 地鐵結果 badge 區手機防爆版 */
 #route-line{
   display:flex;
   flex-wrap:wrap;
@@ -704,11 +705,14 @@ img{
   }
 
   #route-line{
-    gap:6px;
+    justify-content:flex-start;
+    overflow-x:auto;
+    flex-wrap:nowrap;
+    padding-bottom:4px;
   }
 
   #route-line > span{
-    max-width:100%;
+    flex-shrink:0;
   }
 
   .station-name{
