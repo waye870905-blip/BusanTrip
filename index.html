@@ -807,30 +807,38 @@ function calculateRoute(fromId, toId) {
   result.lineSequence.forEach((lineText, index) => {
     const span = document.createElement("span");
 
-    const line = metroLines.find(l => l.label === lineText);
+    const cleanLineName = lineText.split("（")[0];
 
     const color = line?.color || "#999";
 
     const transfer = result.transferNotes.find(t =>
       t.toLine === lineText
     );
+    const stops = result.lineStopsMap[lineText] || 0;
+    const cleanLineName = lineText.split("（")[0];
 
-    span.textContent = transfer
-      ? `${lineText} ${transfer.station}`
-      : lineText;
+span.innerHTML = `
+  <div style="display:flex; flex-direction:column; align-items:center; line-height:1.2;">
+    <div>${cleanLineName}</div>
+    <div style="font-size:10px; opacity:0.9;">
+      ${stops}站${transfer ? `｜${transfer.station}` : ""}
+    </div>
+  </div>
+`;
+  span.style.background = color;
+  span.style.color = "#fff";
+  span.style.padding = "8px 12px";
+  span.style.borderRadius = "999px";
+  span.style.fontSize = "12px";
+  span.style.fontWeight = "700";
+  span.style.marginRight = "6px";
+  span.style.display = "inline-flex";
+  span.style.alignItems = "center";
+  span.style.justifyContent = "center";
+  span.style.minWidth = "70px";
 
-    span.style.background = color;
-    span.style.color = "#fff";
-    span.style.padding = "6px 10px";
-    span.style.borderRadius = "999px";
-    span.style.fontSize = "12px";
-    span.style.fontWeight = "700";
-    span.style.marginRight = "6px";
-    span.style.display = "inline-flex";
-    span.style.alignItems = "center";
-
-    routeLine.appendChild(span);
-
+  routeLine.appendChild(span);
+    
     if (index < result.lineSequence.length - 1) {
       const arrow = document.createElement("span");
       arrow.textContent = "→";
