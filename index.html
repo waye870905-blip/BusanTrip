@@ -144,7 +144,7 @@
       <p>
         金海機場可搭金海輕軌，於 <strong>沙上站</strong> 轉乘地鐵 2 號線，
         或於 <strong>大渚站</strong> 轉乘 3 號線；也可選擇機場巴士往
-        <strong>西面/釜山站</strong> 或 <strong>海雲台</strong> 方向。:contentReference[oaicite:1]{index=1}
+        <strong>西面/釜山站</strong> 或 <strong>海雲台</strong> 方向。
       </p>
     </div>
   </div>
@@ -218,247 +218,228 @@
   </footer>
 
   <script>
-    function updateKoreaTime() {
-      const now = new Date();
-      const koreaTime = new Intl.DateTimeFormat("zh-TW", {
-        timeZone: "Asia/Seoul",
-        year: "numeric",
-        month: "2-digit",
-        day: "2-digit",
-        hour: "2-digit",
-        minute: "2-digit",
-        second: "2-digit",
-        hour12: false
-      }).format(now);
+  function updateKoreaTime() {
+    const now = new Date();
+    const koreaTime = new Intl.DateTimeFormat("zh-TW", {
+      timeZone: "Asia/Seoul",
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",
+      hour12: false
+    }).format(now);
 
-      document.getElementById("korea-time").textContent = koreaTime;
-    }
+    document.getElementById("korea-time").textContent = koreaTime;
+  }
 
-    function weatherCodeToText(code) {
-      const map = {
-        0: "晴天",
-        1: "大致晴",
-        2: "多雲",
-        3: "陰天",
-        45: "有霧",
-        48: "霧凇",
-        51: "毛毛雨",
-        53: "細雨",
-        55: "較強毛雨",
-        61: "小雨",
-        63: "中雨",
-        65: "大雨",
-        71: "小雪",
-        73: "中雪",
-        75: "大雪",
-        80: "陣雨",
-        81: "較強陣雨",
-        82: "強烈陣雨",
-        95: "雷雨"
-      };
-      return map[code] || "天氣更新中";
-    }
+  function weatherCodeToText(code) {
+    const map = {
+      0: "晴天",
+      1: "大致晴",
+      2: "多雲",
+      3: "陰天",
+      45: "有霧",
+      48: "霧凇",
+      51: "毛毛雨",
+      53: "細雨",
+      55: "較強毛雨",
+      61: "小雨",
+      63: "中雨",
+      65: "大雨",
+      71: "小雪",
+      73: "中雪",
+      75: "大雪",
+      80: "陣雨",
+      81: "較強陣雨",
+      82: "強烈陣雨",
+      95: "雷雨"
+    };
+    return map[code] || "天氣更新中";
+  }
 
-    async function loadBusanWeather() {
-      const weatherMain = document.getElementById("weather-main");
-      const weatherSub = document.getElementById("weather-sub");
+  async function loadBusanWeather() {
+    const weatherMain = document.getElementById("weather-main");
+    const weatherSub = document.getElementById("weather-sub");
 
-      try {
-        const res = await fetch("https://api.open-meteo.com/v1/forecast?latitude=35.1796&longitude=129.0756&current=temperature_2m,weather_code&timezone=Asia%2FSeoul");
-        const data = await res.json();
+    try {
+      const res = await fetch("https://api.open-meteo.com/v1/forecast?latitude=35.1796&longitude=129.0756&current=temperature_2m,weather_code&timezone=Asia%2FSeoul");
+      const data = await res.json();
 
-        const temp = data?.current?.temperature_2m;
-        const code = data?.current?.weather_code;
-        const text = weatherCodeToText(code);
+      const temp = data?.current?.temperature_2m;
+      const code = data?.current?.weather_code;
+      const text = weatherCodeToText(code);
 
-        if (temp !== undefined) {
-          weatherMain.textContent = `${temp}°C`;
-          weatherSub.textContent = `${text}｜釜山目前狀態`;
-        } else {
-          weatherMain.textContent = "無法取得";
-          weatherSub.textContent = "稍後再試一次";
-        }
-      } catch (error) {
-        weatherMain.textContent = "讀取失敗";
-        weatherSub.textContent = "請確認網路或稍後重整";
+      if (temp !== undefined) {
+        weatherMain.textContent = `${temp}°C`;
+        weatherSub.textContent = `${text}｜釜山目前狀態`;
+      } else {
+        weatherMain.textContent = "無法取得";
+        weatherSub.textContent = "稍後再試一次";
       }
+    } catch (error) {
+      weatherMain.textContent = "讀取失敗";
+      weatherSub.textContent = "請確認網路或稍後重整";
     }
+  }
 
-    updateKoreaTime();
-    setInterval(updateKoreaTime, 1000);
-    loadBusanWeather();
-  </script>
-<script>
   const metroStations = [
-    "釜山站",
-    "南浦站",
-    "札嘎其站",
-    "土城站",
-    "西面站",
-    "海雲台站",
-    "中洞站",
-    "Centum City站",
-    "沙上站",
-    "大渚站",
-    "機場站",
-    "老圃站",
-    "慶星大・釜慶大站"
-  ];
+    { id: "101", line: "1", name: "多大浦海水浴場", en: "Dadaepo Beach", label: "[101] 多大浦海水浴場 (Dadaepo Beach)" },
+    { id: "102", line: "1", name: "多大浦港", en: "Dadaepo Harbor", label: "[102] 多大浦港 (Dadaepo Harbor)" },
+    { id: "103", line: "1", name: "納坡", en: "Natgae", label: "[103] 納坡 (Natgae)" },
+    { id: "104", line: "1", name: "新長林", en: "Sinjangnim", label: "[104] 新長林 (Sinjangnim)" },
+    { id: "105", line: "1", name: "長林", en: "Jangnim", label: "[105] 長林 (Jangnim)" },
+    { id: "106", line: "1", name: "東埋浦", en: "Dongmae", label: "[106] 東埋浦 (Dongmae)" },
+    { id: "107", line: "1", name: "新平", en: "Sinpyeong", label: "[107] 新平 (Sinpyeong)" },
+    { id: "108", line: "1", name: "下端", en: "Hadan", label: "[108] 下端 (Hadan)" },
+    { id: "109", line: "1", name: "堂里", en: "Dangni", label: "[109] 堂里 (Dangni)" },
+    { id: "110", line: "1", name: "沙下", en: "Saha", label: "[110] 沙下 (Saha)" },
+    { id: "111", line: "1", name: "槐亭", en: "Goejeong", label: "[111] 槐亭 (Goejeong)" },
+    { id: "112", line: "1", name: "大峙", en: "Daeti", label: "[112] 大峙 (Daeti)" },
+    { id: "113", line: "1", name: "西大新", en: "Seodaesin", label: "[113] 西大新 (Seodaesin)" },
+    { id: "114", line: "1", name: "東大新", en: "Dongdaesin", label: "[114] 東大新 (Dongdaesin)" },
+    { id: "115", line: "1", name: "土城", en: "Toseong", label: "[115] 土城 (Toseong)" },
+    { id: "116", line: "1", name: "札嘎其", en: "Jagalchi", label: "[116] 札嘎其 (Jagalchi)" },
+    { id: "117", line: "1", name: "南浦", en: "Nampo", label: "[117] 南浦 (Nampo)" },
+    { id: "118", line: "1", name: "中央", en: "Jungang", label: "[118] 中央 (Jungang)" },
+    { id: "119", line: "1", name: "釜山站", en: "Busan Station", label: "[119] 釜山站 (Busan Station)" },
+    { id: "120", line: "1", name: "草梁", en: "Choryang", label: "[120] 草梁 (Choryang)" },
+    { id: "121", line: "1", name: "佐川", en: "Jwacheon", label: "[121] 佐川 (Jwacheon)" },
+    { id: "122", line: "1", name: "凡一", en: "Beomil", label: "[122] 凡一 (Beomil)" },
+    { id: "123", line: "1", name: "凡內谷", en: "Beomnaegol", label: "[123] 凡內谷 (Beomnaegol)" },
+    { id: "124", line: "1", name: "西面", en: "Seomyeon", label: "[124] 西面 (Seomyeon)" },
+    { id: "125", line: "1", name: "釜田", en: "Bujeon", label: "[125] 釜田 (Bujeon)" },
+    { id: "126", line: "1", name: "楊亭", en: "Yangjeong", label: "[126] 楊亭 (Yangjeong)" },
+    { id: "127", line: "1", name: "市廳", en: "City Hall", label: "[127] 市廳 (City Hall)" },
+    { id: "128", line: "1", name: "蓮山", en: "Yeonsan", label: "[128] 蓮山 (Yeonsan)" },
+    { id: "129", line: "1", name: "教大", en: "Busan Nat'l Univ. of Edu.", label: "[129] 教大 (Busan Nat'l Univ. of Edu.)" },
+    { id: "130", line: "1", name: "東萊", en: "Dongnae", label: "[130] 東萊 (Dongnae)" },
+    { id: "131", line: "1", name: "明倫", en: "Myeongnyun", label: "[131] 明倫 (Myeongnyun)" },
+    { id: "132", line: "1", name: "溫泉場", en: "Oncheonjang", label: "[132] 溫泉場 (Oncheonjang)" },
+    { id: "133", line: "1", name: "釜山大學", en: "Pusan Nat'l Univ.", label: "[133] 釜山大學 (Pusan Nat'l Univ.)" },
+    { id: "134", line: "1", name: "長箭", en: "Jangjeon", label: "[134] 長箭 (Jangjeon)" },
+    { id: "135", line: "1", name: "久瑞", en: "Guseo", label: "[135] 久瑞 (Guseo)" },
+    { id: "136", line: "1", name: "杜實", en: "Dusil", label: "[136] 杜實 (Dusil)" },
+    { id: "137", line: "1", name: "南山", en: "Namsan", label: "[137] 南山 (Namsan)" },
+    { id: "138", line: "1", name: "梵魚寺", en: "Beomeosa", label: "[138] 梵魚寺 (Beomeosa)" },
+    { id: "139", line: "1", name: "老圃", en: "Nopo", label: "[139] 老圃 (Nopo)" },
 
-  const metroRoutes = {
-    "機場站|沙上站": {
-      stops: "7 站",
-      duration: "約 16 分",
-      line: "金海輕軌",
-      note: "搭乘金海輕軌前往沙上站，再轉乘地鐵 2 號線。"
-    },
-    "機場站|大渚站": {
-      stops: "3 站",
-      duration: "約 8 分",
-      line: "金海輕軌",
-      note: "搭乘金海輕軌前往大渚站，再轉乘地鐵 3 號線。"
-    },
-    "釜山站|南浦站": {
-      stops: "2 站",
-      duration: "約 4 分",
-      line: "地鐵 1 號線",
-      note: "地鐵 1 號線直達，不需轉乘。"
-    },
-    "釜山站|札嘎其站": {
-      stops: "3 站",
-      duration: "約 6 分",
-      line: "地鐵 1 號線",
-      note: "地鐵 1 號線直達，不需轉乘。"
-    },
-    "釜山站|土城站": {
-      stops: "4 站",
-      duration: "約 8 分",
-      line: "地鐵 1 號線",
-      note: "地鐵 1 號線直達，甘川文化村常會先到土城站再轉公車。"
-    },
-    "釜山站|西面站": {
-      stops: "5 站",
-      duration: "約 11 分",
-      line: "地鐵 1 號線",
-      note: "地鐵 1 號線直達，不需轉乘。"
-    },
-    "釜山站|海雲台站": {
-      stops: "轉乘 1 次",
-      duration: "約 39 分",
-      line: "1 號線 → 2 號線",
-      note: "先搭 1 號線到西面站，再轉乘 2 號線往海雲台方向。"
-    },
-    "釜山站|中洞站": {
-      stops: "轉乘 1 次",
-      duration: "約 42 分",
-      line: "1 號線 → 2 號線",
-      note: "先搭到西面站，再轉 2 號線；中洞站可銜接尾浦、青沙浦一帶行程。"
-    },
-    "釜山站|Centum City站": {
-      stops: "轉乘 1 次",
-      duration: "約 32 分",
-      line: "1 號線 → 2 號線",
-      note: "先到西面站，再轉乘 2 號線往海雲台方向。"
-    },
-    "釜山站|慶星大・釜慶大站": {
-      stops: "轉乘 1 次",
-      duration: "約 26 分",
-      line: "1 號線 → 2 號線",
-      note: "先搭到西面站，再轉 2 號線，適合去廣安里周邊。"
-    },
-    "釜山站|老圃站": {
-      stops: "15 站",
-      duration: "約 34 分",
-      line: "地鐵 1 號線",
-      note: "地鐵 1 號線直達。"
-    },
-    "沙上站|海雲台站": {
-      stops: "17 站",
-      duration: "約 42 分",
-      line: "地鐵 2 號線",
-      note: "地鐵 2 號線直達，不需轉乘。"
-    },
-    "西面站|海雲台站": {
-      stops: "12 站",
-      duration: "約 28 分",
-      line: "地鐵 2 號線",
-      note: "地鐵 2 號線直達。"
-    },
-    "西面站|Centum City站": {
-      stops: "9 站",
-      duration: "約 20 分",
-      line: "地鐵 2 號線",
-      note: "地鐵 2 號線直達。"
-    },
-    "西面站|慶星大・釜慶大站": {
-      stops: "5 站",
-      duration: "約 10 分",
-      line: "地鐵 2 號線",
-      note: "地鐵 2 號線直達。"
-    },
-    "海雲台站|中洞站": {
-      stops: "1 站",
-      duration: "約 2 分",
-      line: "地鐵 2 號線",
-      note: "地鐵 2 號線直達。"
-    }
-  };
+    { id: "201", line: "2", name: "萇山", en: "Jangsan", label: "[201] 萇山 (Jangsan)" },
+    { id: "202", line: "2", name: "中洞", en: "Jung-dong", label: "[202] 中洞 (Jung-dong)" },
+    { id: "203", line: "2", name: "海雲台", en: "Haeundae", label: "[203] 海雲台 (Haeundae)" },
+    { id: "204", line: "2", name: "冬柏", en: "Dongbaek", label: "[204] 冬柏 (Dongbaek)" },
+    { id: "205", line: "2", name: "BEXCO", en: "BEXCO", label: "[205] BEXCO" },
+    { id: "206", line: "2", name: "Centum City", en: "Centum City", label: "[206] Centum City" },
+    { id: "207", line: "2", name: "民樂", en: "Millak", label: "[207] 民樂 (Millak)" },
+    { id: "208", line: "2", name: "水營", en: "Suyeong", label: "[208] 水營 (Suyeong)" },
+    { id: "209", line: "2", name: "廣安", en: "Gwangan", label: "[209] 廣安 (Gwangan)" },
+    { id: "210", line: "2", name: "金蓮山", en: "Geumnyeonsan", label: "[210] 金蓮山 (Geumnyeonsan)" },
+    { id: "211", line: "2", name: "南川", en: "Namcheon", label: "[211] 南川 (Namcheon)" },
+    { id: "212", line: "2", name: "慶星大・釜慶大", en: "Kyungsung Univ.‧Pukyong Nat'l Univ.", label: "[212] 慶星大・釜慶大 (Kyungsung Univ.‧Pukyong Nat'l Univ.)" },
+    { id: "213", line: "2", name: "大淵", en: "Daeyeon", label: "[213] 大淵 (Daeyeon)" },
+    { id: "214", line: "2", name: "戊骨", en: "Motgol", label: "[214] 戊骨 (Motgol)" },
+    { id: "215", line: "2", name: "門峴", en: "Munhyeon", label: "[215] 門峴 (Munhyeon)" },
+    { id: "216", line: "2", name: "國際金融中心・釜山銀行", en: "IFC‧Busan Bank", label: "[216] 國際金融中心・釜山銀行 (IFC‧Busan Bank)" },
+    { id: "217", line: "2", name: "田浦", en: "Jeonpo", label: "[217] 田浦 (Jeonpo)" },
+    { id: "218", line: "2", name: "西面", en: "Seomyeon", label: "[218] 西面 (Seomyeon)" },
+    { id: "219", line: "2", name: "釜岩", en: "Buam", label: "[219] 釜岩 (Buam)" },
+    { id: "220", line: "2", name: "加耶", en: "Gaya", label: "[220] 加耶 (Gaya)" },
+    { id: "221", line: "2", name: "冷井", en: "Naengjeong", label: "[221] 冷井 (Naengjeong)" },
+    { id: "222", line: "2", name: "周禮", en: "Jurye", label: "[222] 周禮 (Jurye)" },
+    { id: "223", line: "2", name: "沙上", en: "Sasang", label: "[223] 沙上 (Sasang)" },
+    { id: "224", line: "2", name: "德浦", en: "Deokpo", label: "[224] 德浦 (Deokpo)" },
+    { id: "225", line: "2", name: "毛羅", en: "Mora", label: "[225] 毛羅 (Mora)" },
+    { id: "226", line: "2", name: "龜南", en: "Gumyeong", label: "[226] 龜南 (Gumyeong)" },
+    { id: "227", line: "2", name: "龜明", en: "Gupo", label: "[227] 龜明 (Gupo)" },
+    { id: "228", line: "2", name: "德川", en: "Deokcheon", label: "[228] 德川 (Deokcheon)" },
+    { id: "229", line: "2", name: "水亭", en: "Sujeong", label: "[229] 水亭 (Sujeong)" },
+    { id: "230", line: "2", name: "華明", en: "Hwamyeong", label: "[230] 華明 (Hwamyeong)" },
+    { id: "231", line: "2", name: "栗里", en: "Yulli", label: "[231] 栗里 (Yulli)" },
+    { id: "232", line: "2", name: "東園", en: "Dongwon", label: "[232] 東園 (Dongwon)" },
+    { id: "233", line: "2", name: "金谷", en: "Geumgok", label: "[233] 金谷 (Geumgok)" },
+    { id: "234", line: "2", name: "湖浦", en: "Hopo", label: "[234] 湖浦 (Hopo)" },
+    { id: "235", line: "2", name: "甑山", en: "Jeungsan", label: "[235] 甑山 (Jeungsan)" },
+    { id: "236", line: "2", name: "釜山大梁山校園", en: "Pusan Nat'l Univ. Yangsan Campus", label: "[236] 釜山大梁山校園 (Pusan Nat'l Univ. Yangsan Campus)" },
+    { id: "237", line: "2", name: "南梁山", en: "Namyangsan", label: "[237] 南梁山 (Namyangsan)" },
+    { id: "238", line: "2", name: "梁山", en: "Yangsan", label: "[238] 梁山 (Yangsan)" },
+
+    { id: "301", line: "3", name: "水營", en: "Suyeong", label: "[301] 水營 (Suyeong)" },
+    { id: "302", line: "3", name: "望美", en: "Mangmi", label: "[302] 望美 (Mangmi)" },
+    { id: "303", line: "3", name: "杯山", en: "Baesan", label: "[303] 杯山 (Baesan)" },
+    { id: "304", line: "3", name: "蓮山", en: "Yeonsan", label: "[304] 蓮山 (Yeonsan)" },
+    { id: "305", line: "3", name: "巨堤", en: "Geoje", label: "[305] 巨堤 (Geoje)" },
+    { id: "306", line: "3", name: "綜合運動場", en: "Sports Complex", label: "[306] 綜合運動場 (Sports Complex)" },
+    { id: "307", line: "3", name: "社稷", en: "Sajik", label: "[307] 社稷 (Sajik)" },
+    { id: "308", line: "3", name: "美南", en: "Minam", label: "[308] 美南 (Minam)" },
+    { id: "309", line: "3", name: "萬德", en: "Mandeok", label: "[309] 萬德 (Mandeok)" },
+    { id: "310", line: "3", name: "南山亭", en: "Namsanjeong", label: "[310] 南山亭 (Namsanjeong)" },
+    { id: "311", line: "3", name: "淑登", en: "Sukdeung", label: "[311] 淑登 (Sukdeung)" },
+    { id: "312", line: "3", name: "德川", en: "Deokcheon", label: "[312] 德川 (Deokcheon)" },
+    { id: "313", line: "3", name: "龜浦", en: "Gupo", label: "[313] 龜浦 (Gupo)" },
+    { id: "314", line: "3", name: "江西區廳", en: "Gangseo-gu Office", label: "[314] 江西區廳 (Gangseo-gu Office)" },
+    { id: "315", line: "3", name: "體育公園", en: "Sports Park", label: "[315] 體育公園 (Sports Park)" },
+    { id: "316", line: "3", name: "大渚", en: "Daejeo", label: "[316] 大渚 (Daejeo)" },
+
+    { id: "401", line: "4", name: "美南", en: "Minam", label: "[401] 美南 (Minam)" },
+    { id: "402", line: "4", name: "東萊", en: "Dongnae", label: "[402] 東萊 (Dongnae)" },
+    { id: "403", line: "4", name: "壽安", en: "Suan", label: "[403] 壽安 (Suan)" },
+    { id: "404", line: "4", name: "盤如農產物市場", en: "Banyeo Agricultural Market", label: "[404] 盤如農產物市場 (Banyeo Agricultural Market)" },
+    { id: "405", line: "4", name: "石臺", en: "Seokdae", label: "[405] 石臺 (Seokdae)" },
+    { id: "406", line: "4", name: "靈山大學", en: "Youngsan Univ.", label: "[406] 靈山大學 (Youngsan Univ.)" },
+    { id: "407", line: "4", name: "古村", en: "Gochon", label: "[407] 古村 (Gochon)" },
+    { id: "408", line: "4", name: "安平", en: "Anpyeong", label: "[408] 安平 (Anpyeong)" },
+
+    { id: "B01", line: "BGL", name: "沙上", en: "Sasang", label: "[B01] 沙上 (Sasang)" },
+    { id: "B02", line: "BGL", name: "掛法勒", en: "Gwaebeop Renecite", label: "[B02] 掛法勒 (Gwaebeop Renecite)" },
+    { id: "B03", line: "BGL", name: "西釜山流通地區", en: "Seobusan Yutongjigu", label: "[B03] 西釜山流通地區 (Seobusan Yutongjigu)" },
+    { id: "B04", line: "BGL", name: "金海機場", en: "Gimhae Int'l Airport", label: "[B04] 金海機場 (Gimhae Int'l Airport)" },
+    { id: "B05", line: "BGL", name: "機場站", en: "Airport", label: "[B05] 機場站 (Airport)" },
+    { id: "B06", line: "BGL", name: "西釜山車庫", en: "Seobusan Depot", label: "[B06] 西釜山車庫 (Seobusan Depot)" },
+    { id: "B07", line: "BGL", name: "德斗", en: "Deokdu", label: "[B07] 德斗 (Deokdu)" },
+    { id: "B08", line: "BGL", name: "登龜", en: "Deunggu", label: "[B08] 登龜 (Deunggu)" },
+    { id: "B09", line: "BGL", name: "大渚", en: "Daejeo", label: "[B09] 大渚 (Daejeo)" },
+    { id: "B10", line: "BGL", name: "平江", en: "Pyeonggang", label: "[B10] 平江 (Pyeonggang)" },
+    { id: "B11", line: "BGL", name: "大沙", en: "Daesa", label: "[B11] 大沙 (Daesa)" },
+    { id: "B12", line: "BGL", name: "佛岩", en: "Bulseong", label: "[B12] 佛岩 (Bulseong)" },
+    { id: "B13", line: "BGL", name: "池內", en: "Jinae", label: "[B13] 池內 (Jinae)" },
+    { id: "B14", line: "BGL", name: "金海大學", en: "Gimhae Univ.", label: "[B14] 金海大學 (Gimhae Univ.)" },
+    { id: "B15", line: "BGL", name: "仁濟大學", en: "Inje Univ.", label: "[B15] 仁濟大學 (Inje Univ.)" },
+    { id: "B16", line: "BGL", name: "金海市廳", en: "Gimhae City Hall", label: "[B16] 金海市廳 (Gimhae City Hall)" },
+    { id: "B17", line: "BGL", name: "府院", en: "Buwon", label: "[B17] 府院 (Buwon)" },
+    { id: "B18", line: "BGL", name: "鳳凰", en: "Bonghwang", label: "[B18] 鳳凰 (Bonghwang)" },
+    { id: "B19", line: "BGL", name: "博物館", en: "Museum", label: "[B19] 博物館 (Museum)" },
+    { id: "B20", line: "BGL", name: "蓮池公園", en: "Yeonji Park", label: "[B20] 蓮池公園 (Yeonji Park)" },
+    { id: "B21", line: "BGL", name: "長神大", en: "Jangsin Univ.", label: "[B21] 長神大 (Jangsin Univ.)" }
+  ];
 
   function fillMetroSelects() {
     const fromSelect = document.getElementById("from-station");
     const toSelect = document.getElementById("to-station");
 
-    metroStations.forEach(station => {
-      const opt1 = document.createElement("option");
-      opt1.value = station;
-      opt1.textContent = station;
-      fromSelect.appendChild(opt1);
+    if (!fromSelect || !toSelect) return;
 
-      const opt2 = document.createElement("option");
-      opt2.value = station;
-      opt2.textContent = station;
-      toSelect.appendChild(opt2);
+    fromSelect.innerHTML = '<option value="">請選擇出發站...</option>';
+    toSelect.innerHTML = '<option value="">請選擇目的站...</option>';
+
+    metroStations.forEach(station => {
+      const fromOption = document.createElement("option");
+      fromOption.value = station.id;
+      fromOption.textContent = station.label;
+      fromSelect.appendChild(fromOption);
+
+      const toOption = document.createElement("option");
+      toOption.value = station.id;
+      toOption.textContent = station.label;
+      toSelect.appendChild(toOption);
     });
   }
 
-  function findRoute(from, to) {
-    const key1 = `${from}|${to}`;
-    const key2 = `${to}|${from}`;
-    return metroRoutes[key1] || metroRoutes[key2] || null;
-  }
-
-  function planMetroRoute() {
-    const from = document.getElementById("from-station").value;
-    const to = document.getElementById("to-station").value;
-
-    if (!from || !to) {
-      alert("請先選擇出發站與目的站");
-      return;
-    }
-
-    if (from === to) {
-      alert("出發站與目的站不能相同");
-      return;
-    }
-
-    const result = findRoute(from, to);
-
-    if (!result) {
-      alert("這組路線我還沒補進去，先跟我說你想加哪一段，我幫你補。");
-      return;
-    }
-
-    document.getElementById("route-stops").textContent = result.stops;
-    document.getElementById("route-duration").textContent = result.duration;
-    document.getElementById("route-from").textContent = from;
-    document.getElementById("route-to").textContent = to;
-    document.getElementById("route-line").textContent = result.line;
-    document.getElementById("route-note").textContent = result.note;
-    document.getElementById("planner-result-card").style.display = "block";
+  function getStationById(id) {
+    return metroStations.find(station => station.id === id);
   }
 
   fillMetroSelects();
-  document.getElementById("plan-route-btn").addEventListener("click", planMetroRoute);
 </script>
 </body>
 </html>
