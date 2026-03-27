@@ -169,7 +169,9 @@ body {
 .transport-route {
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
   gap: 6px;
+  line-height: 1.8;
 }
 
 .line-badge {
@@ -225,5 +227,28 @@ body {
 
   .transport-card {
     padding: 10px;
+  }
+    .transport-route {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .transport-route .arrow {
+    display: none;
+  }
+
+  .line-badge,
+  .station {
+    width: 100%;
+  }
+
+  .line-badge {
+    justify-content: center;
+    text-align: center;
+  }
+
+  .station {
+    text-align: center;
   }
 }
