@@ -511,215 +511,298 @@
     }
     return null;
   }
-  function getLineByKey(lineKey) {
-    return metroLines.find(line => line.key === lineKey);
-  }
+  function getAllStations() {
+  const allStations = [];
 
-  function getStationIndex(lineKey, stationId) {
-    const line = getLineByKey(lineKey);
-    if (!line) return -1;
-    return line.stations.findIndex(station => station.id === stationId);
-  }
+  metroLines.forEach(line => {
+    line.stations.forEach((station, index) => {
+      allStations.push({
+        ...station,
+        lineKey: line.key,
+        lineLabel: line.label,
+        lineColor: line.color,
+        index
+      });
+    });
+  });
 
-  function formatMinutes(minutes) {
-    if (minutes < 60) return `${minutes} 分鐘`;
-    const hrs = Math.floor(minutes / 60);
-    const mins = minutes % 60;
-    return mins === 0 ? `${hrs} 小時` : `${hrs} 小時 ${mins} 分鐘`;
-  }
+  return allStations;
+}
 
-  function getTransferStations() {
-    return [
-      {
-        name: "西面",
-        connections: [
-          { lineKey: "line1", stationId: "119" },
-          { lineKey: "line2", stationId: "219" }
-        ]
-      },
-      {
-        name: "蓮山",
-        connections: [
-          { lineKey: "line1", stationId: "123" },
-          { lineKey: "line3", stationId: "305" }
-        ]
-      },
-      {
-        name: "東萊",
-        connections: [
-          { lineKey: "line1", stationId: "125" },
-          { lineKey: "line4", stationId: "402" }
-        ]
-      },
-      {
-        name: "水營",
-        connections: [
-          { lineKey: "line2", stationId: "208" },
-          { lineKey: "line3", stationId: "301" }
-        ]
-      },
-      {
-        name: "美南",
-        connections: [
-          { lineKey: "line3", stationId: "309" },
-          { lineKey: "line4", stationId: "401" }
-        ]
-      },
-      {
-        name: "沙上",
-        connections: [
-          { lineKey: "line2", stationId: "227" },
-          { lineKey: "bgl", stationId: "bgl-01" }
-        ]
-      },
-      {
-        name: "大渚",
-        connections: [
-          { lineKey: "line3", stationId: "317" },
-          { lineKey: "bgl", stationId: "bgl-07" }
-        ]
+function getStationNodeKey(lineKey, stationId) {
+  return `${lineKey}__${stationId}`;
+}
+
+function buildMetroGraph() {
+  const graph = {};
+  const allStations = getAllStations();
+
+  // 1. 建立每個站的節點
+  allStations.forEach(station => {
+    const key = getStationNodeKey(station.lineKey, station.id);
+    graph[key] = [];
+  });
+
+  // 2. 同一條線前後站互連
+  metroLines.forEach(line => {
+    for (let i = 0; i < line.stations.length; i++) {
+      const current = line.stations[i];
+      const currentKey = getStationNodeKey(line.key, current.id);
+
+      if (i > 0) {
+        const prev = line.stations[i - 1];
+        const prevKey = getStationNodeKey(line.key, prev.id);
+
+        graph[currentKey].push({
+          to: prevKey,
+          time: 2,
+          type: "ride"
+        });
+
+        graph[prevKey].push({
+          to: currentKey,
+          time: 2,
+          type: "ride"
+        });
       }
-    ];
-  }
+    }
+  });
 
-  function calculateSameLineRoute(from, to) {
-    const fromIndex = getStationIndex(from.lineKey, from.id);
-    const toIndex = getStationIndex(to.lineKey, to.id);
+  // 3. 不同線但同站名，建立轉乘連結
+  for (let i = 0; i < allStations.length; i++) {
+    for (let j = i + 1; j < allStations.length; j++) {
+      const a = allStations[i];
+      const b = allStations[j];
 
-    if (fromIndex === -1 || toIndex === -1) return null;
+      if (a.name === b.name && a.lineKey !== b.lineKey) {
+        const aKey = getStationNodeKey(a.lineKey, a.id);
+        const bKey = getStationNodeKey(b.lineKey, b.id);
 
-    const stops = Math.abs(toIndex - fromIndex);
-    const duration = stops * 2 + 2; // 粗估：每站 2 分鐘 + 進出站緩衝
+        graph[aKey].push({
+          to: bKey,
+          time: 4,
+          type: "transfer"
+        });
 
-    return {
-      stops,
-      duration,
-      lineText: from.lineLabel,
-      note: stops === 0 ? "起點與終點相同" : "直達，不需轉乘"
-    };
-  }
-
-  function calculateTransferRoute(from, to) {
-    const transferStations = getTransferStations();
-
-    for (const transfer of transferStations) {
-      const fromTransfer = transfer.connections.find(c => c.lineKey === from.lineKey);
-      const toTransfer = transfer.connections.find(c => c.lineKey === to.lineKey);
-
-      if (!fromTransfer || !toTransfer) continue;
-
-      const fromIndex = getStationIndex(from.lineKey, from.id);
-      const fromTransferIndex = getStationIndex(from.lineKey, fromTransfer.stationId);
-      const toIndex = getStationIndex(to.lineKey, to.id);
-      const toTransferIndex = getStationIndex(to.lineKey, toTransfer.stationId);
-
-      if (
-        fromIndex === -1 ||
-        fromTransferIndex === -1 ||
-        toIndex === -1 ||
-        toTransferIndex === -1
-      ) {
-        continue;
+        graph[bKey].push({
+          to: aKey,
+          time: 4,
+          type: "transfer"
+        });
       }
+    }
+  }
 
-      const firstLegStops = Math.abs(fromIndex - fromTransferIndex);
-      const secondLegStops = Math.abs(toIndex - toTransferIndex);
-      const totalStops = firstLegStops + secondLegStops;
-      const duration = totalStops * 2 + 6; // 加入轉乘緩衝
+  return graph;
+}
 
-      return {
-        stops: totalStops,
-        duration,
-        lineText: `${from.lineLabel} → ${to.lineLabel}`,
-        note: `於 ${transfer.name} 轉乘`
-      };
+function getStationByNodeKey(nodeKey) {
+  const [lineKey, stationId] = nodeKey.split("__");
+  const line = metroLines.find(l => l.key === lineKey);
+  if (!line) return null;
+
+  const station = line.stations.find(s => s.id === stationId);
+  if (!station) return null;
+
+  return {
+    ...station,
+    lineKey: line.key,
+    lineLabel: line.label,
+    lineColor: line.color
+  };
+}
+
+function findShortestPath(startKey, endKey, graph) {
+  const distances = {};
+  const previous = {};
+  const visited = new Set();
+
+  Object.keys(graph).forEach(key => {
+    distances[key] = Infinity;
+    previous[key] = null;
+  });
+
+  distances[startKey] = 0;
+
+  while (true) {
+    let current = null;
+    let minDistance = Infinity;
+
+    for (const key of Object.keys(graph)) {
+      if (!visited.has(key) && distances[key] < minDistance) {
+        minDistance = distances[key];
+        current = key;
+      }
     }
 
+    if (current === null) break;
+    if (current === endKey) break;
+
+    visited.add(current);
+
+    for (const edge of graph[current]) {
+      const newDistance = distances[current] + edge.time;
+      if (newDistance < distances[edge.to]) {
+        distances[edge.to] = newDistance;
+        previous[edge.to] = {
+          node: current,
+          type: edge.type,
+          time: edge.time
+        };
+      }
+    }
+  }
+
+  if (distances[endKey] === Infinity) {
     return null;
   }
 
-  function calculateRoute(fromId, toId) {
-    const from = getStationById(fromId);
-    const to = getStationById(toId);
+  const path = [];
+  let current = endKey;
 
-    if (!from || !to) {
-      return {
-        error: "請先選擇出發站與目的站"
-      };
+  while (current) {
+    path.unshift(current);
+    current = previous[current]?.node || null;
+  }
+
+  return {
+    path,
+    totalTime: distances[endKey]
+  };
+}
+
+function buildRouteSummary(pathResult) {
+  const { path, totalTime } = pathResult;
+  const stations = path.map(getStationByNodeKey).filter(Boolean);
+
+  if (stations.length === 0) return null;
+
+  let rideStops = 0;
+  let transferCount = 0;
+  const lineSequence = [];
+  const transferNotes = [];
+
+  for (let i = 0; i < stations.length; i++) {
+    const current = stations[i];
+
+    if (lineSequence.length === 0 || lineSequence[lineSequence.length - 1] !== current.lineLabel) {
+      lineSequence.push(current.lineLabel);
     }
 
-    if (from.id === to.id && from.lineKey === to.lineKey) {
-      return {
-        from,
-        to,
-        stops: 0,
-        duration: 0,
-        lineText: from.lineLabel,
-        note: "起點與終點相同"
-      };
+    if (i > 0) {
+      const prev = stations[i - 1];
+      if (prev.lineKey === current.lineKey) {
+        rideStops += 1;
+      } else {
+        transferCount += 1;
+        transferNotes.push(`${prev.name} 轉乘 ${current.lineLabel}`);
+      }
     }
+  }
 
-    if (from.lineKey === to.lineKey) {
-      const sameLine = calculateSameLineRoute(from, to);
-      return {
-        from,
-        to,
-        ...sameLine
-      };
+  let note = "直達，不需轉乘";
+  if (transferCount > 0) {
+    note = transferNotes.join(" → ");
+  }
+
+  return {
+    from: stations[0],
+    to: stations[stations.length - 1],
+    stops: rideStops,
+    duration: totalTime + 2, // 加一點進出站緩衝
+    lineText: lineSequence.join(" → "),
+    note,
+    pathStations: stations,
+    transferCount
+  };
+}
+
+function calculateRoute(fromId, toId) {
+  const fromCandidates = [];
+  const toCandidates = [];
+
+  metroLines.forEach(line => {
+    line.stations.forEach(station => {
+      if (station.id === fromId) {
+        fromCandidates.push(getStationNodeKey(line.key, station.id));
+      }
+      if (station.id === toId) {
+        toCandidates.push(getStationNodeKey(line.key, station.id));
+      }
+    });
+  });
+
+  if (!fromId || !toId) {
+    return { error: "請先選擇出發站與目的站" };
+  }
+
+  if (fromCandidates.length === 0 || toCandidates.length === 0) {
+    return { error: "找不到站點資料" };
+  }
+
+  const graph = buildMetroGraph();
+
+  let bestResult = null;
+
+  for (const startKey of fromCandidates) {
+    for (const endKey of toCandidates) {
+      const found = findShortestPath(startKey, endKey, graph);
+      if (!found) continue;
+
+      if (!bestResult || found.totalTime < bestResult.totalTime) {
+        bestResult = found;
+      }
     }
+  }
 
-    const transferRoute = calculateTransferRoute(from, to);
-    if (transferRoute) {
-      return {
-        from,
-        to,
-        ...transferRoute
-      };
-    }
-
+  if (!bestResult) {
     return {
-      from,
-      to,
-      stops: "--",
-      duration: null,
-      lineText: "尚未支援",
-      note: "這條路線目前還沒加入多次轉乘邏輯"
+      error: "目前找不到可用路線"
     };
   }
 
-  function renderRouteResult(result) {
-    const resultCard = document.getElementById("planner-result-card");
-    const routeStops = document.getElementById("route-stops");
-    const routeDuration = document.getElementById("route-duration");
-    const routeFrom = document.getElementById("route-from");
-    const routeTo = document.getElementById("route-to");
-    const routeLine = document.getElementById("route-line");
-    const routeNote = document.getElementById("route-note");
+  return buildRouteSummary(bestResult);
+}
+  function formatMinutes(minutes) {
+  if (minutes < 60) return `${minutes} 分鐘`;
+  const hrs = Math.floor(minutes / 60);
+  const mins = minutes % 60;
+  return mins === 0 ? `${hrs} 小時` : `${hrs} 小時 ${mins} 分鐘`;
+}
 
-    if (!resultCard || !routeStops || !routeDuration || !routeFrom || !routeTo || !routeLine || !routeNote) {
-      return;
-    }
+function renderRouteResult(result) {
+  const resultCard = document.getElementById("planner-result-card");
+  const routeStops = document.getElementById("route-stops");
+  const routeDuration = document.getElementById("route-duration");
+  const routeFrom = document.getElementById("route-from");
+  const routeTo = document.getElementById("route-to");
+  const routeLine = document.getElementById("route-line");
+  const routeNote = document.getElementById("route-note");
 
-    resultCard.style.display = "block";
-
-    if (result.error) {
-      routeStops.textContent = "--";
-      routeDuration.textContent = "--";
-      routeFrom.textContent = "--";
-      routeTo.textContent = "--";
-      routeLine.textContent = "請重新選擇";
-      routeNote.textContent = result.error;
-      return;
-    }
-
-    routeStops.textContent = typeof result.stops === "number" ? `${result.stops} 站` : result.stops;
-    routeDuration.textContent = typeof result.duration === "number" ? formatMinutes(result.duration) : "--";
-    routeFrom.textContent = `${result.from.name} [${result.from.code}]`;
-    routeTo.textContent = `${result.to.name} [${result.to.code}]`;
-    routeLine.textContent = result.lineText;
-    routeNote.textContent = result.note;
+  if (!resultCard || !routeStops || !routeDuration || !routeFrom || !routeTo || !routeLine || !routeNote) {
+    return;
   }
-  document.addEventListener("DOMContentLoaded", () => {
+
+  resultCard.style.display = "block";
+
+  if (result.error) {
+    routeStops.textContent = "--";
+    routeDuration.textContent = "--";
+    routeFrom.textContent = "--";
+    routeTo.textContent = "--";
+    routeLine.textContent = "請重新選擇";
+    routeNote.textContent = result.error;
+    return;
+  }
+
+  routeStops.textContent = `${result.stops} 站`;
+  routeDuration.textContent = formatMinutes(result.duration);
+  routeFrom.textContent = `${result.from.name} [${result.from.code}]`;
+  routeTo.textContent = `${result.to.name} [${result.to.code}]`;
+  routeLine.textContent = result.lineText;
+  routeNote.textContent = result.note;
+}
+    document.addEventListener("DOMContentLoaded", () => {
   updateKoreaTime();
   setInterval(updateKoreaTime, 1000);
 
@@ -733,12 +816,16 @@
       const toId = document.getElementById("to-station")?.value;
 
       const result = calculateRoute(fromId, toId);
+      console.log("route result:", result);
       renderRouteResult(result);
     });
   }
 
   console.log("頁面初始化完成");
-  console.log("地鐵站總數：", metroLines.reduce((sum, line) => sum + line.stations.length, 0));
+  console.log(
+    "地鐵站總數：",
+    metroLines.reduce((sum, line) => sum + line.stations.length, 0)
+  );
 });
 </script>
 </body>
