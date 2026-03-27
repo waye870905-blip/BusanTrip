@@ -808,7 +808,7 @@ function calculateRoute(fromId, toId) {
     const span = document.createElement("span");
 
     const line = metroLines.find(l =>
-      lineText.includes(l.label.split("（")[0])
+      const line = metroLines.find(l => l.label === lineText);
     );
 
     const color = line?.color || "#999";
@@ -818,7 +818,7 @@ function calculateRoute(fromId, toId) {
     );
 
     span.textContent = transfer
-      ? `${lineText}（${transfer.station}轉乘）`
+      ? `${lineText}🔁 ${transfer.station}`
       : lineText;
 
     span.style.background = color;
@@ -837,7 +837,7 @@ function calculateRoute(fromId, toId) {
       const arrow = document.createElement("span");
       arrow.textContent = "→";
       arrow.style.margin = "0 6px";
-      arrow.style.color = "#fff";
+      arrow.style.color = "#ccc";
       routeLine.appendChild(arrow);
     }
   });
