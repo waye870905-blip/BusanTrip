@@ -1,0 +1,581 @@
+const metroLines = [
+  {
+    key: "line1",
+    label: "1號線（橘線）",
+    color: "#F58220",
+    stations: [
+      { id: "095", name: "多大浦海水浴場", en: "Dadaepo Beach", code: "095" },
+      { id: "096", name: "多大浦港", en: "Dadaepo Harbor", code: "096" },
+      { id: "097", name: "汐浦", en: "Natgae", code: "097" },
+      { id: "098", name: "新長林", en: "Sinjangnim", code: "098" },
+      { id: "099", name: "長林", en: "Jangnim", code: "099" },
+      { id: "100", name: "東梅", en: "Dongmae", code: "100" },
+      { id: "101", name: "新平", en: "Sinpyeong", code: "101" },
+      { id: "102", name: "下端", en: "Hadan", code: "102" },
+      { id: "103", name: "堂里", en: "Dangni", code: "103" },
+      { id: "104", name: "沙下", en: "Saha", code: "104" },
+      { id: "105", name: "槐亭", en: "Goejeong", code: "105" },
+      { id: "106", name: "大峙", en: "Daeti", code: "106" },
+      { id: "107", name: "西大新", en: "Seodaesin", code: "107" },
+      { id: "108", name: "東大新", en: "Dongdaesin", code: "108" },
+      { id: "109", name: "土城", en: "Toseong", code: "109" },
+      { id: "110", name: "札嘎其", en: "Jagalchi", code: "110" },
+      { id: "111", name: "南浦", en: "Nampo", code: "111" },
+      { id: "112", name: "中央", en: "Jungang", code: "112" },
+      { id: "113", name: "釜山站", en: "Busan Station", code: "113" },
+      { id: "114", name: "草梁", en: "Choryang", code: "114" },
+      { id: "115", name: "釜山鎮", en: "Busanjin", code: "115" },
+      { id: "116", name: "佐川", en: "Jwacheon", code: "116" },
+      { id: "117", name: "凡一", en: "Beomil", code: "117" },
+      { id: "118", name: "凡內谷", en: "Beomnaegol", code: "118" },
+      { id: "119", name: "西面", en: "Seomyeon", code: "119" },
+      { id: "120", name: "釜田", en: "Bujeon", code: "120" },
+      { id: "121", name: "楊亭", en: "Yangjeong", code: "121" },
+      { id: "122", name: "市廳", en: "City Hall", code: "122" },
+      { id: "123", name: "蓮山", en: "Yeonsan", code: "123" },
+      { id: "124", name: "教大", en: "Busan Nat'l Univ. of Edu.", code: "124" },
+      { id: "125", name: "東萊", en: "Dongnae", code: "125" },
+      { id: "126", name: "明倫", en: "Myeongnyun", code: "126" },
+      { id: "127", name: "溫泉場", en: "Oncheonjang", code: "127" },
+      { id: "128", name: "釜山大學", en: "Pusan Nat'l Univ.", code: "128" },
+      { id: "129", name: "長箭", en: "Jangjeon", code: "129" },
+      { id: "130", name: "久瑞", en: "Guseo", code: "130" },
+      { id: "131", name: "斗實", en: "Dusil", code: "131" },
+      { id: "132", name: "南山", en: "Namsan", code: "132" },
+      { id: "133", name: "梵魚寺", en: "Beomeosa", code: "133" },
+      { id: "134", name: "老圃", en: "Nopo", code: "134" }
+    ]
+  },
+  {
+    key: "line2",
+    label: "2號線（綠線）",
+    color: "#33C481",
+    stations: [
+      { id: "201", name: "萇山", en: "Jangsan", code: "201" },
+      { id: "202", name: "中洞", en: "Jung-dong", code: "202" },
+      { id: "203", name: "海雲台", en: "Haeundae", code: "203" },
+      { id: "204", name: "冬柏", en: "Dongbaek", code: "204" },
+      { id: "205", name: "BEXCO", en: "BEXCO", code: "205" },
+      { id: "206", name: "Centum City", en: "Centum City", code: "206" },
+      { id: "207", name: "民樂", en: "Millak", code: "207" },
+      { id: "208", name: "水營", en: "Suyeong", code: "208" },
+      { id: "209", name: "廣安", en: "Gwangan", code: "209" },
+      { id: "210", name: "金蓮山", en: "Geumnyeonsan", code: "210" },
+      { id: "211", name: "南川", en: "Namcheon", code: "211" },
+      { id: "212", name: "慶星大・釜慶大", en: "Kyungsung Univ. · Pukyong Nat'l Univ.", code: "212" },
+      { id: "213", name: "大淵", en: "Daeyeon", code: "213" },
+      { id: "214", name: "池谷", en: "Motgol", code: "214" },
+      { id: "215", name: "支架谷", en: "Jigegol", code: "215" },
+      { id: "216", name: "門峴", en: "Munhyeon", code: "216" },
+      { id: "217", name: "國際金融中心・釜山銀行", en: "Busan Int'l Finance Center · Busan Bank", code: "217" },
+      { id: "218", name: "田浦", en: "Jeonpo", code: "218" },
+      { id: "219", name: "西面", en: "Seomyeon", code: "219" },
+      { id: "220", name: "釜岩", en: "Buam", code: "220" },
+      { id: "221", name: "伽倻", en: "Gaya", code: "221" },
+      { id: "222", name: "東義大", en: "Dong-eui Univ.", code: "222" },
+      { id: "223", name: "開琴", en: "Gaegeum", code: "223" },
+      { id: "224", name: "冷井", en: "Naengjeong", code: "224" },
+      { id: "225", name: "周禮", en: "Jurye", code: "225" },
+      { id: "226", name: "甘田", en: "Gamjeon", code: "226" },
+      { id: "227", name: "沙上", en: "Sasang", code: "227" },
+      { id: "228", name: "德浦", en: "Deokpo", code: "228" },
+      { id: "229", name: "毛德", en: "Modeok", code: "229" },
+      { id: "230", name: "毛羅", en: "Mora", code: "230" },
+      { id: "231", name: "龜南", en: "Gunam", code: "231" },
+      { id: "232", name: "龜明", en: "Gumyeong", code: "232" },
+      { id: "233", name: "德川", en: "Deokcheon", code: "233" },
+      { id: "234", name: "水亭", en: "Sujeong", code: "234" },
+      { id: "235", name: "華明", en: "Hwamyeong", code: "235" },
+      { id: "236", name: "栗里", en: "Yulli", code: "236" },
+      { id: "237", name: "東院", en: "Dongwon", code: "237" },
+      { id: "238", name: "金谷", en: "Geumgok", code: "238" },
+      { id: "239", name: "湖浦", en: "Hopo", code: "239" },
+      { id: "240", name: "甑山", en: "Jeungsan", code: "240" },
+      { id: "241", name: "釜山大梁山校區", en: "Pusan Nat'l Univ. Yangsan Campus", code: "241" },
+      { id: "242", name: "南梁山", en: "Namyangsan", code: "242" },
+      { id: "243", name: "梁山", en: "Yangsan", code: "243" }
+    ]
+  },
+  {
+    key: "line3",
+    label: "3號線（棕線）",
+    color: "#BB8C46",
+    stations: [
+      { id: "301", name: "水營", en: "Suyeong", code: "301" },
+      { id: "302", name: "望美", en: "Mangmi", code: "302" },
+      { id: "303", name: "盃山", en: "Baesan", code: "303" },
+      { id: "304", name: "物萬谷", en: "Mulmangol", code: "304" },
+      { id: "305", name: "蓮山", en: "Yeonsan", code: "305" },
+      { id: "306", name: "巨堤", en: "Geoje", code: "306" },
+      { id: "307", name: "綜合運動場", en: "Sports Complex", code: "307" },
+      { id: "308", name: "社稷", en: "Sajik", code: "308" },
+      { id: "309", name: "美南", en: "Minam", code: "309" },
+      { id: "310", name: "萬德", en: "Mandeok", code: "310" },
+      { id: "311", name: "南山亭", en: "Namsanjeong", code: "311" },
+      { id: "312", name: "淑嶝", en: "Sukdeung", code: "312" },
+      { id: "313", name: "德川", en: "Deokcheon", code: "313" },
+      { id: "314", name: "龜浦", en: "Gupo", code: "314" },
+      { id: "315", name: "江西區廳", en: "Gangseo-gu Office", code: "315" },
+      { id: "316", name: "體育公園", en: "Sports Park", code: "316" },
+      { id: "317", name: "大渚", en: "Daejeo", code: "317" }
+    ]
+  },
+  {
+    key: "line4",
+    label: "4號線（藍線）",
+    color: "#2F6CE5",
+    stations: [
+      { id: "401", name: "美南", en: "Minam", code: "401" },
+      { id: "402", name: "東萊", en: "Dongnae", code: "402" },
+      { id: "403", name: "壽安", en: "Suan", code: "403" },
+      { id: "404", name: "樂民", en: "Nangmin", code: "404" },
+      { id: "405", name: "忠烈祠", en: "Chungnyeolsa", code: "405" },
+      { id: "406", name: "鳴藏", en: "Myeongjang", code: "406" },
+      { id: "407", name: "書洞", en: "Seo-dong", code: "407" },
+      { id: "408", name: "錦絲", en: "Geumsa", code: "408" },
+      { id: "409", name: "盤如農產物市場", en: "Banyeo Agricultural Market", code: "409" },
+      { id: "410", name: "石坮", en: "Seokdae", code: "410" },
+      { id: "411", name: "靈山大", en: "Youngsan University", code: "411" },
+      { id: "412", name: "上盤松", en: "Witbansong", code: "412" },
+      { id: "413", name: "古村", en: "Gochon", code: "413" },
+      { id: "414", name: "安平", en: "Anpyeong", code: "414" }
+    ]
+  },
+  {
+    key: "bgl",
+    label: "金海輕軌（紫線）",
+    color: "#8758D6",
+    stations: [
+      { id: "bgl-01", name: "沙上", en: "Sasang", code: "1" },
+      { id: "bgl-02", name: "掛法勒內希泰", en: "Gwaebeop Renecite", code: "2" },
+      { id: "bgl-03", name: "西釜山流通地區", en: "Seobusan Yutongjigu", code: "3" },
+      { id: "bgl-04", name: "金海國際機場", en: "Gimhae Int'l Airport", code: "4" },
+      { id: "bgl-05", name: "德斗", en: "Deokdu", code: "5" },
+      { id: "bgl-06", name: "登龜", en: "Deunggu", code: "6" },
+      { id: "bgl-07", name: "大渚", en: "Daejeo", code: "7" },
+      { id: "bgl-08", name: "平江", en: "Pyeonggang", code: "8" },
+      { id: "bgl-09", name: "大沙", en: "Daesa", code: "9" },
+      { id: "bgl-10", name: "佛岩", en: "Buram", code: "10" },
+      { id: "bgl-11", name: "池內", en: "Jinae", code: "11" },
+      { id: "bgl-12", name: "金海大學", en: "Gimhae College", code: "12" },
+      { id: "bgl-13", name: "仁濟大", en: "Inje Univ.", code: "13" },
+      { id: "bgl-14", name: "金海市廳", en: "Gimhae City Hall", code: "14" },
+      { id: "bgl-15", name: "府院", en: "Buwon", code: "15" },
+      { id: "bgl-16", name: "鳳凰", en: "Bonghwang", code: "16" },
+      { id: "bgl-17", name: "首露王陵", en: "Royal Tomb of King Suro", code: "17" },
+      { id: "bgl-18", name: "博物館", en: "Gimhae Nat'l Museum", code: "18" },
+      { id: "bgl-19", name: "蓮池公園", en: "Yeonji Park", code: "19" },
+      { id: "bgl-20", name: "長神大", en: "Jangshindae", code: "20" },
+      { id: "bgl-21", name: "加耶大", en: "Gaya Univ.", code: "21" }
+    ]
+  }
+];
+
+function fillMetroSelects() {
+  const fromSelect = document.getElementById("from-station");
+  const toSelect = document.getElementById("to-station");
+
+  if (!fromSelect || !toSelect) return;
+
+  fromSelect.innerHTML = '<option value="">請選擇出發站...</option>';
+  toSelect.innerHTML = '<option value="">請選擇目的站...</option>';
+
+  metroLines.forEach((line) => {
+    const fromGroup = document.createElement("optgroup");
+    fromGroup.label = line.label;
+
+    const toGroup = document.createElement("optgroup");
+    toGroup.label = line.label;
+
+    line.stations.forEach((station) => {
+      const fromOption = document.createElement("option");
+      fromOption.value = station.id;
+      fromOption.textContent = `[${station.code}] ${station.name} (${station.en})`;
+      fromGroup.appendChild(fromOption);
+
+      const toOption = document.createElement("option");
+      toOption.value = station.id;
+      toOption.textContent = `[${station.code}] ${station.name} (${station.en})`;
+      toGroup.appendChild(toOption);
+    });
+
+    fromSelect.appendChild(fromGroup);
+    toSelect.appendChild(toGroup);
+  });
+}
+
+function getAllStations() {
+  const allStations = [];
+
+  metroLines.forEach((line) => {
+    line.stations.forEach((station, index) => {
+      allStations.push({
+        ...station,
+        lineKey: line.key,
+        lineLabel: line.label,
+        lineColor: line.color,
+        index
+      });
+    });
+  });
+
+  return allStations;
+}
+
+function getStationNodeKey(lineKey, stationId) {
+  return `${lineKey}__${stationId}`;
+}
+
+function buildMetroGraph() {
+  const graph = {};
+  const allStations = getAllStations();
+
+  allStations.forEach((station) => {
+    const key = getStationNodeKey(station.lineKey, station.id);
+    graph[key] = [];
+  });
+
+  metroLines.forEach((line) => {
+    for (let i = 0; i < line.stations.length; i += 1) {
+      const current = line.stations[i];
+      const currentKey = getStationNodeKey(line.key, current.id);
+
+      if (i > 0) {
+        const prev = line.stations[i - 1];
+        const prevKey = getStationNodeKey(line.key, prev.id);
+
+        graph[currentKey].push({
+          to: prevKey,
+          time: 2,
+          type: "ride"
+        });
+
+        graph[prevKey].push({
+          to: currentKey,
+          time: 2,
+          type: "ride"
+        });
+      }
+    }
+  });
+
+  for (let i = 0; i < allStations.length; i += 1) {
+    for (let j = i + 1; j < allStations.length; j += 1) {
+      const a = allStations[i];
+      const b = allStations[j];
+
+      if (a.name === b.name && a.lineKey !== b.lineKey) {
+        const aKey = getStationNodeKey(a.lineKey, a.id);
+        const bKey = getStationNodeKey(b.lineKey, b.id);
+
+        graph[aKey].push({
+          to: bKey,
+          time: 4,
+          type: "transfer"
+        });
+
+        graph[bKey].push({
+          to: aKey,
+          time: 4,
+          type: "transfer"
+        });
+      }
+    }
+  }
+
+  return graph;
+}
+
+function getStationByNodeKey(nodeKey) {
+  const [lineKey, stationId] = nodeKey.split("__");
+  const line = metroLines.find((item) => item.key === lineKey);
+  if (!line) return null;
+
+  const station = line.stations.find((item) => item.id === stationId);
+  if (!station) return null;
+
+  return {
+    ...station,
+    lineKey: line.key,
+    lineLabel: line.label,
+    lineColor: line.color
+  };
+}
+
+function findShortestPath(startKey, endKey, graph) {
+  const distances = {};
+  const previous = {};
+  const visited = new Set();
+
+  Object.keys(graph).forEach((key) => {
+    distances[key] = Infinity;
+    previous[key] = null;
+  });
+
+  distances[startKey] = 0;
+
+  while (true) {
+    let current = null;
+    let minDistance = Infinity;
+
+    Object.keys(graph).forEach((key) => {
+      if (!visited.has(key) && distances[key] < minDistance) {
+        minDistance = distances[key];
+        current = key;
+      }
+    });
+
+    if (current === null) break;
+    if (current === endKey) break;
+
+    visited.add(current);
+
+    graph[current].forEach((edge) => {
+      const newDistance = distances[current] + edge.time;
+      if (newDistance < distances[edge.to]) {
+        distances[edge.to] = newDistance;
+        previous[edge.to] = {
+          node: current,
+          type: edge.type,
+          time: edge.time
+        };
+      }
+    });
+  }
+
+  if (distances[endKey] === Infinity) return null;
+
+  const path = [];
+  let current = endKey;
+
+  while (current) {
+    path.unshift(current);
+    current = previous[current]?.node || null;
+  }
+
+  return {
+    path,
+    totalTime: distances[endKey]
+  };
+}
+
+function buildRouteSummary(pathResult) {
+  const { path, totalTime } = pathResult;
+  const stations = path.map(getStationByNodeKey).filter(Boolean);
+
+  if (stations.length === 0) return null;
+
+  let rideStops = 0;
+  let transferCount = 0;
+  const lineSequence = [];
+  const transferNotes = [];
+  const lineStopsMap = {};
+
+  for (let i = 0; i < stations.length; i += 1) {
+    const current = stations[i];
+
+    if (
+      lineSequence.length === 0 ||
+      lineSequence[lineSequence.length - 1] !== current.lineLabel
+    ) {
+      lineSequence.push(current.lineLabel);
+    }
+
+    if (i > 0) {
+      const prev = stations[i - 1];
+
+      if (prev.lineKey === current.lineKey) {
+        rideStops += 1;
+
+        if (!lineStopsMap[current.lineLabel]) {
+          lineStopsMap[current.lineLabel] = 0;
+        }
+        lineStopsMap[current.lineLabel] += 1;
+      } else {
+        transferCount += 1;
+        transferNotes.push({
+          station: prev.name,
+          toLine: current.lineLabel
+        });
+      }
+    }
+  }
+
+  return {
+    from: stations[0],
+    to: stations[stations.length - 1],
+    stops: rideStops,
+    duration: totalTime + 2,
+    lineSequence,
+    transferNotes,
+    transferCount,
+    lineStopsMap
+  };
+}
+
+function calculateRoute(fromId, toId) {
+  if (!fromId || !toId) {
+    return { error: "請先選擇出發站與目的站" };
+  }
+
+  const fromCandidates = [];
+  const toCandidates = [];
+
+  metroLines.forEach((line) => {
+    line.stations.forEach((station) => {
+      if (station.id === fromId) {
+        fromCandidates.push(getStationNodeKey(line.key, station.id));
+      }
+      if (station.id === toId) {
+        toCandidates.push(getStationNodeKey(line.key, station.id));
+      }
+    });
+  });
+
+  if (fromCandidates.length === 0 || toCandidates.length === 0) {
+    return { error: "找不到站點資料" };
+  }
+
+  const graph = buildMetroGraph();
+  let bestResult = null;
+
+  fromCandidates.forEach((startKey) => {
+    toCandidates.forEach((endKey) => {
+      const found = findShortestPath(startKey, endKey, graph);
+      if (!found) return;
+
+      if (!bestResult || found.totalTime < bestResult.totalTime) {
+        bestResult = found;
+      }
+    });
+  });
+
+  if (!bestResult) {
+    return { error: "目前找不到可用路線" };
+  }
+
+  return buildRouteSummary(bestResult);
+}
+
+function formatMinutes(minutes) {
+  if (minutes < 60) return `${minutes} 分鐘`;
+  const hrs = Math.floor(minutes / 60);
+  const mins = minutes % 60;
+  return mins === 0 ? `${hrs} 小時` : `${hrs} 小時 ${mins} 分鐘`;
+}
+
+function renderRouteResult(result) {
+  const resultCard = document.getElementById("planner-result-card");
+  const routeStops = document.getElementById("route-stops");
+  const routeDuration = document.getElementById("route-duration");
+  const routeFrom = document.getElementById("route-from");
+  const routeTo = document.getElementById("route-to");
+  const routeLine = document.getElementById("route-line");
+  const routeNote = document.getElementById("route-note");
+
+  if (!resultCard || !routeStops || !routeDuration || !routeFrom || !routeTo || !routeLine || !routeNote) {
+    return;
+  }
+
+  resultCard.style.display = "block";
+
+  if (result.error) {
+    routeStops.textContent = "--";
+    routeDuration.textContent = "--";
+    routeFrom.textContent = "--";
+    routeTo.textContent = "--";
+    routeLine.textContent = "請重新選擇";
+    routeNote.textContent = result.error;
+    return;
+  }
+
+  routeStops.textContent = `${result.stops} 站`;
+  routeDuration.textContent = formatMinutes(result.duration);
+  routeFrom.textContent = `${result.from.name} [${result.from.code}]`;
+  routeTo.textContent = `${result.to.name} [${result.to.code}]`;
+
+  routeFrom.style.color = result.from.lineColor;
+  routeTo.style.color = result.to.lineColor;
+  routeFrom.style.fontWeight = "800";
+  routeTo.style.fontWeight = "800";
+
+  routeLine.innerHTML = "";
+
+  result.lineSequence.forEach((lineText, index) => {
+    const span = document.createElement("span");
+
+    const line = metroLines.find((item) => item.label === lineText);
+    const color = line?.color || "#999";
+    const cleanLineName = lineText.split("（")[0];
+    const transfer = result.transferNotes.find((item) => item.toLine === lineText);
+    const stops = result.lineStopsMap?.[lineText] || 0;
+
+    span.innerHTML = `
+      <div style="
+        display:flex;
+        flex-direction:column;
+        align-items:center;
+        justify-content:center;
+        line-height:1.3;
+        text-align:center;
+        white-space:normal;
+      ">
+        <div style="
+          font-size:14px;
+          font-weight:800;
+          line-height:1.2;
+        ">
+          ${cleanLineName}
+        </div>
+        <div style="
+          font-size:12px;
+          opacity:0.95;
+          line-height:1.2;
+          margin-top:4px;
+        ">
+          ${stops}站${transfer ? `｜${transfer.station}` : ""}
+        </div>
+      </div>
+    `;
+
+    span.style.background = color;
+    span.style.color = "#fff";
+    span.style.padding = "10px 14px";
+    span.style.borderRadius = "24px";
+    span.style.fontWeight = "700";
+    span.style.marginRight = "6px";
+    span.style.display = "inline-flex";
+    span.style.alignItems = "center";
+    span.style.justifyContent = "center";
+    span.style.minWidth = "88px";
+    span.style.minHeight = "84px";
+    span.style.boxSizing = "border-box";
+    span.style.flexShrink = "0";
+
+    routeLine.appendChild(span);
+
+    if (index < result.lineSequence.length - 1) {
+      const arrow = document.createElement("span");
+      arrow.textContent = "→";
+      arrow.style.margin = "0 6px";
+      arrow.style.color = "#ccc";
+      routeLine.appendChild(arrow);
+    }
+  });
+
+  routeNote.textContent = "";
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  fillMetroSelects();
+
+  const planBtn = document.getElementById("plan-route-btn");
+  if (planBtn) {
+    planBtn.addEventListener("click", () => {
+      const fromId = document.getElementById("from-station")?.value;
+      const toId = document.getElementById("to-station")?.value;
+      const result = calculateRoute(fromId, toId);
+      renderRouteResult(result);
+    });
+  }
+});
