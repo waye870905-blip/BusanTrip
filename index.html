@@ -1,80 +1,252 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>釜山自由行｜首頁</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-<nav class="nav">
-  <div class="container nav-inner">
-    <a class="brand" href="index.html">🇰🇷 釜山行</a>
-    <div class="nav-links">
-      <a href="index.html" class="active">首頁</a>
-      <a href="d1.html">Day 1</a>
-      <a href="d2.html">Day 2</a>
-      <a href="d3.html">Day 3</a>
-      <a href="d4.html">Day 4</a>
-      <a href="d5.html">Day 5</a>
-      <a href="notes.html">注意事項</a>
+  <nav class="nav">
+    <div class="container nav-inner">
+      <a class="brand" href="index.html">🇰🇷 釜山行</a>
+      <div class="nav-links">
+        <a href="index.html" class="active">首頁</a>
+        <a href="itinerary.html">行程表</a>
+      </div>
     </div>
-  </div>
-</nav>
+  </nav>
 
-<header class="page-hero">
-  <div class="container">
-    <div class="card page-head page-head-cover page-head-home">
-      <div class="page-head-mask"></div>
+  <header class="hero hero-home">
+    <div class="hero-mask"></div>
+    <div class="container hero-content">
+      <span class="badge">2026/05/23 - 2026/05/27</span>
+      <h1>釜山自由行</h1>
+      <p class="lead">
+        釜山是韓國第二大城市，也是很適合自由行的海港城市，
+        有海景、文化村、美食、購物，也很適合排成順路的五天四夜行程。
+      </p>
 
-      <div class="page-head-overlay">
-        <span class="badge">2026/05/23 - 2026/05/27</span>
-        <h1>釜山自由行</h1>
+      <div class="meta-row">
+        <span>4人同行</span>
+        <span>住宿：釜山站附近</span>
+        <span>主題：美食 × 海景 × 購物</span>
+      </div>
 
-        <p class="lead">
-          釜山是韓國第二大城市，也是最具代表性的海港城市，結合了海灘、山景、文化與美食。
-        </p>
+      <div class="action-row">
+        <a class="btn primary" href="#subway-info">地鐵資訊</a>
+        <a class="btn secondary" href="itinerary.html">行程表</a>
+      </div>
+    </div>
+  </header>
 
-        <div class="meta">
-          <span>4人同行</span>
-          <span>住宿：釜山站附近</span>
-          <span>主題：美食 × 海景 × 購物</span>
+  <main>
+    <section class="section">
+      <div class="container">
+        <div class="dashboard-grid">
+          <div class="card dashboard-card">
+            <div class="card-title">韓國時間</div>
+            <div id="korea-time" class="big-number">--:--:--</div>
+            <p class="small-muted">時區：Asia/Seoul</p>
+          </div>
+
+          <div class="card dashboard-card">
+            <div class="card-title">釜山目前天氣</div>
+            <div id="weather-main" class="big-number">讀取中...</div>
+            <p id="weather-sub" class="small-muted">正在抓取目前氣溫與天氣狀態</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="subway-info">
+      <div class="container">
+        <div class="section-head">
+          <h2>地鐵資訊</h2>
+          <p class="small-muted">先把常用路線整理在首頁，之後還可以再補更多站點。</p>
         </div>
 
-        <div class="btn-row">
-          <a class="btn primary" href="d1.html">開始看行程</a>
-          <a class="btn secondary" href="notes.html">旅遊注意事項</a>
+        <div class="card route-card">
+          <div class="route-head">
+            <h3>常用站點路線整理</h3>
+            <span class="route-badge">可再補充</span>
+          </div>
+
+          <div class="route-list">
+            <div class="route-item">
+              <h4>釜山站 → 南浦站</h4>
+              <p>搭乘地鐵 1 號線，不需轉乘。</p>
+              <ul>
+                <li>路線：釜山站 → 南浦站</li>
+                <li>轉乘：無</li>
+                <li>班距：可填你查到的平日／假日班距</li>
+              </ul>
+            </div>
+
+            <div class="route-item">
+              <h4>釜山站 → 西面站</h4>
+              <p>搭乘地鐵 1 號線，不需轉乘。</p>
+              <ul>
+                <li>路線：釜山站 → 西面站</li>
+                <li>轉乘：無</li>
+                <li>班距：可填你常用時段的班距</li>
+              </ul>
+            </div>
+
+            <div class="route-item">
+              <h4>釜山站 → 海雲台／尾浦方向</h4>
+              <p>可先到西面或依你實際安排轉乘，這區先保留成可編輯區塊。</p>
+              <ul>
+                <li>建議寫法：起點站 → 轉乘站 → 目的站</li>
+                <li>轉乘：填第幾號線轉第幾號線</li>
+                <li>班距：填尖峰／離峰</li>
+              </ul>
+            </div>
+          </div>
         </div>
       </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section-head">
+          <h2>旅遊資訊</h2>
+          <p class="small-muted">首頁保留常用資訊，之後再慢慢補完整。</p>
+        </div>
+
+        <div class="info-grid">
+          <div class="card info-card">
+            <h3>住宿資訊</h3>
+            <p>飯店名稱：可填</p>
+            <p>地址：可填</p>
+            <p>入住／退房：可填</p>
+            <p>附近地鐵站：釜山站</p>
+          </div>
+
+          <div class="card info-card">
+            <h3>交通提醒</h3>
+            <p>地鐵適合大部分行程移動。</p>
+            <p>若跨區太遠、多人同行或晚間移動，可搭 Uber / 計程車。</p>
+            <p>T-money / Cashbee 可事先準備。</p>
+          </div>
+
+          <div class="card info-card">
+            <h3>旅遊提醒</h3>
+            <p>插頭、網卡、換錢、退稅、交通卡、行動電源都可以整理在這裡。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section-head">
+          <h2>機票資訊</h2>
+          <p class="small-muted">這區先整理成首頁卡片，之後可再補座位、行李與報到提醒。</p>
+        </div>
+
+        <div class="ticket-grid">
+          <div class="card ticket-card">
+            <h3>去程</h3>
+            <p><strong>日期：</strong>2026/05/23</p>
+            <p><strong>出發地：</strong>台灣</p>
+            <p><strong>抵達地：</strong>釜山／金海國際機場</p>
+            <p><strong>抵達時間：</strong>19:55</p>
+            <p><strong>備註：</strong>建議抓出關與機場接送時間</p>
+          </div>
+
+          <div class="card ticket-card">
+            <h3>回程</h3>
+            <p><strong>日期：</strong>2026/05/27</p>
+            <p><strong>出發地：</strong>釜山／金海國際機場</p>
+            <p><strong>抵達地：</strong>台灣</p>
+            <p><strong>時間：</strong>可補上</p>
+            <p><strong>備註：</strong>建議抓提前到機場與退稅時間</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      Busan Trip Website｜首頁先整合時間、天氣、地鐵資訊、旅遊資訊、機票資訊
     </div>
-  </div>
-</header>
+  </footer>
 
- <section class="section info-section">
-  <div class="container">
-    <h2>旅遊資訊</h2>
-    <div class="info-grid">
-      <div class="card info-card">
-        <h3>住宿位置</h3>
-        <p class="small-muted">建議放飯店名稱、地址、入住資訊與附近地鐵站。</p>
-      </div>
+  <script>
+    function updateKoreaTime() {
+      const now = new Date();
+      const koreaTime = new Intl.DateTimeFormat("zh-TW", {
+        timeZone: "Asia/Seoul",
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit",
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
+        hour12: false
+      }).format(now);
 
-      <div class="card info-card">
-        <h3>交通方式</h3>
-        <p class="small-muted">地鐵、公車、Uber 使用時機可以整理在這邊。</p>
-      </div>
+      document.getElementById("korea-time").textContent = koreaTime;
+    }
 
-      <div class="card info-card">
-        <h3>旅遊提醒</h3>
-        <p class="small-muted">例如插頭、天氣、換錢、退稅、網卡與交通卡。</p>
-      </div>
-    </div>
-  </div>
-</section>
+    function weatherCodeToText(code) {
+      const map = {
+        0: "晴天",
+        1: "大致晴",
+        2: "多雲",
+        3: "陰天",
+        45: "有霧",
+        48: "霧凇",
+        51: "毛毛雨",
+        53: "細雨",
+        55: "較強毛雨",
+        61: "小雨",
+        63: "中雨",
+        65: "大雨",
+        71: "小雪",
+        73: "中雪",
+        75: "大雪",
+        80: "陣雨",
+        81: "較強陣雨",
+        82: "強烈陣雨",
+        95: "雷雨"
+      };
+      return map[code] || "天氣更新中";
+    }
 
-<div class="container footer">BusanTrip｜可直接放到 GitHub Pages。圖片可替換成你自己的 Canva 行程圖。</div>
+    async function loadBusanWeather() {
+      const weatherMain = document.getElementById("weather-main");
+      const weatherSub = document.getElementById("weather-sub");
+
+      try {
+        const res = await fetch("https://api.open-meteo.com/v1/forecast?latitude=35.1796&longitude=129.0756&current=temperature_2m,weather_code&timezone=Asia%2FSeoul");
+        const data = await res.json();
+
+        const temp = data?.current?.temperature_2m;
+        const code = data?.current?.weather_code;
+        const text = weatherCodeToText(code);
+
+        if (temp !== undefined) {
+          weatherMain.textContent = `${temp}°C`;
+          weatherSub.textContent = `${text}｜釜山目前狀態`;
+        } else {
+          weatherMain.textContent = "無法取得";
+          weatherSub.textContent = "稍後再試一次";
+        }
+      } catch (error) {
+        weatherMain.textContent = "讀取失敗";
+        weatherSub.textContent = "請確認網路或稍後重整";
+      }
+    }
+
+    updateKoreaTime();
+    setInterval(updateKoreaTime, 1000);
+    loadBusanWeather();
+  </script>
 </body>
 </html>
