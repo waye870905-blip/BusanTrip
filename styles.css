@@ -779,6 +779,7 @@ body{
   justify-content:center;
   flex:1;
   min-width:58px;
+  min-height:56px;
   text-align:center;
 }
 
@@ -788,6 +789,7 @@ body{
   color:#1f2937;
   line-height:1.15;
   margin-bottom:2px;
+  min-height:18px;
 }
 
 .route-group .transfer {
@@ -795,6 +797,7 @@ body{
   color:#94a3b8;
   line-height:1;
   margin:1px 0;
+  min-height:14px;
 }
 
 .transport-route .arrow {
