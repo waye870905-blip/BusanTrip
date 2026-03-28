@@ -865,6 +865,11 @@ body{
 }
 
 @media (max-width: 768px) {
+  .itinerary-list li > span {
+  font-size:13px;
+  line-height:1.5;
+}
+  
   .transport-card{
     padding:8px 10px;
   }
