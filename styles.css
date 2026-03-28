@@ -891,10 +891,21 @@ body{
   }
 
   .transport-route .arrow {
-    font-size:13px;
-    margin:0 -6px;
-  }
-
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  align-self:center;
+  height:56px;
+  font-size:13px;
+  margin:0 -6px;
+  line-height:1;
+}
+.route-group .transfer {
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  min-height:14px;
+}
   .transport-route .line-badge {
     min-width:52px;
     font-size:10px;
