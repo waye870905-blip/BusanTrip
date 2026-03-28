@@ -3,7 +3,8 @@ function updateKoreaTime() {
   if (!koreaTimeEl) return;
 
   const now = new Date();
-  const koreaTime = new Intl.DateTimeFormat("zh-TW", {
+
+  const parts = new Intl.DateTimeFormat("zh-TW", {
     timeZone: "Asia/Seoul",
     year: "numeric",
     month: "2-digit",
@@ -12,11 +13,15 @@ function updateKoreaTime() {
     minute: "2-digit",
     second: "2-digit",
     hour12: false
-  }).format(now);
+  }).formatToParts(now);
 
-  koreaTimeEl.textContent = koreaTime;
+  const get = type => parts.find(p => p.type === type)?.value || "";
+
+  const date = `${get("year")}/${get("month")}/${get("day")}`;
+  const time = `${get("hour")}:${get("minute")}:${get("second")}`;
+
+  koreaTimeEl.textContent = `${date} ${time}`;
 }
-
 function weatherCodeToText(code) {
   const map = {
     0: "晴天",
