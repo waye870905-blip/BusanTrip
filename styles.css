@@ -803,7 +803,76 @@ body{
   font-size:11px;
   color:#94a3b8;
 }
+/* ===== 行程路線 ===== */
+.route-flow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  width: 100%;
+}
 
+.route-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 72px;
+  text-align: center;
+  flex: 1;
+}
+
+.route-step.start {
+  gap: 8px;
+}
+
+.route-step.middle {
+  gap: 4px;
+}
+
+.station-name {
+  font-size: 15px;
+  font-weight: 700;
+  color: #1f2937;
+  line-height: 1.2;
+}
+
+.transfer-text {
+  font-size: 12px;
+  color: #94a3b8;
+  line-height: 1;
+}
+
+.arrow {
+  font-size: 18px;
+  color: #94a3b8;
+  flex-shrink: 0;
+  margin: 0 -2px;
+}
+
+.line-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 7px 14px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #fff;
+  white-space: nowrap;
+}
+
+.line-badge.purple {
+  background: #7c3aed;
+}
+
+.line-badge.green {
+  background: #22c55e;
+}
+
+.line-badge.orange {
+  background: #f97316;
+}
 /* ===== footer ===== */
 .footer{
   padding:28px 0 40px;
