@@ -731,8 +731,8 @@ body{
   flex: 0 0 88px;   /* 時間固定寬度 */
 }
 
-.itinerary-list li span,
-.itinerary-list li .item-text {
+.itinerary-list > li > span,
+.itinerary-list > li > .item-text {
   flex: 1;
   margin-left: auto;
   text-align: right;
@@ -771,7 +771,41 @@ body{
   gap:2px;
   width:100%;
 }
+.transport-route span {
+  flex: unset;
+  margin-left: 0;
+  max-width: none;
+  text-align: center;
+  line-height: normal;
+}
 
+.route-group {
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  flex:1;
+  min-width:58px;
+  min-height:56px;
+  text-align:center;
+}
+
+.route-group .station {
+  font-size:14px;
+  font-weight:700;
+  color:#1f2937;
+  line-height:1.15;
+  margin-bottom:2px;
+  min-height:18px;
+}
+
+.route-group .transfer {
+  font-size:11px;
+  color:#94a3b8;
+  line-height:1;
+  margin:1px 0;
+  min-height:14px;
+}
 .route-group {
   display:flex;
   flex-direction:column;
