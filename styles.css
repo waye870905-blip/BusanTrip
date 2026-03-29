@@ -876,7 +876,14 @@ body{
   background: #7ec9e6;
   color: #fff;
 }
-
+.line-bus {
+  background: #4b5563;
+  color: #fff;
+}
+.Gondola {
+  background: #0066CC;
+  color: #fff;
+}
 @media (max-width: 768px) {
   .itinerary-list li > span {
   font-size:13px;
