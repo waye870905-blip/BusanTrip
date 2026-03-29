@@ -863,6 +863,15 @@ body{
 .walk-badge{
   background:#64748b;
 }
+.line-6 {
+  background: #6bbf59;
+  color: #fff;
+}
+
+.taxi-badge {
+  background: #222;
+  color: #fff;
+}
 
 @media (max-width: 768px) {
   .itinerary-list li > span {
