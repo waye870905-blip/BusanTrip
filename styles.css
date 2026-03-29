@@ -872,6 +872,10 @@ body{
   background: #222;
   color: #fff;
 }
+.line-sky {
+  background: #7ec9e6;
+  color: #fff;
+}
 
 @media (max-width: 768px) {
   .itinerary-list li > span {
