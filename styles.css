@@ -930,7 +930,7 @@ body{
       rgba(8, 15, 35, 0.12) 100%
     ),
     url("images/cover.jpg") center/cover no-repeat;
-  margin-bottom:12px;
+  margin-bottom:8px;
 }
 
 .trip-cover-info{
