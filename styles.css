@@ -977,6 +977,11 @@ body{
     ),
     url("images/notes-cover.jpg") center/cover no-repeat;
 }
+.trip-cover-notes h1{
+  font-size:56px;
+  line-height:1.1;
+  letter-spacing:1px;
+}
 /* ===== responsive ===== */
 @media (max-width: 980px){
   .subway-layout{
