@@ -1,77 +1,132 @@
-<main>
-  <section class="page-head page-head-cover trip-cover trip-cover-notes">
-    <div class="page-head-overlay">
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>釜山自由行｜注意事項</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v=2" />
+</head>
+
+<body>
+  <div class="top-bar">
+    <div class="container top-bar-inner">
+      <div class="top-item">
+        🇰🇷 韓國時間：
+        <span id="korea-time">--:--:--</span>
+      </div>
+      <div class="top-item">
+        🌤 釜山天氣：
+        <span id="weather-main">--°C</span>
+        <span id="weather-sub" class="top-sub"></span>
+      </div>
+    </div>
+  </div>
+
+  <nav class="nav">
+    <div class="container nav-inner">
+      <a class="brand" href="index.html">🇰🇷 釜山行</a>
+      <div class="nav-links">
+        <a href="index.html">首頁</a>
+        <a href="itinerary.html">行程表</a>
+        <a href="travel-info.html">旅遊資訊</a>
+        <a href="subway.html">地鐵指南</a>
+        <a href="notes.html" class="active">注意事項</a>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <section class="page-head page-head-cover trip-cover trip-cover-notes">
+      <div class="page-head-overlay">
+        <div class="container">
+          <h1>注意事項</h1>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
       <div class="container">
-        <h1>注意事項</h1>
-        <p>韓國入境、禁帶物品與退稅整理</p>
-      </div>
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="container">
-
-      <div class="card info-card" style="margin-bottom: 20px;">
-        <h3>1｜簽證</h3>
-        <p>韓國政府已宣布至 2026 年 12 月 31 日前，台灣旅客前往韓國無需申請 K-ETA。</p>
-        <p>目前韓國全面推廣「電子入境卡（E-Arrival Card）」以取代傳統紙本。</p>
-        <p>建議在抵達韓國前 3 天內線上填妥，入境時只需出示手機畫面即可快速通關。</p>
-      </div>
-
-      <div class="card info-card" style="margin-bottom: 20px;">
-        <h3>2｜韓國入境禁帶物品</h3>
-        <p>有些台灣常見的常備藥、液體類、行動電源等物品，整理行李時一定要特別留意相關規範：</p>
-
-        <div class="info-grid" style="margin-top: 20px;">
-          <div class="card">
-            <h3>藥品管制</h3>
-            <p>台灣人愛買的日本「EVE 止痛藥」，在韓國被列為管制藥品。</p>
-          </div>
-
-          <div class="card">
-            <h3>行動電源</h3>
-            <p>必須隨身攜帶，並使用透明夾鏈袋，將每個電源分開收納，禁止托運。</p>
-            <p>且行動電源必須標示「Wh（瓦特小時）」，100Wh 以下可登機。</p>
-          </div>
-
-          <div class="card">
-            <h3>液體類</h3>
-            <p>隨身攜帶的液體單件不得超過 100ml，且需裝在 1 公升透明密封袋內。</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="card info-card">
-        <h3>3｜出境韓國與退稅</h3>
-
-        <h4 style="margin: 0 0 12px;">可退稅商品</h4>
-        <ul>
-          <li>**日常用品**：衣物、鞋子、化妝品、家電等商品通常可以退稅。</li>
-          <li>**醫美療程**：只要單次費用超過 15,000 韓元就可以辦理退稅，但建議先向診所確認療程是否符合資格。</li>
-          <li>**精品**：無法提供現場退稅，因此記得向店家索取退稅單，事後到機場辦理退稅。</li>
-          <li>**飯店退稅**：部分飯店可辦理住宿費退稅，建議訂房前先詢問飯店是否能申請退稅。</li>
-        </ul>
-
-        <h4 style="margin: 24px 0 12px;">退稅方式</h4>
         <div class="info-grid">
-          <div class="card">
-            <h3>現場退稅</h3>
-            <p>消費當下完成退稅手續，無需到機場再辦理。</p>
-            <p>單筆消費滿 15,000 韓元，且不超過一定金額內可直接退稅。</p>
+          <div class="card info-card">
+            <h3>簽證</h3>
+            <p>韓國政府已宣布至 2026 年 12 月 31 日前，台灣旅客前往韓國無需申請 K-ETA。</p>
+            <p>目前韓國全面推廣「電子入境卡（E-Arrival Card）」以取代傳統紙本。</p>
+            <p>建議在抵達韓國前 3 天內線上填妥，入境時只需出示手機畫面即可快速通關。</p>
           </div>
 
-          <div class="card">
-            <h3>市區退稅</h3>
-            <p>市區設有退稅櫃檯或自助機可辦理，退稅後離境當天仍需在機場再次掃描護照和退稅單。</p>
+          <div class="card info-card">
+            <h3>韓國入境禁帶物品</h3>
+            <p>有些台灣常見的常備藥、液體類、行動電源等物品，整理行李時一定要特別留意相關規範：</p>
+            <ul>
+              <li>藥品管制：日本 EVE 止痛藥在韓國被列為管制藥品。</li>
+              <li>行動電源：必須隨身攜帶，不可托運。</li>
+              <li>行動電源需標示 Wh（瓦特小時），100Wh 以下通常可登機。</li>
+              <li>液體類：單件不得超過 100ml，且需裝入 1 公升透明密封袋。</li>
+            </ul>
           </div>
 
-          <div class="card">
-            <h3>機場退稅</h3>
-            <p>可在機場櫃檯或自助機一次性辦理退稅。</p>
+          <div class="card info-card">
+            <h3>入境整理提醒</h3>
+            <ul>
+              <li>護照請確認效期足夠。</li>
+              <li>電子入境卡建議事先截圖備份。</li>
+              <li>行動電源、護照、手機請放在隨身包。</li>
+              <li>液體與藥品建議提早分類整理，避免安檢卡關。</li>
+            </ul>
           </div>
         </div>
       </div>
+    </section>
 
+    <section class="section">
+      <div class="container">
+        <div class="section-head">
+          <h1>出境韓國與退稅</h1>
+        </div>
+
+        <div class="info-grid">
+          <div class="card info-card">
+            <h3>可退稅商品</h3>
+            <ul>
+              <li>日常用品：衣物、鞋子、化妝品、家電等商品通常可以退稅。</li>
+              <li>醫美療程：單次費用超過 15,000 韓元可申請退稅，但建議先向診所確認資格。</li>
+              <li>精品：通常需索取退稅單，再到機場辦理。</li>
+              <li>飯店退稅：部分飯店可申請住宿費退稅，建議先向飯店確認。</li>
+            </ul>
+          </div>
+
+          <div class="card info-card">
+            <h3>退稅方式</h3>
+            <ul>
+              <li>現場退稅：消費當下直接完成退稅。</li>
+              <li>市區退稅：可在市區退稅櫃檯或自助機辦理，之後仍需到機場再次確認。</li>
+              <li>機場退稅：在機場櫃檯或自助機一次完成辦理。</li>
+            </ul>
+          </div>
+
+          <div class="card info-card">
+            <h3>退稅提醒</h3>
+            <ul>
+              <li>記得保留發票與退稅單。</li>
+              <li>高單價商品建議預留更多退稅時間。</li>
+              <li>出境當天建議提早到機場，避免排隊過久。</li>
+              <li>若有精品、醫美或住宿退稅，最好事先再次確認流程。</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      Busan Trip Notes｜韓國入境與退稅注意事項
     </div>
-  </section>
-</main>
+  </footer>
+
+  <script src="app.js?v=2"></script>
+</body>
+</html>
