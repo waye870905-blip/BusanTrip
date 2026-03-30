@@ -976,7 +976,7 @@ body{
       rgba(8, 15, 35, 0.48) 40%,
       rgba(8, 15, 35, 0.12) 100%
     ),
-    url("images/notes-cover.jpg") center/cover no-repeat;
+    url("images/notes-cover.jpg") center 10%/cover no-repeat;
 }
 /* ===== responsive ===== */
 @media (max-width: 980px){
