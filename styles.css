@@ -945,7 +945,7 @@ body{
 }
 
 .trip-cover-itinerary .page-head-overlay,
-.trip-cover-info .page-head-overlay {
+.trip-cover-info .page-head-overlay,
 .trip-cover-notes .page-head-overlay{
   width: 100%;
   padding: 80px 0 40px;
