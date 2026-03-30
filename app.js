@@ -79,18 +79,33 @@ document.addEventListener("DOMContentLoaded", () => {
   updateKoreaTime();
   setInterval(updateKoreaTime, 1000);
   loadBusanWeather();
+const dayCards = document.querySelectorAll(".day-card");
 
-  document.querySelectorAll(".day-toggle").forEach(toggle => {
-    toggle.addEventListener("click", () => {
-      const card = toggle.closest(".day-card");
-      if (!card) return;
+dayCards.forEach(card => {
+  const toggle = card.querySelector(".day-toggle");
 
-      card.classList.toggle("active");
+  toggle.addEventListener("click", () => {
+    const isActive = card.classList.contains("active");
 
-      const icon = toggle.querySelector(".toggle-icon");
+    // 先關掉全部
+    dayCards.forEach(item => {
+      item.classList.remove("active");
+
+      const icon = item.querySelector(".toggle-icon");
       if (icon) {
-        icon.textContent = card.classList.contains("active") ? "－" : "＋";
+        icon.textContent = "＋";
       }
     });
+
+    // 如果原本沒開，再打開目前這張
+    if (!isActive) {
+      card.classList.add("active");
+
+      const icon = card.querySelector(".toggle-icon");
+      if (icon) {
+        icon.textContent = "－";
+      }
+    }
   });
 });
+})
