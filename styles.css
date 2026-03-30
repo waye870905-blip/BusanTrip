@@ -962,7 +962,16 @@ body{
   font-size: 1.05rem;
   color: rgba(255,255,255,0.92);
 }
-
+.page-head.trip-cover {
+  background:
+    linear-gradient(
+      90deg,
+      rgba(8, 15, 35, 0.72) 0%,
+      rgba(8, 15, 35, 0.48) 40%,
+      rgba(8, 15, 35, 0.12) 100%
+    ),
+    url("images/travel-info-cover.jpg") center/cover no-repeat;
+}
 /* ===== responsive ===== */
 @media (max-width: 980px){
   .subway-layout{
