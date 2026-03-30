@@ -806,33 +806,6 @@ body{
   margin:1px 0;
   min-height:14px;
 }
-.route-group {
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  flex:1;
-  min-width:58px;
-  min-height:56px;
-  text-align:center;
-}
-
-.route-group .station {
-  font-size:14px;
-  font-weight:700;
-  color:#1f2937;
-  line-height:1.15;
-  margin-bottom:2px;
-  min-height:18px;
-}
-
-.route-group .transfer {
-  font-size:11px;
-  color:#94a3b8;
-  line-height:1;
-  margin:1px 0;
-  min-height:14px;
-}
 
 .transport-route .arrow {
   font-size:15px;
@@ -884,9 +857,7 @@ body{
   background: #0066CC;
   color: #fff;
 }
-@media (max-width: 768px) {
-  
-}
+
 /* ===== responsive ===== */
 @media (max-width: 980px){
   .subway-layout{
@@ -913,12 +884,14 @@ body{
     font-size:14px;
     line-height:1.5;
   }
- .itinerary-list li strong {
-    flex: 0 0 72px;
-    font-size: 11px;
-    white-space: normal;
-    line-height: 1.2;
-  }
+ .itinerary-list li strong{
+  flex: 0 0 72px;
+  width:72px;
+  font-size:11px;
+  white-space:normal;
+  line-height:1.2;
+  height:auto;
+}
   
   .transport-card{
     padding:8px 10px;
@@ -1048,10 +1021,6 @@ body{
   white-space:nowrap;
   flex-shrink:0;
 }
-.nav-links::-webkit-scrollbar{
-  display:none;
-}
-
 .nav-links{
   scrollbar-width:none;
 }
@@ -1133,12 +1102,6 @@ body{
   .station-name{
     font-size:1rem;
     word-break:break-word;
-  }
-
-  .itinerary-list strong{
-    width:75px;
-    height:28px;
-    font-size:12px;
   }
 
   .itinerary-list li{
