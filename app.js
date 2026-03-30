@@ -79,33 +79,46 @@ document.addEventListener("DOMContentLoaded", () => {
   updateKoreaTime();
   setInterval(updateKoreaTime, 1000);
   loadBusanWeather();
-const dayCards = document.querySelectorAll(".day-card");
 
-dayCards.forEach(card => {
-  const toggle = card.querySelector(".day-toggle");
+  const dayCards = document.querySelectorAll(".day-card");
 
-  toggle.addEventListener("click", () => {
-    const isActive = card.classList.contains("active");
+  dayCards.forEach(card => {
+    const toggle = card.querySelector(".day-toggle");
 
-    // 先關掉全部
-    dayCards.forEach(item => {
-      item.classList.remove("active");
+    toggle.addEventListener("click", () => {
+      const isActive = card.classList.contains("active");
 
-      const icon = item.querySelector(".toggle-icon");
-      if (icon) {
-        icon.textContent = "＋";
+      // 先記住目前這張卡片的位置
+      const top = card.getBoundingClientRect().top + window.scrollY;
+
+      // 先關掉全部
+      dayCards.forEach(item => {
+        item.classList.remove("active");
+        const icon = item.querySelector(".toggle-icon");
+        if (icon) icon.textContent = "＋";
+      });
+
+      // 如果原本沒開，再打開目前這張
+      if (!isActive) {
+        card.classList.add("active");
+        const icon = card.querySelector(".toggle-icon");
+        if (icon) icon.textContent = "－";
+
+        // 等畫面重排後，再捲回這張卡片
+        requestAnimationFrame(() => {
+          window.scrollTo({
+            top: top - 12,
+            behavior: "smooth"
+          });
+        });
+      } else {
+        requestAnimationFrame(() => {
+          window.scrollTo({
+            top: top - 12,
+            behavior: "smooth"
+          });
+        });
       }
     });
-
-    // 如果原本沒開，再打開目前這張
-    if (!isActive) {
-      card.classList.add("active");
-
-      const icon = card.querySelector(".toggle-icon");
-      if (icon) {
-        icon.textContent = "－";
-      }
-    }
   });
 });
-})
