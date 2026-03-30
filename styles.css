@@ -728,7 +728,7 @@ body{
 }
 
 .itinerary-list li strong {
-  flex: 0 0 88px;   /* 時間固定寬度 */
+  flex: 0 0 100px;   /* 時間固定寬度 */
 }
 
 .itinerary-list > li > span,
