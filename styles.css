@@ -885,13 +885,40 @@ body{
   color: #fff;
 }
 @media (max-width: 768px) {
+  
+}
+/* ===== responsive ===== */
+@media (max-width: 980px){
+  .subway-layout{
+    grid-template-columns:1fr;
+  }
+}
+
+@media (max-width: 900px){
+  .dashboard-grid,
+  .info-grid,
+  .ticket-grid{
+    grid-template-columns:1fr;
+  }
+
+  .day-head{
+    flex-direction:column;
+  }
+}
+
+@media (max-width: 768px){
   .itinerary-list li > span,
   .itinerary-list li > .item-text,
   .itinerary-list li > .item-text div {
     font-size:14px;
     line-height:1.5;
   }
-}
+ .itinerary-list li strong {
+    flex: 0 0 72px;
+    font-size: 11px;
+    white-space: normal;
+    line-height: 1.2;
+  }
   
   .transport-card{
     padding:8px 10px;
@@ -939,7 +966,6 @@ body{
     font-size:10px;
     padding:4px 8px;
   }
-}
 
 .line-badge.purple {
   background: #7c3aed;
@@ -958,27 +984,7 @@ body{
   color:#64748b;
   font-size:14px;
 }
-
-/* ===== responsive ===== */
-@media (max-width: 980px){
-  .subway-layout{
-    grid-template-columns:1fr;
-  }
-}
-
-@media (max-width: 900px){
-  .dashboard-grid,
-  .info-grid,
-  .ticket-grid{
-    grid-template-columns:1fr;
-  }
-
-  .day-head{
-    flex-direction:column;
-  }
-}
-
-@media (max-width: 768px){
+  
   .top-bar{
     min-height:52px;
     padding:6px 0;
