@@ -870,6 +870,16 @@ body{
 .transport-title a:hover {
   text-decoration: underline;
 }
+.trip-cover {
+  background-image: linear-gradient(
+      to top,
+      rgba(0, 0, 0, 0.55),
+      rgba(0, 0, 0, 0.15)
+    ),
+    url("images/cover.jpg");
+  background-size: cover;
+  background-position: center;
+}
 /* ===== responsive ===== */
 @media (max-width: 980px){
   .subway-layout{
