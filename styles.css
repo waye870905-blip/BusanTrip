@@ -943,9 +943,10 @@ body{
     url("images/trip-info-cover.jpg") center/cover no-repeat;
 }
 
-.trip-cover .page-head-overlay{
+.trip-cover-itinerary .page-head-overlay,
+.trip-cover-info .page-head-overlay {
   width: 100%;
-  padding: 32px 36px 0;
+  padding: 80px 0 40px;
   color: #fff;
 }
 
