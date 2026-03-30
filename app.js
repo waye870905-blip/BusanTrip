@@ -22,6 +22,7 @@ function updateKoreaTime() {
 
   koreaTimeEl.textContent = `${date} ${time}`;
 }
+
 function weatherCodeToText(code) {
   const map = {
     0: "晴天",
@@ -74,7 +75,7 @@ async function loadBusanWeather() {
     weatherSub.textContent = "請確認網路或稍後重整";
   }
 }
- // 👉 收合功能
+
 document.addEventListener("DOMContentLoaded", () => {
   updateKoreaTime();
   setInterval(updateKoreaTime, 1000);
@@ -88,37 +89,25 @@ document.addEventListener("DOMContentLoaded", () => {
     toggle.addEventListener("click", () => {
       const isActive = card.classList.contains("active");
 
-      // 先記住目前這張卡片的位置
-      const top = card.getBoundingClientRect().top + window.scrollY;
-
-      // 先關掉全部
       dayCards.forEach(item => {
         item.classList.remove("active");
         const icon = item.querySelector(".toggle-icon");
         if (icon) icon.textContent = "＋";
       });
 
-      // 如果原本沒開，再打開目前這張
       if (!isActive) {
         card.classList.add("active");
         const icon = card.querySelector(".toggle-icon");
         if (icon) icon.textContent = "－";
-
-        // 等畫面重排後，再捲回這張卡片
-        requestAnimationFrame(() => {
-          window.scrollTo({
-            top: top - 12,
-            behavior: "smooth"
-          });
-        });
-      } else {
-        requestAnimationFrame(() => {
-          window.scrollTo({
-            top: top - 12,
-            behavior: "smooth"
-          });
-        });
       }
+
+      setTimeout(() => {
+        const top = card.getBoundingClientRect().top + window.scrollY;
+        window.scrollTo({
+          top: top - 90,
+          behavior: "smooth"
+        });
+      }, 50);
     });
   });
 });
