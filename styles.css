@@ -318,17 +318,23 @@ body{
   display:grid;
   grid-template-columns:repeat(3, minmax(0, 1fr));
   gap:18px;
+  align-items:stretch;
 }
 
 .info-card,
 .ticket-card{
+  display:flex;
+  flex-direction:column;
+  height:100%;
   padding:22px;
 }
 
 .info-card h3,
 .ticket-card h3{
-  margin-top:0;
-  margin-bottom:12px;
+  margin:0 0 18px;
+  min-height:28px;
+  display:flex;
+  align-items:center;
 }
 
 .route-card{
