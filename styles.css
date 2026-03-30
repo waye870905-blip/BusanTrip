@@ -862,7 +862,14 @@ body{
   color:#64748b;
   font-size:14px;
 }
+.transport-title a {
+  color: inherit;
+  text-decoration: none;
+}
 
+.transport-title a:hover {
+  text-decoration: underline;
+}
 /* ===== responsive ===== */
 @media (max-width: 980px){
   .subway-layout{
