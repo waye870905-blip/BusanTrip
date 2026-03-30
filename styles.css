@@ -1206,5 +1206,13 @@ body{
   .arrow{
     font-size:11px;
   }
- 
+ html{
+    scroll-padding-top:140px;
+  }
+
+  .section,
+  .day-card,
+  [id]{
+    scroll-margin-top:140px;
+  }
 }
