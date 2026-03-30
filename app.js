@@ -105,9 +105,9 @@ document.addEventListener("DOMContentLoaded", () => {
         const top = card.getBoundingClientRect().top + window.scrollY;
         const offset = window.innerWidth <= 768 ? 110 : 90;
         window.scrollTo({
-          top: top - 90,
+          top: top - offset,
           behavior: "smooth"
-        });
+          });
       }, 50);
     });
   });
