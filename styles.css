@@ -320,13 +320,8 @@ body{
   align-items:stretch;
 }
 
-.info-card,
-.ticket-card{
-  display:flex;
-  flex-direction:column;
+.info-card{
   height:100%;
-  min-height:340px;
-  padding:22px;
 }
 
 .info-card h3,
