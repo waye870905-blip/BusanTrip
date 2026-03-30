@@ -320,18 +320,12 @@ body{
   align-items:stretch;
 }
 
-.ticket-grid{
-  display:grid;
-  grid-template-columns:repeat(2, minmax(0, 1fr));
-  gap:18px;
-  align-items:stretch;
-}
-
 .info-card,
 .ticket-card{
   display:flex;
   flex-direction:column;
   height:100%;
+  min-height:340px;
   padding:22px;
 }
 
@@ -344,16 +338,27 @@ body{
 }
 
 .info-card p,
-.ticket-card p,
+.ticket-card p{
+  margin:0 0 12px;
+}
+
 .info-card ul,
 .ticket-card ul{
   margin:0 0 12px;
+  padding-left:20px;
+}
+
+.info-card li,
+.ticket-card li{
+  margin:0 0 8px;
 }
 
 .info-card p:last-child,
 .ticket-card p:last-child,
 .info-card ul:last-child,
-.ticket-card ul:last-child{
+.ticket-card ul:last-child,
+.info-card li:last-child,
+.ticket-card li:last-child{
   margin-bottom:0;
 }
 
