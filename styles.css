@@ -338,7 +338,7 @@ body{
 .info-card h3,
 .ticket-card h3{
   margin:0 0 18px;
-  min-height:28px;
+  min-height:36px;
   display:flex;
   align-items:center;
 }
