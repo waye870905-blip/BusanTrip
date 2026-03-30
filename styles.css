@@ -320,8 +320,20 @@ body{
   align-items:stretch;
 }
 
-.info-card{
+.ticket-grid{
+  display:grid;
+  grid-template-columns:repeat(2, minmax(0, 1fr));
+  gap:18px;
+  align-items:stretch;
+}
+
+.info-card,
+.ticket-card{
+  display:flex;
+  flex-direction:column;
   height:100%;
+  min-height:340px;
+  padding:22px;
 }
 
 .info-card h3,
@@ -339,7 +351,7 @@ body{
 
 .info-card ul,
 .ticket-card ul{
-  margin:0 0 12px;
+  margin:0;
   padding-left:20px;
 }
 
