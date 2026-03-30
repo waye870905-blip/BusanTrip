@@ -885,9 +885,12 @@ body{
   color: #fff;
 }
 @media (max-width: 768px) {
-  .itinerary-list li > span {
-  font-size:13px;
-  line-height:1.5;
+  .itinerary-list li > span,
+  .itinerary-list li > .item-text,
+  .itinerary-list li > .item-text div {
+    font-size:14px;
+    line-height:1.5;
+  }
 }
   
   .transport-card{
