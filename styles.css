@@ -904,18 +904,20 @@ body{
 }
 
 .trip-cover h1{
-  margin: 0 0 10px;
-  font-size: clamp(2rem, 4vw, 3.2rem);
-  line-height: 1.1;
+  margin: 0 0 14px;
+  font-size: clamp(2.5rem, 5vw, 4.6rem);
+  line-height: 1.05;
   font-weight: 800;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.04em;
   color: #fff;
+  text-shadow: 0 10px 24px rgba(0,0,0,0.22);
 }
 
 .trip-cover p{
   margin: 0;
-  color: rgba(255,255,255,0.88);
-  font-size: 1rem;
+  max-width: 660px;
+  font-size: 1.05rem;
+  color: rgba(255,255,255,0.92);
 }
 
 /* ===== responsive ===== */
