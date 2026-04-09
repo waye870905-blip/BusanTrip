@@ -216,6 +216,7 @@ body > *{ position:relative; z-index:1; }
 
 /* ===== cards ===== */
 .card{
+  width:100%;
   background:var(--card);
   border:1px solid rgba(229,231,235,0.8);
   border-radius:16px;
@@ -461,7 +462,8 @@ body > *{ position:relative; z-index:1; }
 .cover-subtitle{ margin-top:10px; color:rgba(255,255,255,0.9); font-size:1rem; }
 
 /* ===== expense ===== */
-.expense-page{ display:grid; gap:24px; padding-bottom:48px; }
+.expense-page{ display:grid; gap:24px; padding-bottom:48px;width:100%; }
+.expense-page > .card{width:100%;}
 .expense-summary-grid{ display:grid; grid-template-columns:repeat(3, minmax(0, 1fr)); gap:16px; }
 .summary-box{ background:rgba(255,255,255,0.7); border:1px solid rgba(15,23,42,0.08); border-radius:20px; padding:20px; box-shadow:0 8px 24px rgba(15,23,42,0.06); }
 .summary-label{ display:block; font-size:0.95rem; color:var(--muted); margin-bottom:10px; }
