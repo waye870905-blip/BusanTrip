@@ -556,7 +556,7 @@ body > *{ position:relative; z-index:1; }
   .trip-cover h1{ font-size:clamp(2rem, 7vw, 2.6rem); margin:0; }
 
   .expense-page{ gap:16px; }
-  .container .card{ width:100%; max-width:100%; }
+  .expense-page > .card{width:100%;max-width:100%;}
   #expense-date{ max-width:220px; }
 
   .form-row,
@@ -566,25 +566,18 @@ body > *{ position:relative; z-index:1; }
   .rate-group{ max-width:none; }
 
   .expense-table-wrap{ width:100%; overflow-x:auto; -webkit-overflow-scrolling:touch; }
-  .expense-list-card .expense-table{ min-width:640px; }
+  .expense-list-card .expense-table{ min-width:600px; }
   .expense-table th,
   .expense-table td{ padding:10px 8px; font-size:13px; }
   .summary-box{ padding:16px; }
 
-  .expense-person-summary-card .expense-table-wrap{ overflow-x:visible; }
-  .expense-person-summary-card .expense-table{
-    min-width:0;
-    width:100%;
-    table-layout:fixed;
-  }
+  .expense-person-summary-card{overflow:hidden;}
+  .expense-person-summary-card .expense-table-wrap{overflow-x:visible;}
+  .expense-person-summary-card .expense-table{min-width:0;width:100%;table-layout:auto;}
   .expense-person-summary-card .expense-table th,
-  .expense-person-summary-card .expense-table td{
-    font-size:13px;
-    padding:10px 6px;
-    text-align:left;
-    white-space:normal;
-    word-break:break-word;
-  }
+  .expense-person-summary-card .expense-table td{font-size:13px;padding:10px 8px;white-space:nowrap;}
+  .expense-person-summary-card .expense-table th:first-child,
+  .expense-person-summary-card .expense-table td:first-child{width:30%;}
 
   .toggle-icon{ width:38px; height:38px; font-size:1.3rem; box-shadow:0 4px 10px rgba(80,100,140,0.10), inset 0 1px 0 rgba(255,255,255,0.9); }
   .ticket-grid{ grid-template-columns:1fr; }
