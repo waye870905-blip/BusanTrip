@@ -5,6 +5,7 @@ const expenseTotalKrw = document.getElementById("expense-total-krw");
 const expenseTotalTwd = document.getElementById("expense-total-twd");
 const exchangeRateInput = document.getElementById("exchange-rate");
 const clearExpensesBtn = document.getElementById("clear-expenses");
+const personSummaryTbody = document.getElementById("person-summary-tbody");
 
 const EXPENSE_STORAGE_KEY = "busan_trip_expenses";
 const RATE_STORAGE_KEY = "busan_trip_exchange_rate";
@@ -45,6 +46,12 @@ function renderExpenses() {
         <td colspan="8">目前還沒有任何費用記錄</td>
       </tr>
     `;
+
+    personSummaryTbody.innerHTML = `
+      <tr class="empty-row">
+        <td colspan="3">目前還沒有任何費用記錄</td>
+      </tr>
+    `;
   } else {
     expenseTbody.innerHTML = expenses
       .map((item, index) => {
@@ -61,6 +68,32 @@ function renderExpenses() {
             <td>
               <button class="btn-delete" type="button" onclick="deleteExpense(${index})">刪除</button>
             </td>
+          </tr>
+        `;
+      })
+      .join("");
+
+    const personTotals = {
+      "拔拔": 0,
+      "麻麻": 0,
+      "哥哥": 0,
+      "屁屁": 0
+    };
+
+    expenses.forEach(item => {
+      if (personTotals[item.person] !== undefined) {
+        personTotals[item.person] += Number(item.amount);
+      }
+    });
+
+    personSummaryTbody.innerHTML = Object.entries(personTotals)
+      .map(([person, totalKrw]) => {
+        const totalTwd = totalKrw * rate;
+        return `
+          <tr>
+            <td>${person}</td>
+            <td>${formatKrw(totalKrw)}</td>
+            <td>${formatTwd(totalTwd)}</td>
           </tr>
         `;
       })
