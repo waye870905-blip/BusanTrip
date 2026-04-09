@@ -490,7 +490,7 @@ body > *{ position:relative; z-index:1; }
 .form-actions .btn-primary{ min-width:140px; height:48px; padding:0 20px; white-space:nowrap; flex-shrink:0; }
 .expense-list-head{ display:flex; justify-content:space-between; align-items:center; gap:12px; margin-bottom:16px; }
 .expense-table-wrap{ overflow-x:auto; }
-.expense-table{ width:100%; border-collapse:collapse;}
+.expense-table{ width:100%; border-collapse:collapse;min-width: 0;}
 .expense-table thead th{ text-align:left; font-size:0.95rem; color:var(--muted); padding:12px 10px; border-bottom:1px solid rgba(15,23,42,0.1); }
 .expense-table tbody td{ padding:14px 10px; border-bottom:1px solid rgba(15,23,42,0.08); vertical-align:top; }
 .empty-row td{ text-align:center; color:var(--muted); padding:24px 10px; }
@@ -508,6 +508,12 @@ body > *{ position:relative; z-index:1; }
 }
 
 @media (max-width: 768px){
+  .expense-page{gap:16px;}
+  .expense-page .card{width:100%;max-width:100%;overflow:hidden;}
+  .expense-table-wrap{width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch;}
+  .expense-table th,
+  .expense-table td{padding:10px 8px;font-size:13px;}
+  .summary-box{padding:16px;}
   .expense-table{min-width: 640px;}
   .expense-table th,
   .expense-table td{padding: 10px 8px;font-size: 13px;}
