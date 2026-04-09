@@ -1268,6 +1268,16 @@ body > *{
   white-space: nowrap;
   flex-shrink: 0;
 }
+.form-row-3{
+  display:grid;
+  grid-template-columns: 1.4fr 1fr 1fr;
+  gap:16px;
+}
+
+.form-group-wide{
+  min-width:0;
+}
+
 /* ===== responsive ===== */
 @media (max-width: 980px){
   .subway-layout{
@@ -1287,6 +1297,9 @@ body > *{
 }
 
 @media (max-width: 768px){
+  .form-row-3{
+    grid-template-columns:1fr;
+  }
   .expense-summary-grid{
     grid-template-columns: 1fr;
   }
