@@ -68,23 +68,33 @@
       <h2>新增支出</h2>
       <form id="expense-form" class="expense-form">
         <div class="form-row">
-          <div class="form-group">
-            <label for="expense-date">日期</label>
-            <input type="date" id="expense-date" required />
-          </div>
+  <div class="form-group">
+    <label for="expense-date">日期</label>
+    <input type="date" id="expense-date" required />
+  </div>
 
-          <div class="form-group">
-            <label for="expense-category">分類</label>
-            <select id="expense-category" required>
-              <option value="交通">交通</option>
-              <option value="餐飲">餐飲</option>
-              <option value="門票">門票</option>
-              <option value="購物">購物</option>
-              <option value="住宿">住宿</option>
-              <option value="其他">其他</option>
-            </select>
-          </div>
-        </div>
+  <div class="form-group">
+    <label for="expense-category">分類</label>
+    <select id="expense-category" required>
+      <option value="交通">交通</option>
+      <option value="餐飲">餐飲</option>
+      <option value="門票">門票</option>
+      <option value="購物">購物</option>
+      <option value="住宿">住宿</option>
+      <option value="其他">其他</option>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label for="expense-person">誰付款</label>
+    <select id="expense-person" required>
+      <option value="拔拔">拔拔</option>
+      <option value="麻麻">麻麻</option>
+      <option value="哥哥">哥哥</option>
+      <option value="屁屁">屁屁</option>
+    </select>
+  </div>
+</div>
 
         <div class="form-row">
           <div class="form-group">
@@ -133,11 +143,12 @@
               <th>換算（TWD）</th>
               <th>備註</th>
               <th>操作</th>
+              <th>誰花錢</th>
             </tr>
           </thead>
           <tbody id="expense-tbody">
             <tr class="empty-row">
-              <td colspan="7">目前還沒有任何費用記錄</td>
+              <td colspan="8">目前還沒有任何費用記錄</td>
             </tr>
           </tbody>
         </table>
