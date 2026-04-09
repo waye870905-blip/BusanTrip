@@ -1268,10 +1268,8 @@ body > *{
   white-space: nowrap;
   flex-shrink: 0;
 }
-.form-row-3{
-  display:grid;
-  grid-template-columns: 1.4fr 1fr 1fr;
-  gap:16px;
+.form-row.form-row-3{
+  grid-template-columns: 1.8fr 1fr 1fr;
 }
 
 .form-group-wide{
