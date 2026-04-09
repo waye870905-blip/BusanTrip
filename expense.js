@@ -42,7 +42,7 @@ function renderExpenses() {
   if (!expenses.length) {
     expenseTbody.innerHTML = `
       <tr class="empty-row">
-        <td colspan="7">目前還沒有任何費用記錄</td>
+        <td colspan="8">目前還沒有任何費用記錄</td>
       </tr>
     `;
   } else {
@@ -53,6 +53,7 @@ function renderExpenses() {
           <tr>
             <td>${item.date}</td>
             <td><span class="category-badge">${item.category}</span></td>
+            <td>${item.person || "-"}</td>
             <td>${item.item}</td>
             <td>${formatKrw(item.amount)}</td>
             <td>${formatTwd(twd)}</td>
@@ -86,18 +87,20 @@ expenseForm?.addEventListener("submit", (e) => {
 
   const date = document.getElementById("expense-date").value;
   const category = document.getElementById("expense-category").value;
+  const person = document.getElementById("expense-person").value;
   const item = document.getElementById("expense-item").value.trim();
   const amount = Number(document.getElementById("expense-amount").value);
   const note = document.getElementById("expense-note").value.trim();
   const rate = Number(exchangeRateInput.value);
 
-  if (!date || !category || !item || !amount) return;
+  if (!date || !category || !person || !item || !amount) return;
 
   const expenses = getExpenses();
 
   expenses.unshift({
     date,
     category,
+    person,
     item,
     amount,
     note
@@ -108,6 +111,7 @@ expenseForm?.addEventListener("submit", (e) => {
 
   expenseForm.reset();
   document.getElementById("expense-date").value = date;
+  document.getElementById("expense-person").value = "拔拔";
   exchangeRateInput.value = rate;
 
   renderExpenses();
