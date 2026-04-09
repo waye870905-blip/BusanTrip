@@ -7,8 +7,13 @@ const exchangeRateInput = document.getElementById("exchange-rate");
 const clearExpensesBtn = document.getElementById("clear-expenses");
 const personSummaryTbody = document.getElementById("person-summary-tbody");
 
+const expenseAmountInput = document.getElementById("expense-amount");
+const expenseAmountTwdInput = document.getElementById("expense-amount-twd");
+
 const EXPENSE_STORAGE_KEY = "busan_trip_expenses";
 const RATE_STORAGE_KEY = "busan_trip_exchange_rate";
+
+let isSyncingAmount = false;
 
 function getExpenses() {
   return JSON.parse(localStorage.getItem(EXPENSE_STORAGE_KEY) || "[]");
@@ -32,6 +37,46 @@ function formatKrw(value) {
 
 function formatTwd(value) {
   return `NT$${Math.round(Number(value || 0)).toLocaleString("zh-TW")}`;
+}
+
+function syncFromKRW() {
+  if (isSyncingAmount) return;
+  const rate = getRate();
+  const krw = Number(expenseAmountInput.value || 0);
+
+  isSyncingAmount = true;
+
+  if (!expenseAmountInput.value) {
+    expenseAmountTwdInput.value = "";
+  } else {
+    expenseAmountTwdInput.value = Math.round(krw * rate);
+  }
+
+  isSyncingAmount = false;
+}
+
+function syncFromTWD() {
+  if (isSyncingAmount) return;
+  const rate = getRate();
+  const twd = Number(expenseAmountTwdInput.value || 0);
+
+  isSyncingAmount = true;
+
+  if (!expenseAmountTwdInput.value) {
+    expenseAmountInput.value = "";
+  } else {
+    expenseAmountInput.value = Math.round(twd / rate);
+  }
+
+  isSyncingAmount = false;
+}
+
+function refreshAmountByExistingInput() {
+  if (expenseAmountInput.value && !expenseAmountTwdInput.value) {
+    syncFromKRW();
+  } else if (expenseAmountTwdInput.value && !expenseAmountInput.value) {
+    syncFromTWD();
+  }
 }
 
 function renderExpenses() {
@@ -126,6 +171,9 @@ function deleteExpense(index) {
   renderExpenses();
 }
 
+expenseAmountInput?.addEventListener("input", syncFromKRW);
+expenseAmountTwdInput?.addEventListener("input", syncFromTWD);
+
 expenseForm?.addEventListener("submit", (e) => {
   e.preventDefault();
 
@@ -133,13 +181,11 @@ expenseForm?.addEventListener("submit", (e) => {
   const category = document.getElementById("expense-category").value;
   const person = document.getElementById("expense-person").value;
   const item = document.getElementById("expense-item").value.trim();
-  const amountInput = document.getElementById("expense-amount").value;
-  const amountTwdInput = document.getElementById("expense-amount-twd").value;
   const note = document.getElementById("expense-note").value.trim();
   const rate = Number(exchangeRateInput.value);
 
-  const amount = Number(amountInput || 0);
-  const amountTwd = Number(amountTwdInput || 0);
+  const amount = Number(expenseAmountInput.value || 0);
+  const amountTwd = Number(expenseAmountTwdInput.value || 0);
 
   if (!date || !category || !person || !item || (!amount && !amountTwd)) return;
 
@@ -148,9 +194,7 @@ expenseForm?.addEventListener("submit", (e) => {
 
   if (amount && !amountTwd) {
     finalTwd = Math.round(amount * rate);
-  }
-
-  if (!amount && amountTwd) {
+  } else if (!amount && amountTwd) {
     finalKrw = Math.round(amountTwd / rate);
   }
 
@@ -173,14 +217,17 @@ expenseForm?.addEventListener("submit", (e) => {
   document.getElementById("expense-date").value = date;
   document.getElementById("expense-person").value = "拔拔";
   exchangeRateInput.value = rate;
+  expenseAmountInput.value = "";
+  expenseAmountTwdInput.value = "";
 
   renderExpenses();
 });
 
-exchangeRateInput?.addEventListener("change", () => {
+exchangeRateInput?.addEventListener("input", () => {
   const rate = Number(exchangeRateInput.value);
   if (!rate) return;
   saveRate(rate);
+  refreshAmountByExistingInput();
   renderExpenses();
 });
 
