@@ -591,7 +591,7 @@ body > *{ position:relative; z-index:1; }
 
   /* 封面 */
   .trip-cover{
-    width:min(100%, calc(100% - 24px));
+    width:min(1200px, calc(100% - 48px));
     margin:16px auto 20px;
     min-height:220px;
     border-radius:18px;
