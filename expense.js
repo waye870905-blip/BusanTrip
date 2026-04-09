@@ -27,11 +27,11 @@ function saveRate(rate) {
 }
 
 function formatKrw(value) {
-  return `₩${Number(value).toLocaleString("ko-KR")}`;
+  return `₩${Number(value || 0).toLocaleString("ko-KR")}`;
 }
 
 function formatTwd(value) {
-  return `NT$${Math.round(value).toLocaleString("zh-TW")}`;
+  return `NT$${Math.round(Number(value || 0)).toLocaleString("zh-TW")}`;
 }
 
 function renderExpenses() {
@@ -47,15 +47,18 @@ function renderExpenses() {
       </tr>
     `;
 
-    personSummaryTbody.innerHTML = `
-      <tr class="empty-row">
-        <td colspan="3">目前還沒有任何費用記錄</td>
-      </tr>
-    `;
+    if (personSummaryTbody) {
+      personSummaryTbody.innerHTML = `
+        <tr class="empty-row">
+          <td colspan="3">目前還沒有任何費用記錄</td>
+        </tr>
+      `;
+    }
   } else {
     expenseTbody.innerHTML = expenses
       .map((item, index) => {
-        const twd = item.amount * rate;
+        const twd = item.amountTwd ?? Math.round((item.amount || 0) * rate);
+
         return `
           <tr>
             <td>${item.date}</td>
@@ -73,35 +76,43 @@ function renderExpenses() {
       })
       .join("");
 
-    const personTotals = {
-      "拔拔": 0,
-      "麻麻": 0,
-      "哥哥": 0,
-      "屁屁": 0
-    };
+    if (personSummaryTbody) {
+      const personTotals = {
+        "拔拔": { krw: 0, twd: 0 },
+        "麻麻": { krw: 0, twd: 0 },
+        "哥哥": { krw: 0, twd: 0 },
+        "屁屁": { krw: 0, twd: 0 }
+      };
 
-    expenses.forEach(item => {
-      if (personTotals[item.person] !== undefined) {
-        personTotals[item.person] += Number(item.amount);
-      }
-    });
+      expenses.forEach(item => {
+        if (personTotals[item.person] !== undefined) {
+          const krw = Number(item.amount || 0);
+          const twd = Number(item.amountTwd ?? Math.round(krw * rate));
 
-    personSummaryTbody.innerHTML = Object.entries(personTotals)
-      .map(([person, totalKrw]) => {
-        const totalTwd = totalKrw * rate;
-        return `
-          <tr>
-            <td>${person}</td>
-            <td>${formatKrw(totalKrw)}</td>
-            <td>${formatTwd(totalTwd)}</td>
-          </tr>
-        `;
-      })
-      .join("");
+          personTotals[item.person].krw += krw;
+          personTotals[item.person].twd += twd;
+        }
+      });
+
+      personSummaryTbody.innerHTML = Object.entries(personTotals)
+        .map(([person, totals]) => {
+          return `
+            <tr>
+              <td>${person}</td>
+              <td>${formatKrw(totals.krw)}</td>
+              <td>${formatTwd(totals.twd)}</td>
+            </tr>
+          `;
+        })
+        .join("");
+    }
   }
 
-  const totalKrw = expenses.reduce((sum, item) => sum + Number(item.amount), 0);
-  const totalTwd = totalKrw * rate;
+  const totalKrw = expenses.reduce((sum, item) => sum + Number(item.amount || 0), 0);
+  const totalTwd = expenses.reduce(
+    (sum, item) => sum + Number(item.amountTwd ?? Math.round((item.amount || 0) * rate)),
+    0
+  );
 
   expenseCount.textContent = expenses.length;
   expenseTotalKrw.textContent = formatKrw(totalKrw);
@@ -122,11 +133,26 @@ expenseForm?.addEventListener("submit", (e) => {
   const category = document.getElementById("expense-category").value;
   const person = document.getElementById("expense-person").value;
   const item = document.getElementById("expense-item").value.trim();
-  const amount = Number(document.getElementById("expense-amount").value);
+  const amountInput = document.getElementById("expense-amount").value;
+  const amountTwdInput = document.getElementById("expense-amount-twd").value;
   const note = document.getElementById("expense-note").value.trim();
   const rate = Number(exchangeRateInput.value);
 
-  if (!date || !category || !person || !item || !amount) return;
+  const amount = Number(amountInput || 0);
+  const amountTwd = Number(amountTwdInput || 0);
+
+  if (!date || !category || !person || !item || (!amount && !amountTwd)) return;
+
+  let finalKrw = amount;
+  let finalTwd = amountTwd;
+
+  if (amount && !amountTwd) {
+    finalTwd = Math.round(amount * rate);
+  }
+
+  if (!amount && amountTwd) {
+    finalKrw = Math.round(amountTwd / rate);
+  }
 
   const expenses = getExpenses();
 
@@ -135,7 +161,8 @@ expenseForm?.addEventListener("submit", (e) => {
     category,
     person,
     item,
-    amount,
+    amount: finalKrw,
+    amountTwd: finalTwd,
     note
   });
 
