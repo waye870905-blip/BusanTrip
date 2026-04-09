@@ -107,8 +107,15 @@ document.addEventListener("DOMContentLoaded", () => {
         window.scrollTo({
           top: top - offset,
           behavior: "smooth"
-          });
+        });
       }, 50);
     });
+  });
+
+  const navToggle = document.getElementById("nav-toggle");
+  const navLinks = document.getElementById("nav-links");
+
+  navToggle?.addEventListener("click", () => {
+    navLinks.classList.toggle("show");
   });
 });
