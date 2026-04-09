@@ -1303,9 +1303,6 @@ body > *{
 }
 
 @media (max-width: 768px){
-  .nav-inner{
-    position:relative;
-  }
 
   .nav-toggle{
     display:block;
@@ -1451,12 +1448,12 @@ body > *{
   .nav{
     top:52px;
   }
-
   .nav-inner{
+  position:relative;
   display:flex;
   flex-direction:row;
   align-items:center;
-  justify-content:flex-start;
+  justify-content:space-between;
   gap:8px;
   flex-wrap:nowrap;
 }
@@ -1467,33 +1464,45 @@ body > *{
   flex-shrink:0;
 }
 
+.nav-toggle{
+  display:block;
+  margin-left:auto;
+  border:0;
+  background:transparent;
+  font-size:28px;
+  cursor:pointer;
+  color:var(--navy);
+  padding:4px 8px;
+}
+
 .nav-links{
+  display:none;
+  position:absolute;
+  top:100%;
+  left:0;
+  right:0;
+  flex-direction:column;
+  gap:8px;
+  padding:12px;
+  background:rgba(255,255,255,0.98);
+  backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
+  border-bottom:1px solid rgba(229,231,235,0.8);
+  box-shadow:0 12px 24px rgba(0,0,0,0.08);
+  z-index:60;
+}
+
+.nav-links.show{
   display:flex;
-  align-items:center;
-  gap:4px;
-  flex:1;
-  min-width:0;
-  flex-wrap:nowrap;
-  overflow-x:auto;
-  justify-content:flex-end;
-  -webkit-overflow-scrolling:touch;
 }
 
 .nav-links a{
-  font-size:11px;
-  padding:6px 7px;
+  width:100%;
+  font-size:14px;
+  padding:12px 14px;
   white-space:nowrap;
-  flex-shrink:0;
+  border-radius:12px;
 }
-.nav-links{
-  scrollbar-width:none;
-}
-  /* 👉 隱藏滑動條（美化） */
-  .nav-links::-webkit-scrollbar{
-    display: none;
-  }
-
-
   .hero{
     min-height:360px;
   }
