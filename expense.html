@@ -3,22 +3,41 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>旅費記錄｜釜山行</title>
-  <link rel="stylesheet" href="styles.css?v=10" />
+  <title>釜山行｜行程表</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v=2" />
 </head>
 <body>
-  <header class="top-bar">
-    <div class="top-bar-inner">
-      <span id="live-date">韓國時間載入中...</span>
-      <span id="weather">釜山天氣載入中...</span>
-    </div>
-  </header>
 
-  <nav class="main-nav">
-    <a href="index.html">首頁</a>
-    <a href="trip-info.html">旅遊資訊</a>
-    <a href="subway.html">地鐵資訊</a>
-    <a href="expense.html" class="active">旅費記錄</a>
+  <!-- top bar -->
+  <div class="top-bar">
+    <div class="container top-bar-inner">
+      <div class="top-item">
+        🇰🇷 韓國時間：
+        <span id="korea-time">--:--:--</span>
+      </div>
+      <div class="top-item">
+        🌤 釜山天氣：
+        <span id="weather-main">--°C</span>
+        <span id="weather-sub" class="top-sub"></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- nav -->
+  <nav class="nav">
+    <div class="container nav-inner">
+      <a class="brand" href="index.html">🇰🇷 釜山行</a>
+      <div class="nav-links">
+        <a href="itinerary.html">行程表</a>
+        <a href="travel-info.html">旅遊資訊</a>
+        <a href="notes.html">注意事項</a>
+        <a href="subway.html">地鐵指南</a>
+        <a href="expense.html" class="active">旅費記錄</a>
+      </div>
+    </div>
   </nav>
 
   <section class="page-head page-head-cover trip-cover trip-cover-expense">
