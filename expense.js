@@ -110,8 +110,18 @@ function renderExpenses() {
             <td><span class="category-badge">${item.category}</span></td>
             <td>${item.person || "-"}</td>
             <td>${item.item}</td>
-            <td>${formatKrw(item.amount)}</td>
-            <td>${formatTwd(twd)}</td>
+            <td>
+  <div class="amount-box">
+    <span class="amount">${formatKrw(item.amount)}</span>
+    <span class="currency">(KRW)</span>
+  </div>
+</td>
+<td>
+  <div class="amount-box">
+    <span class="amount">${formatTwd(twd)}</span>
+    <span class="currency">(TWD)</span>
+  </div>
+</td>
             <td>${item.note || "-"}</td>
             <td>
               <button class="btn-delete" type="button" onclick="deleteExpense(${index})">刪除</button>
@@ -248,6 +258,23 @@ document.addEventListener("DOMContentLoaded", () => {
   if (dateInput && !dateInput.value) {
     dateInput.value = today;
   }
+.amount-box{
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+  line-height:1.2;
+}
 
+.amount{
+  font-weight:700;
+  white-space:nowrap;
+}
+
+.currency{
+  display:block;
+  font-size:11px;
+  color:#64748b;
+  white-space:nowrap;
+}
   renderExpenses();
 });
