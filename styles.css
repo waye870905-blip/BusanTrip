@@ -497,7 +497,25 @@ body > *{ position:relative; z-index:1; }
 .expense-table tbody td{ padding:14px 10px; border-bottom:1px solid rgba(15,23,42,0.08); vertical-align:top; }
 .empty-row td{ text-align:center; color:var(--muted); padding:24px 10px; }
 .category-badge{ display:inline-flex; align-items:center; justify-content:center; min-width:56px; padding:6px 10px; border-radius:999px; font-size:0.86rem; font-weight:700; background:rgba(59,130,246,0.12); color:#1d4ed8; }
+/* ===== 雙幣別金額顯示 ===== */
+.amount-box {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  line-height: 1.2;
+}
 
+.amount {
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.currency {
+  display: block;
+  font-size: 11px;
+  color: #64748b;
+  white-space: nowrap;
+}
 /* ===== responsive ===== */
 @media (max-width: 980px){
   .subway-layout{ grid-template-columns:1fr; }
@@ -649,17 +667,62 @@ body > *{ position:relative; z-index:1; }
     max-width:100%;
   }
 
-  /* 費用明細可以滑，但縮一點 */
-
-  .expense-list-card .expense-table{
-  table-layout:fixed;
-}
+  /* 手機版：將費用明細表格轉為卡片式排列，不須左右滑動 */
+  .expense-list-card .expense-table thead {
+    display: none; /* 隱藏原本的橫向表頭 */
+  }
   
- .expense-table th,
-.expense-table td{
-  padding:8px 6px;
-  font-size:12px;
-}
+  .expense-list-card .expense-table,
+  .expense-list-card .expense-table tbody,
+  .expense-list-card .expense-table tr,
+  .expense-list-card .expense-table td {
+    display: block;
+    width: 100%;
+  }
+  
+  .expense-list-card .expense-table tr:not(.empty-row) {
+    margin-bottom: 16px;
+    background: #f8fafc;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 8px 12px;
+  }
+  
+  .expense-list-card .expense-table td {
+    display: flex;
+    justify-content: space-between; /* 讓標題在左，內容在右 */
+    align-items: center;
+    text-align: right;
+    padding: 10px 4px;
+    border-bottom: 1px solid var(--line);
+    font-size: 14px;
+  }
+  
+  .expense-list-card .expense-table td:last-child {
+    border-bottom: none;
+  }
+  
+  /* 透過 CSS 自動在各行前面加上對應的欄位標題 */
+  .expense-list-card .expense-table tr:not(.empty-row) td:nth-child(1)::before { content: "日期"; color: var(--muted); font-weight: bold; }
+  .expense-list-card .expense-table tr:not(.empty-row) td:nth-child(2)::before { content: "分類"; color: var(--muted); font-weight: bold; }
+  .expense-list-card .expense-table tr:not(.empty-row) td:nth-child(3)::before { content: "誰付款"; color: var(--muted); font-weight: bold; }
+  .expense-list-card .expense-table tr:not(.empty-row) td:nth-child(4)::before { content: "項目"; color: var(--muted); font-weight: bold; }
+  .expense-list-card .expense-table tr:not(.empty-row) td:nth-child(5)::before { content: "金額 (KRW)"; color: var(--muted); font-weight: bold; }
+  .expense-list-card .expense-table tr:not(.empty-row) td:nth-child(6)::before { content: "金額 (TWD)"; color: var(--muted); font-weight: bold; }
+  .expense-list-card .expense-table tr:not(.empty-row) td:nth-child(7)::before { content: "備註"; color: var(--muted); font-weight: bold; }
+  .expense-list-card .expense-table tr:not(.empty-row) td:nth-child(8)::before { content: "操作"; color: var(--muted); font-weight: bold; }
+  
+  /* 修正雙幣別數字在手機版靠右對齊 */
+  .amount-box {
+    align-items: flex-end;
+  }
+  
+  /* 空資料列（沒有任何費用記錄時）的置中修正 */
+  .empty-row td {
+    justify-content: center;
+    border-bottom: none;
+    padding: 24px 10px;
+  }
 
   /* 付款人統計：不要滑，直接塞進手機寬 */
   .expense-person-summary-card{
