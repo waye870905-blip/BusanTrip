@@ -514,7 +514,10 @@ body > *{ position:relative; z-index:1; }
     min-height:52px;
     padding:6px 0;
   }
-
+  
+  .container{
+    width:min(100%, calc(100% - 24px));
+  }
   .top-bar-inner{
     flex-direction:column;
     align-items:flex-start;
@@ -582,6 +585,11 @@ body > *{ position:relative; z-index:1; }
     display:flex;
   }
 
+  .trip-cover{
+  width:min(100%, calc(100% - 24px));
+  margin:16px auto 20px;  /* 👈 加這行 */
+}
+  
   .nav-links a{
     width:100%;
     font-size:14px;
@@ -591,12 +599,6 @@ body > *{ position:relative; z-index:1; }
   }
 
   /* 封面 */
-  .trip-cover{
-    width:min(1200px, calc(100% - 48px));
-    margin:16px auto 20px;
-    min-height:220px;
-    border-radius:18px;
-  }
 
   .trip-cover .page-head-overlay{
     padding:42px 0 20px;
@@ -648,21 +650,16 @@ body > *{ position:relative; z-index:1; }
   }
 
   /* 費用明細可以滑，但縮一點 */
-  .expense-table-wrap{
-    width:100%;
-    overflow-x:auto;
-    -webkit-overflow-scrolling:touch;
-  }
 
   .expense-list-card .expense-table{
-    min-width:600px;
-  }
-
-  .expense-table th,
-  .expense-table td{
-    padding:10px 8px;
-    font-size:13px;
-  }
+  table-layout:fixed;
+}
+  
+ .expense-table th,
+.expense-table td{
+  padding:8px 6px;
+  font-size:12px;
+}
 
   /* 付款人統計：不要滑，直接塞進手機寬 */
   .expense-person-summary-card{
@@ -670,8 +667,8 @@ body > *{ position:relative; z-index:1; }
   }
 
   .expense-person-summary-card .expense-table-wrap{
-    overflow-x:visible;
-  }
+  overflow-x:hidden;
+}
 
   .expense-person-summary-card .expense-table{
     width:100%;
