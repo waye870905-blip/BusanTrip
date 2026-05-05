@@ -258,23 +258,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (dateInput && !dateInput.value) {
     dateInput.value = today;
   }
-.amount-box{
-  display:flex;
-  flex-direction:column;
-  align-items:flex-start;
-  line-height:1.2;
-}
-
-.amount{
-  font-weight:700;
-  white-space:nowrap;
-}
-
-.currency{
-  display:block;
-  font-size:11px;
-  color:#64748b;
-  white-space:nowrap;
-}
+  
+  // 已經移除了這裡原本錯誤混入的 CSS 代碼
   renderExpenses();
 });
