@@ -33,13 +33,15 @@ function saveRate(rate) {
 }
 // ==========================================
 // 👉 新增：雲端同步功能
-async function saveToCloud(expenseItem) {
+async function saveToCloud(expenseItem, action = "add") {
   try {
-    // 為了避免擋住畫面，背景發送請求
+    // 把指令 (action: "add" 或 "delete") 包裝進資料裡一起傳給雲端
+    const payload = { ...expenseItem, action: action };
+    
     fetch(CLOUD_API_URL, {
       method: "POST",
-      body: JSON.stringify(expenseItem)
-    }).catch(e => console.error("雲端儲存失敗", e));
+      body: JSON.stringify(payload)
+    }).catch(e => console.error("雲端連線失敗", e));
   } catch (e) {
     console.error("發生錯誤", e);
   }
@@ -206,11 +208,19 @@ function renderExpenses() {
   expenseTotalTwd.textContent = formatTwd(totalTwd);
 }
 
+// 👉 修改：讓刪除時也觸發 saveToCloud
 function deleteExpense(index) {
   const expenses = getExpenses();
+  const itemToDelete = expenses[index]; // 1. 先把要刪除的這筆資料抓出來
+  
   expenses.splice(index, 1);
   saveExpenses(expenses);
-  renderExpenses();
+  renderExpenses(); // 2. 更新畫面
+  
+  // 3. 告訴雲端：「幫我刪除這筆資料」
+  if (itemToDelete) {
+    saveToCloud(itemToDelete, "delete"); 
+  }
 }
 
 expenseAmountInput?.addEventListener("input", syncFromKRW);
@@ -277,11 +287,15 @@ exchangeRateInput?.addEventListener("input", () => {
 });
 
 clearExpensesBtn?.addEventListener("click", () => {
-  const confirmed = confirm("確定要清空全部旅費資料嗎？");
+  const confirmed = confirm("確定要清空全部旅費資料嗎？（這會同時清除雲端所有資料）");
   if (!confirmed) return;
 
+  // 1. 清空本機資料並更新畫面
   localStorage.removeItem(EXPENSE_STORAGE_KEY);
   renderExpenses();
+  
+  // 2. 告訴雲端：「幫我把試算表的資料全部砍掉」
+  saveToCloud({}, "clear");
 });
 
 window.deleteExpense = deleteExpense;
