@@ -12,6 +12,7 @@ const expenseAmountTwdInput = document.getElementById("expense-amount-twd");
 
 const EXPENSE_STORAGE_KEY = "busan_trip_expenses";
 const RATE_STORAGE_KEY = "busan_trip_exchange_rate";
+const CLOUD_API_URL = "https://script.google.com/macros/s/AKfycbzlZiIa1t3SiyGUL7WTQEG_pq6-35XkDNgG85kdC1kjPUMiw9iYb2BXy_cMZmzxk5Q/exec"; // 👉 將 "YOUR_GAS_URL" 換成你剛剛部署的 Google Apps Script 網址
 
 let isSyncingAmount = false;
 
@@ -30,7 +31,38 @@ function getRate() {
 function saveRate(rate) {
   localStorage.setItem(RATE_STORAGE_KEY, String(rate));
 }
+// ==========================================
+// 👉 新增：雲端同步功能
+async function saveToCloud(expenseItem) {
+  try {
+    // 為了避免擋住畫面，背景發送請求
+    fetch(CLOUD_API_URL, {
+      method: "POST",
+      body: JSON.stringify(expenseItem)
+    }).catch(e => console.error("雲端儲存失敗", e));
+  } catch (e) {
+    console.error("發生錯誤", e);
+  }
+}
 
+async function fetchFromCloud() {
+  try {
+    const response = await fetch(CLOUD_API_URL);
+    const cloudData = await response.json();
+    
+    // 將 Excel 陣列資料轉回我們原本的物件格式，並反轉順序（新的在上）
+    const formatted = cloudData.map(row => ({
+      date: row[0], category: row[1], person: row[2], 
+      item: row[3], amount: row[4], amountTwd: row[5], note: row[6]
+    })).reverse(); 
+
+    localStorage.setItem(EXPENSE_STORAGE_KEY, JSON.stringify(formatted));
+    renderExpenses();
+  } catch (e) {
+    console.error("無法同步雲端資料，使用本機快取", e);
+    renderExpenses(); // 如果沒網路，至少會顯示本機最後一次的紀錄
+  }
+}
 function formatKrw(value) {
   return `₩${Number(value || 0).toLocaleString("ko-KR")}`;
 }
@@ -210,7 +242,8 @@ expenseForm?.addEventListener("submit", (e) => {
 
   const expenses = getExpenses();
 
-  expenses.unshift({
+  // 👉 修改：把新增的資料獨立成一個變數，方便傳給雲端
+  const newExpense = {
     date,
     category,
     person,
@@ -218,11 +251,13 @@ expenseForm?.addEventListener("submit", (e) => {
     amount: finalKrw,
     amountTwd: finalTwd,
     note
-  });
+  };
 
-  saveExpenses(expenses);
+  expenses.unshift(newExpense); // 加到畫面上
+  saveExpenses(expenses);       // 存入本機
   saveRate(rate);
-
+  
+  saveToCloud(newExpense);      // 👉 新增：同步傳送到 Google 試算表
   expenseForm.reset();
   document.getElementById("expense-date").value = date;
   document.getElementById("expense-person").value = "拔拔";
@@ -259,6 +294,6 @@ document.addEventListener("DOMContentLoaded", () => {
     dateInput.value = today;
   }
   
-  // 已經移除了這裡原本錯誤混入的 CSS 代碼
-  renderExpenses();
+  // 👉 修改：網頁一打開，先去跟 Google 試算表要最新的資料，要完會自動 render
+  fetchFromCloud();
 });
