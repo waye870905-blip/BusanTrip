@@ -52,9 +52,10 @@ async function fetchFromCloud() {
     const response = await fetch(CLOUD_API_URL);
     const cloudData = await response.json();
     
-    // 將 Excel 陣列資料轉回我們原本的物件格式，並反轉順序（新的在上）
+    // 將 Excel 陣列資料轉回我們原本的物件格式，並反轉順序
     const formatted = cloudData.map(row => ({
-      date: row[0], category: row[1], person: row[2], 
+      date: formatCloudDate(row[0]), // 👈 這裡套用格式化工具
+      category: row[1], person: row[2], 
       item: row[3], amount: row[4], amountTwd: row[5], note: row[6]
     })).reverse(); 
 
@@ -62,7 +63,7 @@ async function fetchFromCloud() {
     renderExpenses();
   } catch (e) {
     console.error("無法同步雲端資料，使用本機快取", e);
-    renderExpenses(); // 如果沒網路，至少會顯示本機最後一次的紀錄
+    renderExpenses();
   }
 }
 function formatKrw(value) {
@@ -112,7 +113,18 @@ function refreshAmountByExistingInput() {
     syncFromTWD();
   }
 }
-
+function formatCloudDate(dateStr) {
+  if (!dateStr) return "";
+  // 如果字串包含 'T'，代表是 Google 傳回的 ISO 時間格式，我們把它轉回當地日期
+  if (typeof dateStr === 'string' && dateStr.includes("T")) {
+    const d = new Date(dateStr);
+    const yyyy = d.getFullYear();
+    const mm = String(d.getMonth() + 1).padStart(2, '0');
+    const dd = String(d.getDate()).padStart(2, '0');
+    return `${yyyy}-${mm}-${dd}`;
+  }
+  return dateStr;
+}
 function renderExpenses() {
   const expenses = getExpenses();
   const rate = getRate();
